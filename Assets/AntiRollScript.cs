@@ -48,15 +48,6 @@ public class AntiRollScript : MonoBehaviour
 		{
 			_carRigidbody.AddForceAtPosition(_wheelR.transform.up * antiRollForce, _wheelR.transform.position);
 		}
-		/*
-		if (!groundedL && !groundedR && _carRigidbody.rotation.z <= -160)
-		{
-			_carRigidbody.transform.localRotation = Quaternion.Euler(_carRigidbody.rotation.x, _carRigidbody.rotation.y, 0f);
-		}*/
-
-		if (!groundedL || !groundedR)
-		{
-			_carRigidbody.AddForceAtPosition(-_carRigidbody.transform.up * antiRollForce * 10, _carRigidbody.transform.position);
-		}
+		
 	}
 }
