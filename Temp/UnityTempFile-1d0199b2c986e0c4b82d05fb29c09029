@@ -300,4 +300,5 @@ Assets\CameraManager.cs
 Assets\CarController.cs
 Assets\InputManager.cs
 "Assets\race-track-lake\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs"
+Assets\Turning.cs
 Assets\UIManager.cs

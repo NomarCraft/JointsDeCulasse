@@ -11,6 +11,10 @@ public class CarController : MonoBehaviour
 	public UIManager _uim;
 	public List<WheelCollider> _throttleWheels;
 	public List<WheelCollider> _steeringWheels;
+	public GameObject _companion;
+
+	private bool _isLeaning = false;
+	private float _leanDir = 0;
 
 	public float _strenghtCoefficient = 10000f;
 	public float _brakeStrenght;
@@ -19,6 +23,9 @@ public class CarController : MonoBehaviour
 	public float _boostRefillRate = 10f;
 	public float _boostAmount = 50f;
 
+	public bool _turning = false;
+	public int _turningDir;
+	public bool _isTheCompanionHelping = false;
 
 	public Transform _cm;
 	public Rigidbody _rb;
@@ -35,22 +42,39 @@ public class CarController : MonoBehaviour
 			_rb.centerOfMass = _cm.position;
 		}
 
-		_throttleWheels[0].ConfigureVehicleSubsteps(300, 24, 24);
+		foreach (WheelCollider wheel in _throttleWheels)
+		{
+			wheel.ConfigureVehicleSubsteps(300, 24, 24);
+		}
+		
 	}
 
 	private void Update()
 	{
-		_uim.changeText(transform.InverseTransformVector(_rb.velocity).z);
+		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
+		Debug.Log(_leanDir);
 	}
 
 	private void FixedUpdate()
 	{
 		Gravity();
+		Companion();
 		Accelerate();
 		Boost();
 		Steer();
 
-		Debug.Log(_boostAmount);
+		if (_turning)
+		{
+			if (_turningDir == _leanDir)
+			{
+				Debug.Log(_isTheCompanionHelping);
+				_isTheCompanionHelping = true;
+			}
+			else if (_turningDir != _leanDir)
+			{
+				_isTheCompanionHelping = false;
+			}
+		}
 	}
 	
 	private bool CheckGround(List<WheelCollider> targets)
@@ -75,6 +99,47 @@ public class CarController : MonoBehaviour
 		bool grounded = CheckGround(_throttleWheels);
 
 		_rb.AddForce(transform.up * -2000, ForceMode.Force);
+	}
+
+	private void Companion()
+	{
+		Lean();
+	}
+
+	private void Lean()
+	{
+		{
+			if (_im._vertical < -0.2f)
+			{
+				if (CanLean(4))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(-30, 0, 0);
+				}
+			}
+			else if (_im._vertical > 0.2f)
+			{
+				if (CanLean(3))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(30, 0, 0);
+				}
+			}
+			else if (_im._horizontal > 0.2f)
+			{
+				if (CanLean(2))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(0, 0, -30);
+				}
+			}
+			else if (_im._horizontal < -0.2f)
+			{
+				if (CanLean(1))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(0, 0, 30);
+				}
+			}
+			
+		}
+		
 	}
 
 	private void Accelerate()
@@ -158,7 +223,62 @@ public class CarController : MonoBehaviour
 	{
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
+			if (_turning && !_isTheCompanionHelping)
+			{
+				wheel.steerAngle = (_maxTurnAngle * _im._steer) / 3;
+			}
+			else
+			{
 				wheel.steerAngle = _maxTurnAngle * _im._steer;
+			}
+				
+		}
+	}
+
+	private bool CanLean(int index)
+	{
+		if( _isLeaning == false)
+		{
+			_leanDir = index;
+			_isLeaning = true;
+			return true;
+		}
+		else if (_isLeaning == true)
+		{
+			if (index == _leanDir)
+			{
+				return false;
+			}
+			else
+			{
+				_companion.transform.SetPositionAndRotation(_companion.transform.position, Quaternion.Euler(0, 0, 0));
+				_isLeaning = false;
+				return false;
+			}
+			
+		}
+
+		else
+		{
+			return false;
+		}
+		
+
+	}
+
+	public void StartTurning (int dir)
+	{
+		if (dir == 5)
+		{
+			_turning = false;
+			_turningDir = 0;
+			_uim.changeDir(_turningDir);
+		}
+		else
+		{
+			_turning = true;
+			_turningDir = dir;
+			_uim.changeDir(_turningDir);
 		}
 	}
 }
