@@ -7,19 +7,35 @@ using UnityEngine;
 [RequireComponent(typeof(UIManager))]
 public class CarController : MonoBehaviour
 {
+
+	//GameManagers
 	public InputManager _im;
 	public UIManager _uim;
+	public GameObject _companion;
+
+	//Wheels
 	public List<WheelCollider> _throttleWheels;
 	public List<WheelCollider> _steeringWheels;
+	
+	//Lean & Turn
+	private bool _isLeaning = false;
+	private float _leanDir = 0;
+	public bool _turning = false;
+	public int _turningDir;
+	public bool _isTheCompanionHelping = false;
 
+	//Car Specs
 	public float _strenghtCoefficient = 10000f;
 	public float _brakeStrenght;
 	public float _maxTurnAngle = 20f;
+	public float _boostUseSpeed = 50f;
+	public float _boostRefillRate = 10f;
+	public float _boostAmount = 50f;
 
-	private bool _boost = false;
-
+	//Components
 	public Transform _cm;
 	public Rigidbody _rb;
+
 
 	private void Start()
 	{
@@ -27,37 +43,119 @@ public class CarController : MonoBehaviour
 		_rb = GetComponent<Rigidbody>();
 		_uim = GetComponent<UIManager>();
 
-		if (_cm)
+		//CenterOfMass(Depreciated)
+		/*if (_cm)
 		{
 			_rb.centerOfMass = _cm.position;
-		}
+		}*/
 
-		_throttleWheels[0].ConfigureVehicleSubsteps(500, 20, 20);
+		foreach (WheelCollider wheel in _throttleWheels)
+		{
+			wheel.ConfigureVehicleSubsteps(300, 24, 24);
+		}
+		
 	}
 
 	private void Update()
 	{
-		_uim.changeText(transform.InverseTransformVector(_rb.velocity).z);
+		//UIUpdate
+		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
 	}
 
 	private void FixedUpdate()
 	{
 		Gravity();
+		Companion();
 		Accelerate();
 		Boost();
 		Steer();
 
-		Debug.Log(Vector3.Dot(transform.InverseTransformVector(_rb.velocity), transform.forward));
+		/*
+		if (_turning)
+		{
+			if (_turningDir == _leanDir)
+			{
+				_isTheCompanionHelping = true;
+			}
+			else if (_turningDir != _leanDir)
+			{
+				_isTheCompanionHelping = false;
+			}
+		}*/
+	}
+	
+	private bool CheckGround(List<WheelCollider> targets)
+	{
+		WheelHit hit = new WheelHit();
+
+		foreach (WheelCollider target in targets)
+		{
+			bool grounded = target.GetGroundHit(out hit);
+			if (grounded)
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private void Gravity()
 	{
-		_rb.AddForce(transform.up * -1500, ForceMode.Force);
+
+		bool grounded = CheckGround(_throttleWheels);
+
+		_rb.AddForce(transform.up * -2000, ForceMode.Force);
+	}
+
+	private void Companion()
+	{
+		Lean();
+	}
+
+	private void Lean()
+	{
+		{
+			if (_im._vertical > -0.2f && _im._vertical < 0.2f && _im._horizontal > -0.2f && _im._horizontal < 0.2f)
+			{
+				_companion.transform.SetPositionAndRotation(_companion.transform.position, Quaternion.Euler(0, 0, 0));
+			}
+			else if (_im._vertical < -0.2f)
+			{
+				if (CanLean(4))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(-30, 0, 0);
+				}
+			}
+			else if (_im._vertical > 0.2f)
+			{
+				if (CanLean(3))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(30, 0, 0);
+				}
+			}
+			else if (_im._horizontal > 0.2f)
+			{
+				if (CanLean(2))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(0, 0, -30);
+				}
+			}
+			else if (_im._horizontal < -0.2f)
+			{
+				if (CanLean(1))
+				{
+					_companion.transform.localRotation = Quaternion.Euler(0, 0, 30);
+				}
+			}
+			
+		}
+		
 	}
 
 	private void Accelerate()
 	{
-		float currentSpeed = Mathf.Round(_rb.velocity.z * 3.6f);
+		float currentSpeed = Mathf.Round(transform.InverseTransformVector(_rb.velocity).z * 3.6f);
 
 		foreach (WheelCollider wheel in _throttleWheels)
 		{
@@ -79,79 +177,122 @@ public class CarController : MonoBehaviour
 
 			else
 			{
-				if (currentSpeed < 100)
+				if (_im._boost == true && _boostAmount > 0f)
 				{
-					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2f;
 					wheel.brakeTorque = 0;
+					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
 				}
-				else if (currentSpeed > 100 && currentSpeed < 170)
+				else
 				{
-					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.10f;
-					wheel.brakeTorque = 0;
+					if (currentSpeed < 100)
+					{
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2f;
+						wheel.brakeTorque = 0;
+					}
+					else if (currentSpeed > 100 && currentSpeed < 170)
+					{
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.10f;
+						wheel.brakeTorque = 0;
+					}
+					else if (currentSpeed > 170 && currentSpeed < 225)
+					{
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.70f;
+						wheel.brakeTorque = 0;
+					}
+					else if (currentSpeed > 225 && currentSpeed < 300)
+					{
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.50f;
+						wheel.brakeTorque = 0;
+					}
+					else if (currentSpeed > 300)
+					{
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.25f;
+						wheel.brakeTorque = 0;
+					}
 				}
-				else if (currentSpeed > 170 && currentSpeed < 225)
-				{
-					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.70f;
-					wheel.brakeTorque = 0;
-				}
-				else if (currentSpeed > 225 && currentSpeed < 300)
-				{
-					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.50f;
-					wheel.brakeTorque = 0;
-				}
-				else if (currentSpeed > 300)
-				{
-					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.25f;
-					wheel.brakeTorque = 0;
-				}
-				
+					
 			}
 		}
 	}
 
 	private void Boost()
 	{
-		WheelHit hit = new WheelHit();
+		bool grounded = CheckGround(_throttleWheels);
 
-		bool grounded = _throttleWheels[0].GetGroundHit(out hit);
-		if (grounded == false)
+		if (grounded && _im._boost)
 		{
-			grounded = _throttleWheels[1].GetGroundHit(out hit);
+			_boostAmount = Mathf.Clamp(_boostAmount - (_boostUseSpeed * Time.deltaTime), 0f, 200f);
 		}
-
-		if (grounded && _im._boost && !_boost)
+		else
 		{
-			StartCoroutine(BoostDelay(2, transform.InverseTransformVector(_rb.velocity).z));
-			_rb.AddForce(transform.forward * 15f, ForceMode.VelocityChange);
-			_boost = true;
+			_boostAmount = Mathf.Clamp(_boostAmount + (_boostRefillRate * Time.deltaTime), 0f, 200f);
 		}
-	}
-
-	private IEnumerator BoostDelay(float delay, float velocity)
-	{
-		yield return new WaitForSeconds(delay);
-
-		if (transform.InverseTransformVector(_rb.velocity).z > velocity)
-		{
-			_rb.AddForce(-transform.forward * 4f, ForceMode.VelocityChange);
-		}
-
-		_boost = false;
+		    
 	}
 
 	private void Steer ()
 	{
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
-			if (transform.InverseTransformVector(_rb.velocity).z < 0.5f)
-			{
-				wheel.steerAngle = (_maxTurnAngle * _im._steer) * 8;
-			}
-			else
+			if (_im._steer < 0.1f && _leanDir == 1)
 			{
 				wheel.steerAngle = _maxTurnAngle * _im._steer;
 			}
+			else if (_im._steer > 0.1f && _leanDir == 2)
+			{
+				wheel.steerAngle = _maxTurnAngle * _im._steer;
+			}
+			else
+			{
+				wheel.steerAngle = _maxTurnAngle * _im._steer / 3;
+			}
+		}
+	}
+
+	private bool CanLean(int index)
+	{
+		if( _isLeaning == false)
+		{
+			_leanDir = index;
+			_isLeaning = true;
+			return true;
+		}
+		else if (_isLeaning == true)
+		{
+			if (index == _leanDir)
+			{
+				return false;
+			}
+			else
+			{
+				_companion.transform.SetPositionAndRotation(_companion.transform.position, Quaternion.Euler(0, 0, 0));
+				_isLeaning = false;
+				return false;
+			}
 			
+		}
+
+		else
+		{
+			return false;
+		}
+		
+
+	}
+
+	public void StartTurning (int dir)
+	{
+		if (dir == 5)
+		{
+			_turning = false;
+			_turningDir = 0;
+			_uim.changeDir(_turningDir);
+		}
+		else
+		{
+			_turning = true;
+			_turningDir = dir;
+			_uim.changeDir(_turningDir);
 		}
 	}
 }
