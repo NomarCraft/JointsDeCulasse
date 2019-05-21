@@ -13,6 +13,10 @@ public class InputManager : MonoBehaviour
 
 	public float _horizontal;
 	public float _vertical;
+	public bool _boostComp;
+	public bool _spotLeft;
+	public bool _spotCentral;
+	public bool _spotRight;
 
 	private void Update()
 	{
@@ -22,5 +26,9 @@ public class InputManager : MonoBehaviour
 		_boost = Input.GetButton("Boost");
 		_horizontal = Input.GetAxis("LeftRight");
 		_vertical = Input.GetAxis("UpDown");
+		_boostComp = Input.GetButton("BoostComp");
+		_spotLeft = Input.GetButton("Spot1");
+		_spotCentral = Input.GetButton("Spot2");
+		_spotRight = Input.GetButton("Spot3");
 	}
 }

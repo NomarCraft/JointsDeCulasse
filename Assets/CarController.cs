@@ -23,6 +23,10 @@ public class CarController : MonoBehaviour
 	public bool _turning = false;
 	public int _turningDir;
 	public bool _isTheCompanionHelping = false;
+	private Vector3 _companionStartPos;
+
+	//Repair
+	private bool _isRepairing = false;
 
 	//Car Specs
 	public float _strenghtCoefficient = 10000f;
@@ -31,6 +35,7 @@ public class CarController : MonoBehaviour
 	public float _boostUseSpeed = 50f;
 	public float _boostRefillRate = 10f;
 	public float _boostAmount = 50f;
+	public float _currentSpeed;
 
 	//Components
 	public Transform _cm;
@@ -64,6 +69,8 @@ public class CarController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
+		_currentSpeed = Mathf.Round(transform.InverseTransformVector(_rb.velocity).z * 3.6f);
+
 		Gravity();
 		Companion();
 		Accelerate();
@@ -110,53 +117,86 @@ public class CarController : MonoBehaviour
 
 	private void Companion()
 	{
+		Repair();
 		Lean();
+	}
+
+	private void Repair()
+	{
+		if (!_isRepairing)
+		{
+			if (_im._spotLeft)
+			{
+				_companionStartPos = _companion.transform.position;
+				_companion.transform.position = transform.localPosition + new Vector3(-0.75f, 0, 0);
+				_isRepairing = true;
+			}
+			if (_im._spotCentral)
+			{
+				_companionStartPos = _companion.transform.position;
+				_companion.transform.position = transform.localPosition + new Vector3(0.75f, 0, 0);
+				_isRepairing = true;
+			}
+			if (_im._spotRight)
+			{
+				_companionStartPos = _companion.transform.position;
+				_companion.transform.position = transform.localPosition + new Vector3(0, 0, 1);
+				_isRepairing = true;
+			}
+		}
+		else if (_isRepairing)
+		{
+			if (Input.GetButtonUp("Spot1") || Input.GetButtonUp("Spot2") || Input.GetButtonUp("Spot3"))
+			{
+				//Stop All Repair fonctions
+				_companion.transform.SetPositionAndRotation(_companionStartPos, Quaternion.Euler(0, 0, 0));
+			}
+		}
 	}
 
 	private void Lean()
 	{
 		{
-			if (_im._vertical > -0.2f && _im._vertical < 0.2f && _im._horizontal > -0.2f && _im._horizontal < 0.2f)
+			if (!_isRepairing)
 			{
-				_companion.transform.SetPositionAndRotation(_companion.transform.position, Quaternion.Euler(0, 0, 0));
-			}
-			else if (_im._vertical < -0.2f)
-			{
-				if (CanLean(4))
+				if (_im._vertical > -0.2f && _im._vertical < 0.2f && _im._horizontal > -0.2f && _im._horizontal < 0.2f)
 				{
-					_companion.transform.localRotation = Quaternion.Euler(-30, 0, 0);
+					_companion.transform.SetPositionAndRotation(_companionStartPos, Quaternion.Euler(0, 0, 0));
+				}
+				else if (_im._vertical < -0.2f)
+				{
+					if (CanLean(4))
+					{
+						_companion.transform.localRotation = Quaternion.Euler(-30, 0, 0);
+					}
+				}
+				else if (_im._vertical > 0.2f)
+				{
+					if (CanLean(3))
+					{
+						_companion.transform.localRotation = Quaternion.Euler(30, 0, 0);
+					}
+				}
+				else if (_im._horizontal > 0.2f)
+				{
+					if (CanLean(2))
+					{
+						_companion.transform.localRotation = Quaternion.Euler(0, 0, -30);
+					}
+				}
+				else if (_im._horizontal < -0.2f)
+				{
+					if (CanLean(1))
+					{
+						_companion.transform.localRotation = Quaternion.Euler(0, 0, 30);
+					}
 				}
 			}
-			else if (_im._vertical > 0.2f)
-			{
-				if (CanLean(3))
-				{
-					_companion.transform.localRotation = Quaternion.Euler(30, 0, 0);
-				}
-			}
-			else if (_im._horizontal > 0.2f)
-			{
-				if (CanLean(2))
-				{
-					_companion.transform.localRotation = Quaternion.Euler(0, 0, -30);
-				}
-			}
-			else if (_im._horizontal < -0.2f)
-			{
-				if (CanLean(1))
-				{
-					_companion.transform.localRotation = Quaternion.Euler(0, 0, 30);
-				}
-			}
-			
 		}
-		
 	}
 
 	private void Accelerate()
 	{
-		float currentSpeed = Mathf.Round(transform.InverseTransformVector(_rb.velocity).z * 3.6f);
-
 		foreach (WheelCollider wheel in _throttleWheels)
 		{
 
@@ -164,47 +204,47 @@ public class CarController : MonoBehaviour
 			{
 				if (transform.InverseTransformVector(_rb.velocity).z <= 0.5f )
 				{
-					wheel.motorTorque = _strenghtCoefficient * Time.deltaTime * -_im._brake;
+					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * -_im._brake) * 2;
 					wheel.brakeTorque = 0;
 				}
 				else
 				{
 					wheel.motorTorque = 0;
-					wheel.brakeTorque = (_im._brake * _brakeStrenght * Time.deltaTime) * 4;
+					wheel.brakeTorque = (_im._brake * _brakeStrenght * Time.deltaTime) * 3;
 				}
 				
 			}
 
 			else
 			{
-				if (_im._boost == true && _boostAmount > 0f)
+				if (_im._boost == true && _im._boostComp == true && _boostAmount > 0f)
 				{
 					wheel.brakeTorque = 0;
 					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
 				}
 				else
 				{
-					if (currentSpeed < 100)
+					if (_currentSpeed < 100)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2f;
 						wheel.brakeTorque = 0;
 					}
-					else if (currentSpeed > 100 && currentSpeed < 170)
+					else if (_currentSpeed > 100 && _currentSpeed < 170)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.10f;
 						wheel.brakeTorque = 0;
 					}
-					else if (currentSpeed > 170 && currentSpeed < 225)
+					else if (_currentSpeed > 170 && _currentSpeed < 225)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.70f;
 						wheel.brakeTorque = 0;
 					}
-					else if (currentSpeed > 225 && currentSpeed < 300)
+					else if (_currentSpeed > 225 && _currentSpeed < 300)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.50f;
 						wheel.brakeTorque = 0;
 					}
-					else if (currentSpeed > 300)
+					else if (_currentSpeed > 300)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.25f;
 						wheel.brakeTorque = 0;
@@ -234,17 +274,24 @@ public class CarController : MonoBehaviour
 	{
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
-			if (_im._steer < 0.1f && _leanDir == 1)
+			if (_currentSpeed < 0.5f)
 			{
-				wheel.steerAngle = _maxTurnAngle * _im._steer;
-			}
-			else if (_im._steer > 0.1f && _leanDir == 2)
-			{
-				wheel.steerAngle = _maxTurnAngle * _im._steer;
+				wheel.steerAngle = _maxTurnAngle * _im._steer * 4;
 			}
 			else
 			{
-				wheel.steerAngle = _maxTurnAngle * _im._steer / 3;
+				if (_im._steer < 0.1f && _leanDir == 1)
+				{
+					wheel.steerAngle = _maxTurnAngle * _im._steer;
+				}
+				else if (_im._steer > 0.1f && _leanDir == 2)
+				{
+					wheel.steerAngle = _maxTurnAngle * _im._steer;
+				}
+				else
+				{
+					wheel.steerAngle = _maxTurnAngle * _im._steer / 2.5f;
+				}
 			}
 		}
 	}
@@ -265,7 +312,7 @@ public class CarController : MonoBehaviour
 			}
 			else
 			{
-				_companion.transform.SetPositionAndRotation(_companion.transform.position, Quaternion.Euler(0, 0, 0));
+				_companion.transform.SetPositionAndRotation(_companionStartPos, Quaternion.Euler(0, 0, 0));
 				_isLeaning = false;
 				return false;
 			}
