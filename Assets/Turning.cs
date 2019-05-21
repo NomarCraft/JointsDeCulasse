@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// ------------- SCRIPT CHECK 21.05.2019 ----------------- //
 public class Turning : MonoBehaviour
 {
-	public enum Direction { Left, Right, Top, Down, Exit } 
+	public enum Direction { Left, Right, Top, Down, Exit }
 
-	public Direction _dir;
 
+	[SerializeField] private Direction _dir;
 	private int _dirIndex;
 
 	private void OnDrawGizmos()

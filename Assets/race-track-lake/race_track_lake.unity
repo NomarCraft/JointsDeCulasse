@@ -5744,6 +5744,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tocus
       objectReference: {fileID: 0}
+    - target: {fileID: 2702726454316572743, guid: 4a540a7e2431cbb46bb2addf4dda1420,
+        type: 3}
+      propertyPath: m_Name
+      value: Companion
+      objectReference: {fileID: 0}
+    - target: {fileID: 2702726454316572743, guid: 4a540a7e2431cbb46bb2addf4dda1420,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1945189444944406170, guid: 4a540a7e2431cbb46bb2addf4dda1420,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.686
+      objectReference: {fileID: 0}
     - target: {fileID: 2827873746992202659, guid: 4a540a7e2431cbb46bb2addf4dda1420,
         type: 3}
       propertyPath: m_Mass
@@ -5822,7 +5837,7 @@ PrefabInstance:
     - target: {fileID: 2827873746660004281, guid: 4a540a7e2431cbb46bb2addf4dda1420,
         type: 3}
       propertyPath: _maxTurnAngle
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 2827873746660004281, guid: 4a540a7e2431cbb46bb2addf4dda1420,
         type: 3}
@@ -5858,21 +5873,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Speed
-      objectReference: {fileID: 0}
-    - target: {fileID: 1945189444944406170, guid: 4a540a7e2431cbb46bb2addf4dda1420,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.686
-      objectReference: {fileID: 0}
-    - target: {fileID: 2702726454316572743, guid: 4a540a7e2431cbb46bb2addf4dda1420,
-        type: 3}
-      propertyPath: m_Name
-      value: Companion
-      objectReference: {fileID: 0}
-    - target: {fileID: 2702726454316572743, guid: 4a540a7e2431cbb46bb2addf4dda1420,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5470935915230281496, guid: 4a540a7e2431cbb46bb2addf4dda1420, type: 3}

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// ------------- SCRIPT CHECK 21.05.2019 ----------------- //
 public class UIManager : MonoBehaviour
 {
 	public TextMeshProUGUI _speed;

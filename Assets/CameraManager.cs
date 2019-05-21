@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// ------------- SCRIPT CHECK 21.05.2019 ----------------- //
 public class CameraManager : MonoBehaviour
 {
 	public GameObject _focusTarget;

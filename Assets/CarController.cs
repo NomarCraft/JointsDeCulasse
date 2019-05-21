@@ -7,15 +7,24 @@ using UnityEngine;
 [RequireComponent(typeof(UIManager))]
 public class CarController : MonoBehaviour
 {
+
+	//GameManagers
 	public InputManager _im;
 	public UIManager _uim;
-	public List<WheelCollider> _throttleWheels;
-	public List<WheelCollider> _steeringWheels;
 	public GameObject _companion;
 
+	//Wheels
+	public List<WheelCollider> _throttleWheels;
+	public List<WheelCollider> _steeringWheels;
+	
+	//Lean & Turn
 	private bool _isLeaning = false;
 	private float _leanDir = 0;
+	public bool _turning = false;
+	public int _turningDir;
+	public bool _isTheCompanionHelping = false;
 
+	//Car Specs
 	public float _strenghtCoefficient = 10000f;
 	public float _brakeStrenght;
 	public float _maxTurnAngle = 20f;
@@ -23,10 +32,7 @@ public class CarController : MonoBehaviour
 	public float _boostRefillRate = 10f;
 	public float _boostAmount = 50f;
 
-	public bool _turning = false;
-	public int _turningDir;
-	public bool _isTheCompanionHelping = false;
-
+	//Components
 	public Transform _cm;
 	public Rigidbody _rb;
 
@@ -37,10 +43,11 @@ public class CarController : MonoBehaviour
 		_rb = GetComponent<Rigidbody>();
 		_uim = GetComponent<UIManager>();
 
-		if (_cm)
+		//CenterOfMass(Depreciated)
+		/*if (_cm)
 		{
 			_rb.centerOfMass = _cm.position;
-		}
+		}*/
 
 		foreach (WheelCollider wheel in _throttleWheels)
 		{
@@ -51,8 +58,8 @@ public class CarController : MonoBehaviour
 
 	private void Update()
 	{
+		//UIUpdate
 		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
-		Debug.Log(_leanDir);
 	}
 
 	private void FixedUpdate()
@@ -63,18 +70,18 @@ public class CarController : MonoBehaviour
 		Boost();
 		Steer();
 
+		/*
 		if (_turning)
 		{
 			if (_turningDir == _leanDir)
 			{
-				Debug.Log(_isTheCompanionHelping);
 				_isTheCompanionHelping = true;
 			}
 			else if (_turningDir != _leanDir)
 			{
 				_isTheCompanionHelping = false;
 			}
-		}
+		}*/
 	}
 	
 	private bool CheckGround(List<WheelCollider> targets)
@@ -109,7 +116,11 @@ public class CarController : MonoBehaviour
 	private void Lean()
 	{
 		{
-			if (_im._vertical < -0.2f)
+			if (_im._vertical > -0.2f && _im._vertical < 0.2f && _im._horizontal > -0.2f && _im._horizontal < 0.2f)
+			{
+				_companion.transform.SetPositionAndRotation(_companion.transform.position, Quaternion.Euler(0, 0, 0));
+			}
+			else if (_im._vertical < -0.2f)
 			{
 				if (CanLean(4))
 				{
@@ -144,7 +155,7 @@ public class CarController : MonoBehaviour
 
 	private void Accelerate()
 	{
-		float currentSpeed = Mathf.Round(_rb.velocity.z * 3.6f);
+		float currentSpeed = Mathf.Round(transform.InverseTransformVector(_rb.velocity).z * 3.6f);
 
 		foreach (WheelCollider wheel in _throttleWheels)
 		{
@@ -223,15 +234,18 @@ public class CarController : MonoBehaviour
 	{
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
-			if (_turning && !_isTheCompanionHelping)
-			{
-				wheel.steerAngle = (_maxTurnAngle * _im._steer) / 3;
-			}
-			else
+			if (_im._steer < 0.1f && _leanDir == 1)
 			{
 				wheel.steerAngle = _maxTurnAngle * _im._steer;
 			}
-				
+			else if (_im._steer > 0.1f && _leanDir == 2)
+			{
+				wheel.steerAngle = _maxTurnAngle * _im._steer;
+			}
+			else
+			{
+				wheel.steerAngle = _maxTurnAngle * _im._steer / 3;
+			}
 		}
 	}
 
