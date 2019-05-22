@@ -1,19 +1,13 @@
-﻿
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
 
 // ------------- SCRIPT CHECK 21.05.2019 ----------------- //
 public class UIManager : MonoBehaviour
 {
 	public TextMeshProUGUI _speed;
 	public TextMeshProUGUI _dir;
-
-    public Image _boostBar;
-
-
 
 	public virtual void changeSpeed (float speed)
 	{

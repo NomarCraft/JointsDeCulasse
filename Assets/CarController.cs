@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI; // MARCO UI
 
 [RequireComponent(typeof(InputManager))]
 [RequireComponent(typeof(Rigidbody))]
@@ -37,8 +36,6 @@ public class CarController : MonoBehaviour
 	public Transform _cm;
 	public Rigidbody _rb;
 
-    //MARCO UI
-    public Image _boostBar;
 
 	private void Start()
 	{
@@ -67,9 +64,7 @@ public class CarController : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-       // UpdateBoostBar(); //MARCO UI
-
-        Gravity();
+		Gravity();
 		Companion();
 		Accelerate();
 		Boost();
@@ -104,11 +99,6 @@ public class CarController : MonoBehaviour
 
 		return false;
 	}
-
-   /* private void UpdateBoostBar() // MARCO UI
-    {
-        _boostBar.fillAmount = _boostAmount / 2;
-    }*/
 
 	private void Gravity()
 	{
@@ -254,7 +244,7 @@ public class CarController : MonoBehaviour
 			}
 			else
 			{
-				wheel.steerAngle = _maxTurnAngle * _im._steer/* / 3*/;
+				wheel.steerAngle = _maxTurnAngle * _im._steer / 3;
 			}
 		}
 	}
