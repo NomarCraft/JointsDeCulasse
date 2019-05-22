@@ -23,10 +23,18 @@ public class CarController : MonoBehaviour
 	public bool _turning = false;
 	public int _turningDir;
 	public bool _isTheCompanionHelping = false;
-	private Vector3 _companionStartPos;
 
 	//Repair
+	public int _repairToolCount = 6;
 	private bool _isRepairing = false;
+	[SerializeField]private Transform _spotLeft;
+	public int _spotLeftLife = 3;
+	[SerializeField]private Transform _spotCenter;
+	public int _spotCenterLife = 3;
+	[SerializeField]private Transform _spotRight;
+	public int _spotRightLife = 3;
+	[SerializeField] private Transform _defaultSpot;
+	private Coroutine _repair;
 
 	//Car Specs
 	public float _strenghtCoefficient = 10000f;
@@ -40,6 +48,7 @@ public class CarController : MonoBehaviour
 	//Components
 	public Transform _cm;
 	public Rigidbody _rb;
+	[SerializeField] private List<Material> _materials;
 
 
 	private void Start()
@@ -121,26 +130,114 @@ public class CarController : MonoBehaviour
 		Lean();
 	}
 
+	private void TakeDamage()
+	{
+		int rand = Random.Range(0, 2);
+		switch (rand)
+		{
+			case 2:
+			if (_spotLeftLife > 0 )
+				{
+					_spotLeftLife -= 1;
+				}
+			else
+				{
+					TakeDamage();
+				}
+				break;
+			case 1:
+				if (_spotCenterLife > 0)
+				{
+					_spotCenterLife -= 1;
+				}
+				else
+				{
+					TakeDamage();
+				}
+				break;
+			case 0:
+				if (_spotRightLife > 0)
+				{
+					_spotRightLife -= 1;
+				}
+				else
+				{
+					TakeDamage();
+				}
+				break;
+			default:
+				break;
+		}
+	}
+
+	private void CheckDamage()
+	{
+		Debug.Log("boum");
+		switch (_spotLeftLife)
+		{
+			case int n when n > 2 :
+				_spotLeft.GetComponentInChildren<MeshRenderer>().material = _materials[0];
+				break;
+			case int n when n > 0 && n <= 2 :
+				_spotLeft.GetComponentInChildren<MeshRenderer>().material = _materials[1];
+				break;
+			case 0:
+				_spotLeft.GetComponentInChildren<MeshRenderer>().material = _materials[2];
+				break;
+			default:
+				break;
+		}
+		switch (_spotCenterLife)
+		{
+			case int n when n > 2 :
+				_spotCenter.GetComponentInChildren<MeshRenderer>().material = _materials[0];
+				break;
+			case int n when n > 0 && n <= 2:
+				_spotCenter.GetComponentInChildren<MeshRenderer>().material = _materials[1];
+				break;
+			case 0:
+				_spotCenter.GetComponentInChildren<MeshRenderer>().material = _materials[2];
+				break;
+			default:
+				break;
+		}
+		switch (_spotRightLife)
+		{
+			case int n when n > 2:
+				_spotRight.GetComponentInChildren<MeshRenderer>().material = _materials[0];
+				break;
+			case int n when n > 0 && n <= 2:
+				_spotRight.GetComponentInChildren<MeshRenderer>().material = _materials[1];
+				break;
+			case 0:
+				_spotRight.GetComponentInChildren<MeshRenderer>().material = _materials[2];
+				break;
+			default:
+				break;
+		}
+	}
+
 	private void Repair()
 	{
-		if (!_isRepairing)
+		if (!_isRepairing && _repairToolCount > 0)
 		{
+			
 			if (_im._spotLeft)
 			{
-				_companionStartPos = _companion.transform.position;
-				_companion.transform.position = transform.localPosition + new Vector3(-0.75f, 0, 0);
+				_companion.transform.position = _spotLeft.position;
+				_repair = StartCoroutine(Repairing(0));
 				_isRepairing = true;
 			}
 			if (_im._spotCentral)
 			{
-				_companionStartPos = _companion.transform.position;
-				_companion.transform.position = transform.localPosition + new Vector3(0.75f, 0, 0);
+				_companion.transform.position = _spotCenter.position;
+				_repair = StartCoroutine(Repairing(1));
 				_isRepairing = true;
 			}
 			if (_im._spotRight)
 			{
-				_companionStartPos = _companion.transform.position;
-				_companion.transform.position = transform.localPosition + new Vector3(0, 0, 1);
+				_companion.transform.position = _spotRight.position;
+				_repair = StartCoroutine(Repairing(2));
 				_isRepairing = true;
 			}
 		}
@@ -149,9 +246,36 @@ public class CarController : MonoBehaviour
 			if (Input.GetButtonUp("Spot1") || Input.GetButtonUp("Spot2") || Input.GetButtonUp("Spot3"))
 			{
 				//Stop All Repair fonctions
-				_companion.transform.SetPositionAndRotation(_companionStartPos, Quaternion.Euler(0, 0, 0));
+				_companion.transform.position = _defaultSpot.position;
+				_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
+				_isRepairing = false;
+				CheckDamage();
+				StopCoroutine(_repair);
 			}
 		}
+	}
+
+	private IEnumerator Repairing(int spot)
+	{
+		yield return new WaitForSeconds(3);
+		switch (spot)
+		{
+			case 0:
+				_spotLeftLife = 4;
+				break;
+			case 1:
+				_spotCenterLife = 4;
+				break;
+			case 2:
+				_spotRightLife = 4;
+				break;
+			default:
+				break;
+		}
+
+		CheckDamage();
+		_companion.transform.position = _defaultSpot.position;
+		_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
 	}
 
 	private void Lean()
@@ -161,7 +285,10 @@ public class CarController : MonoBehaviour
 			{
 				if (_im._vertical > -0.2f && _im._vertical < 0.2f && _im._horizontal > -0.2f && _im._horizontal < 0.2f)
 				{
-					_companion.transform.SetPositionAndRotation(_companionStartPos, Quaternion.Euler(0, 0, 0));
+					_companion.transform.position = _defaultSpot.position;
+					_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
+					_isLeaning = false;
+					_leanDir = 0;
 				}
 				else if (_im._vertical < -0.2f)
 				{
@@ -312,7 +439,7 @@ public class CarController : MonoBehaviour
 			}
 			else
 			{
-				_companion.transform.SetPositionAndRotation(_companionStartPos, Quaternion.Euler(0, 0, 0));
+				_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
 				_isLeaning = false;
 				return false;
 			}
@@ -342,4 +469,16 @@ public class CarController : MonoBehaviour
 			_uim.changeDir(_turningDir);
 		}
 	}
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.tag == "Obstacles")
+		{
+			_rb.AddForce(-transform.forward * 20000);
+			TakeDamage();
+			CheckDamage();
+			Debug.Log("hit");
+		}
+	}
 }
+
