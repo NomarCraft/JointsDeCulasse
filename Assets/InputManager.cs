@@ -17,6 +17,7 @@ public class InputManager : MonoBehaviour
 	public bool _spotLeft;
 	public bool _spotCentral;
 	public bool _spotRight;
+	public bool _grabTools;
 
 	private void Update()
 	{
@@ -30,5 +31,6 @@ public class InputManager : MonoBehaviour
 		_spotLeft = Input.GetButton("Spot1");
 		_spotCentral = Input.GetButton("Spot2");
 		_spotRight = Input.GetButton("Spot3");
+		_grabTools = Input.GetButton("GrabTools");
 	}
 }

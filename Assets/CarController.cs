@@ -26,6 +26,9 @@ public class CarController : MonoBehaviour
 
 	//Repair
 	public int _repairToolCount = 6;
+	public int _repairToolMaxCount = 6;
+	[SerializeField] private Transform _grabSpot;
+	private bool _grabingTools = false;
 	private bool _isRepairing = false;
 	[SerializeField]private Transform _spotLeft;
 	public int _spotLeftLife = 3;
@@ -126,53 +129,65 @@ public class CarController : MonoBehaviour
 
 	private void Companion()
 	{
-		Repair();
-		Lean();
+		if (!_grabingTools)
+		{
+			Repair();
+			Lean();
+		}
+		GrabingTools();
 	}
 
-	private void TakeDamage()
+	private void TakeDamage(int amount)
 	{
-		int rand = Random.Range(0, 2);
-		switch (rand)
+		if (_spotLeftLife > 0 && _spotCenterLife > 0 && _spotRightLife > 0)
 		{
-			case 2:
-			if (_spotLeftLife > 0 )
-				{
-					_spotLeftLife -= 1;
-				}
-			else
-				{
-					TakeDamage();
-				}
-				break;
-			case 1:
-				if (_spotCenterLife > 0)
-				{
-					_spotCenterLife -= 1;
-				}
-				else
-				{
-					TakeDamage();
-				}
-				break;
-			case 0:
-				if (_spotRightLife > 0)
-				{
-					_spotRightLife -= 1;
-				}
-				else
-				{
-					TakeDamage();
-				}
-				break;
-			default:
-				break;
+			int rand = Random.Range(0, 2);
+			switch (rand)
+			{
+				case 2:
+					if (_spotLeftLife > 0)
+					{
+						_spotLeftLife -= amount;
+					}
+					else
+					{
+						TakeDamage(amount);
+					}
+					break;
+				case 1:
+					if (_spotCenterLife > 0)
+					{
+						_spotCenterLife -= amount;
+					}
+					else
+					{
+						TakeDamage(amount);
+					}
+					break;
+				case 0:
+					if (_spotRightLife > 0)
+					{
+						_spotRightLife -= amount;
+					}
+					else
+					{
+						TakeDamage(amount);
+					}
+					break;
+				default:
+					break;
+			}
 		}
+
+		else
+		{
+
+		}
+
 	}
 
 	private void CheckDamage()
 	{
-		Debug.Log("boum");
 		switch (_spotLeftLife)
 		{
 			case int n when n > 2 :
@@ -273,6 +288,8 @@ public class CarController : MonoBehaviour
 				break;
 		}
 
+		_repairToolCount -= 1;
+		Debug.Log(_repairToolCount);
 		CheckDamage();
 		_companion.transform.position = _defaultSpot.position;
 		_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -319,6 +336,20 @@ public class CarController : MonoBehaviour
 					}
 				}
 			}
+		}
+	}
+
+	private void GrabingTools()
+	{
+		if (!_isRepairing && !_isLeaning && _im._grabTools)
+		{
+			_grabingTools = true;
+			_companion.transform.position = _grabSpot.position;
+		}
+		else
+		{
+			_grabingTools = false;
+			_companion.transform.position = _defaultSpot.position;
 		}
 	}
 
@@ -475,9 +506,19 @@ public class CarController : MonoBehaviour
 		if (other.gameObject.tag == "Obstacles")
 		{
 			_rb.AddForce(-transform.forward * 20000);
-			TakeDamage();
+			TakeDamage(1);
 			CheckDamage();
 			Debug.Log("hit");
+		}
+
+		if (other.gameObject.tag == "Tools")
+		{
+			if (_repairToolCount < _repairToolMaxCount && _grabingTools && !other.GetComponent<Tools>()._hasBeenUsed)
+			{
+				_repairToolCount += other.GetComponent<Tools>()._toolsAmount;
+				StartCoroutine(other.GetComponent<Tools>().RegenTime());
+				Debug.Log(_repairToolCount);
+			}
 		}
 	}
 }
