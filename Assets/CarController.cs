@@ -14,8 +14,8 @@ public class CarController : MonoBehaviour
 	public GameObject _companion;
 
 	//Wheels
-	public List<WheelCollider> _throttleWheels;
-	public List<WheelCollider> _steeringWheels;
+	[SerializeField] private List<WheelCollider> _throttleWheels;
+	[SerializeField] private List<WheelCollider> _steeringWheels;
 	
 	//Lean & Turn
 	private bool _isLeaning = false;
@@ -25,28 +25,44 @@ public class CarController : MonoBehaviour
 	public bool _isTheCompanionHelping = false;
 
 	//Repair
+	private int _carLife = 3;
 	public int _repairToolCount = 6;
 	public int _repairToolMaxCount = 6;
 	[SerializeField] private Transform _grabSpot;
 	private bool _grabingTools = false;
 	private bool _isRepairing = false;
-	[SerializeField]private Transform _spotLeft;
-	public int _spotLeftLife = 3;
-	[SerializeField]private Transform _spotCenter;
-	public int _spotCenterLife = 3;
-	[SerializeField]private Transform _spotRight;
-	public int _spotRightLife = 3;
+	[SerializeField] private Transform _spotLeft;
+	[HideInInspector] public int _spotLeftLife = 3;
+	[SerializeField] private int _spotLeftMaxLife = 3;
+	[SerializeField] private Transform _spotCenter;
+	[HideInInspector] public int _spotCenterLife = 3;
+	[SerializeField] private int _spotCenterMaxLife = 3;
+	[SerializeField] private Transform _spotRight;
+	[HideInInspector] public int _spotRightLife = 3;
+	[SerializeField] private int _spotRightMaxLife = 3;
 	[SerializeField] private Transform _defaultSpot;
+	private bool _miniGameFailing = false;
 	private Coroutine _repair;
 
+	//Minigame
+	[SerializeField] private bool _miniGame1IsOn = false;
+	[SerializeField] private GameObject _miniGame1;
+	[SerializeField] private int _score1;
+	[SerializeField] private int _objective1;
+	[SerializeField] private float _timeLeft1;
+	[SerializeField] private float _initialTime1 = 10f;
+
+
 	//Car Specs
-	public float _strenghtCoefficient = 10000f;
-	public float _brakeStrenght;
-	public float _maxTurnAngle = 20f;
-	public float _boostUseSpeed = 50f;
-	public float _boostRefillRate = 10f;
-	public float _boostAmount = 50f;
-	public float _currentSpeed;
+	[SerializeField] private float _strenghtCoefficient = 10000f;
+	[SerializeField] private float _brakeStrenght;
+	[SerializeField] private float _maxTurnAngle = 20f;
+	[SerializeField] private float _boostUseSpeed = 50f;
+	[SerializeField] private float _boostRefillRate = 10f;
+	[SerializeField] private float _boostStartAmount = 50f;
+	[SerializeField] private float _boostAmount;
+	[SerializeField] private float _boostMaxAmount = 200f;
+	[HideInInspector] public float _currentSpeed;
 
 	//Components
 	public Transform _cm;
@@ -60,6 +76,8 @@ public class CarController : MonoBehaviour
 		_rb = GetComponent<Rigidbody>();
 		_uim = GetComponent<UIManager>();
 
+		_boostAmount = _boostStartAmount;
+
 		//CenterOfMass(Depreciated)
 		/*if (_cm)
 		{
@@ -70,6 +88,8 @@ public class CarController : MonoBehaviour
 		{
 			wheel.ConfigureVehicleSubsteps(300, 24, 24);
 		}
+
+		CheckDamage();
 		
 	}
 
@@ -77,6 +97,11 @@ public class CarController : MonoBehaviour
 	{
 		//UIUpdate
 		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
+
+		if (_miniGame1IsOn)
+		{
+			MiniGame1();
+		}
 	}
 
 	private void FixedUpdate()
@@ -86,45 +111,14 @@ public class CarController : MonoBehaviour
 		Gravity();
 		Companion();
 		Accelerate();
-		Boost();
+		BoostAmount();
 		Steer();
-
-		/*
-		if (_turning)
-		{
-			if (_turningDir == _leanDir)
-			{
-				_isTheCompanionHelping = true;
-			}
-			else if (_turningDir != _leanDir)
-			{
-				_isTheCompanionHelping = false;
-			}
-		}*/
-	}
-	
-	private bool CheckGround(List<WheelCollider> targets)
-	{
-		WheelHit hit = new WheelHit();
-
-		foreach (WheelCollider target in targets)
-		{
-			bool grounded = target.GetGroundHit(out hit);
-			if (grounded)
-			{
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private void Gravity()
 	{
-
 		bool grounded = CheckGround(_throttleWheels);
-
-		_rb.AddForce(transform.up * -2000, ForceMode.Force);
+		_rb.AddForce(Vector3.down * 5000, ForceMode.Force);
 	}
 
 	private void Companion()
@@ -137,7 +131,7 @@ public class CarController : MonoBehaviour
 		GrabingTools();
 	}
 
-	private void TakeDamage(int amount)
+	private void TakeDamage(int amount)  //OK
 	{
 		if (_spotLeftLife > 0 && _spotCenterLife > 0 && _spotRightLife > 0)
 		{
@@ -148,6 +142,10 @@ public class CarController : MonoBehaviour
 					if (_spotLeftLife > 0)
 					{
 						_spotLeftLife -= amount;
+						if (_spotLeftLife == 0)
+						{
+							_carLife -= 1;
+						}
 					}
 					else
 					{
@@ -158,6 +156,10 @@ public class CarController : MonoBehaviour
 					if (_spotCenterLife > 0)
 					{
 						_spotCenterLife -= amount;
+						if (_spotCenterLife == 0)
+						{
+							_carLife -= 1;
+						}
 					}
 					else
 					{
@@ -168,6 +170,10 @@ public class CarController : MonoBehaviour
 					if (_spotRightLife > 0)
 					{
 						_spotRightLife -= amount;
+						if (_spotRightLife == 0)
+						{
+							_carLife -= 1;
+						}
 					}
 					else
 					{
@@ -181,75 +187,36 @@ public class CarController : MonoBehaviour
 
 		else
 		{
-
+			return;
 		}
 
 	}
 
-	private void CheckDamage()
+	private void CheckDamage() // OK
 	{
-		switch (_spotLeftLife)
-		{
-			case int n when n > 2 :
-				_spotLeft.GetComponentInChildren<MeshRenderer>().material = _materials[0];
-				break;
-			case int n when n > 0 && n <= 2 :
-				_spotLeft.GetComponentInChildren<MeshRenderer>().material = _materials[1];
-				break;
-			case 0:
-				_spotLeft.GetComponentInChildren<MeshRenderer>().material = _materials[2];
-				break;
-			default:
-				break;
-		}
-		switch (_spotCenterLife)
-		{
-			case int n when n > 2 :
-				_spotCenter.GetComponentInChildren<MeshRenderer>().material = _materials[0];
-				break;
-			case int n when n > 0 && n <= 2:
-				_spotCenter.GetComponentInChildren<MeshRenderer>().material = _materials[1];
-				break;
-			case 0:
-				_spotCenter.GetComponentInChildren<MeshRenderer>().material = _materials[2];
-				break;
-			default:
-				break;
-		}
-		switch (_spotRightLife)
-		{
-			case int n when n > 2:
-				_spotRight.GetComponentInChildren<MeshRenderer>().material = _materials[0];
-				break;
-			case int n when n > 0 && n <= 2:
-				_spotRight.GetComponentInChildren<MeshRenderer>().material = _materials[1];
-				break;
-			case 0:
-				_spotRight.GetComponentInChildren<MeshRenderer>().material = _materials[2];
-				break;
-			default:
-				break;
-		}
+		CheckLife(_spotLeftLife, _spotLeft);
+		CheckLife(_spotCenterLife, _spotCenter);
+		CheckLife(_spotRightLife, _spotRight);
 	}
 
-	private void Repair()
+	private void Repair() // OK
 	{
 		if (!_isRepairing && _repairToolCount > 0)
 		{
 			
-			if (_im._spotLeft)
+			if (_im._spotLeft && _spotLeftLife < _spotLeftMaxLife)
 			{
 				_companion.transform.position = _spotLeft.position;
 				_repair = StartCoroutine(Repairing(0));
 				_isRepairing = true;
 			}
-			if (_im._spotCentral)
+			if (_im._spotCentral && _spotCenterLife < _spotCenterMaxLife)
 			{
 				_companion.transform.position = _spotCenter.position;
 				_repair = StartCoroutine(Repairing(1));
 				_isRepairing = true;
 			}
-			if (_im._spotRight)
+			if (_im._spotRight && _spotRightLife < _spotRightMaxLife)
 			{
 				_companion.transform.position = _spotRight.position;
 				_repair = StartCoroutine(Repairing(2));
@@ -261,6 +228,10 @@ public class CarController : MonoBehaviour
 			if (Input.GetButtonUp("Spot1") || Input.GetButtonUp("Spot2") || Input.GetButtonUp("Spot3"))
 			{
 				//Stop All Repair fonctions
+				if (_miniGame1IsOn)
+				{
+					StopMiniGame1();
+				}
 				_companion.transform.position = _defaultSpot.position;
 				_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
 				_isRepairing = false;
@@ -270,32 +241,108 @@ public class CarController : MonoBehaviour
 		}
 	}
 
-	private IEnumerator Repairing(int spot)
+	private IEnumerator Repairing(int spot)  // OK
 	{
-		yield return new WaitForSeconds(3);
 		switch (spot)
 		{
 			case 0:
-				_spotLeftLife = 4;
+				StartMiniGame1();
 				break;
 			case 1:
-				_spotCenterLife = 4;
+				StartMiniGame1();
 				break;
 			case 2:
-				_spotRightLife = 4;
+				StartMiniGame1();
+				break;
+			default:
+				break;
+		}
+		yield return new WaitForSeconds(10);
+		switch (spot)
+		{
+			case 0:
+				if (_score1 >= _objective1)
+				{
+					_spotLeftLife = _spotLeftMaxLife;
+				}
+				StopMiniGame1();
+				break;
+			case 1:
+				if (_score1 >= _objective1)
+				{
+					_spotCenterLife = _spotCenterMaxLife;
+				}
+				StopMiniGame1();
+				break;
+			case 2:
+				if (_score1 >= _objective1)
+				{
+					_spotRightLife = _spotRightMaxLife;
+				}
+				StopMiniGame1();
 				break;
 			default:
 				break;
 		}
 
 		_repairToolCount -= 1;
-		Debug.Log(_repairToolCount);
+		_carLife += 1;
 		CheckDamage();
 		_companion.transform.position = _defaultSpot.position;
 		_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
+	} 
+
+	private void StartMiniGame1()
+	{
+		_miniGame1.SetActive(true);
+		_timeLeft1 = _initialTime1;
+		_score1 = 0;
+		_miniGame1IsOn = true;
 	}
 
-	private void Lean()
+	private void MiniGame1()
+	{
+		if (_im._leftTrigger != 0)
+		{
+			if (_im._leftTriggerIsInUse == false)
+			{
+				_score1 += 1;
+				_im._leftTriggerIsInUse = true;
+			}
+			
+		}
+		if (_im._leftTrigger == 0)
+		{
+			_im._leftTriggerIsInUse = false;
+		}
+
+		if (_im._rightTrigger != 0)
+		{
+			if (_im._rightTriggerIsInUse == false)
+			{
+				_score1 += 1;
+				_im._rightTriggerIsInUse = true;
+			}
+
+		}
+		if (_im._rightTrigger == 0)
+		{
+			_im._rightTriggerIsInUse = false;
+		}
+
+		_timeLeft1 -= Time.deltaTime;
+		
+
+		_uim.UpdateMiniGame1(_score1, _objective1, Mathf.RoundToInt(_timeLeft1));
+	}
+
+	private void StopMiniGame1()
+	{
+		_miniGame1.SetActive(false);
+		_miniGame1IsOn = false;
+	}
+
+	private void Lean()  // OK
 	{
 		{
 			if (!_isRepairing)
@@ -339,7 +386,7 @@ public class CarController : MonoBehaviour
 		}
 	}
 
-	private void GrabingTools()
+	private void GrabingTools()  //OK
 	{
 		if (!_isRepairing && !_isLeaning && _im._grabTools)
 		{
@@ -353,12 +400,12 @@ public class CarController : MonoBehaviour
 		}
 	}
 
-	private void Accelerate()
+	private void Accelerate() // OK
 	{
 		foreach (WheelCollider wheel in _throttleWheels)
 		{
 
-			if (_im._brake >= 0.1f)
+			if (_im._brake >= 0.2f)
 			{
 				if (transform.InverseTransformVector(_rb.velocity).z <= 0.5f )
 				{
@@ -375,7 +422,7 @@ public class CarController : MonoBehaviour
 
 			else
 			{
-				if (_im._boost == true && _im._boostComp == true && _boostAmount > 0f)
+				if (_im._boost == true && _im._boostComp == true && _boostAmount > 0f && _carLife >= 3)
 				{
 					wheel.brakeTorque = 0;
 					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
@@ -387,22 +434,22 @@ public class CarController : MonoBehaviour
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2f;
 						wheel.brakeTorque = 0;
 					}
-					else if (_currentSpeed > 100 && _currentSpeed < 170)
+					else if (_currentSpeed > 100 && _currentSpeed < 170 && _carLife > 0)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.10f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.30f;
 						wheel.brakeTorque = 0;
 					}
-					else if (_currentSpeed > 170 && _currentSpeed < 225)
+					else if (_currentSpeed > 170 && _currentSpeed < 225 && _carLife > 1)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.70f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.90f;
 						wheel.brakeTorque = 0;
 					}
-					else if (_currentSpeed > 225 && _currentSpeed < 300)
+					else if (_currentSpeed > 225 && _currentSpeed < 300 && _carLife > 1)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.50f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.45f;
 						wheel.brakeTorque = 0;
 					}
-					else if (_currentSpeed > 300)
+					else if (_currentSpeed > 300 && _carLife > 2)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.25f;
 						wheel.brakeTorque = 0;
@@ -413,22 +460,22 @@ public class CarController : MonoBehaviour
 		}
 	}
 
-	private void Boost()
+	private void BoostAmount() // OK
 	{
 		bool grounded = CheckGround(_throttleWheels);
 
 		if (grounded && _im._boost)
 		{
-			_boostAmount = Mathf.Clamp(_boostAmount - (_boostUseSpeed * Time.deltaTime), 0f, 200f);
+			_boostAmount = Mathf.Clamp(_boostAmount - (_boostUseSpeed * Time.deltaTime), 0f, _boostMaxAmount);
 		}
 		else
 		{
-			_boostAmount = Mathf.Clamp(_boostAmount + (_boostRefillRate * Time.deltaTime), 0f, 200f);
+			_boostAmount = Mathf.Clamp(_boostAmount + (_boostRefillRate * Time.deltaTime), 0f, _boostMaxAmount);
 		}
 		    
 	}
 
-	private void Steer ()
+	private void Steer () // OK
 	{
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
@@ -454,7 +501,7 @@ public class CarController : MonoBehaviour
 		}
 	}
 
-	private bool CanLean(int index)
+	private bool CanLean(int index)  // OK
 	{
 		if( _isLeaning == false)
 		{
@@ -485,7 +532,7 @@ public class CarController : MonoBehaviour
 
 	}
 
-	public void StartTurning (int dir)
+	public void StartTurning (int dir) // OK
 	{
 		if (dir == 5)
 		{
@@ -521,5 +568,42 @@ public class CarController : MonoBehaviour
 			}
 		}
 	}
+
+	//Generic Functions
+
+	private bool CheckGround(List<WheelCollider> targets)
+	{
+		WheelHit hit = new WheelHit();
+
+		foreach (WheelCollider target in targets)
+		{
+			bool grounded = target.GetGroundHit(out hit);
+			if (grounded)
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private void CheckLife (int life, Transform target)
+	{
+		switch (life)
+		{
+			case int n when n > 2:
+				target.GetComponentInChildren<MeshRenderer>().material = _materials[0];
+				break;
+			case int n when n > 0 && n <= 2:
+				target.GetComponentInChildren<MeshRenderer>().material = _materials[1];
+				break;
+			case 0:
+				target.GetComponentInChildren<MeshRenderer>().material = _materials[2];
+				break;
+			default:
+				break;
+		}
+	}
+
 }
 

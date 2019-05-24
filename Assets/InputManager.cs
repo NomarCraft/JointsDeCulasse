@@ -10,14 +10,18 @@ public class InputManager : MonoBehaviour
 	public float _steer;
 	public float _brake;
 	public bool _boost;
-
 	public float _horizontal;
+
 	public float _vertical;
 	public bool _boostComp;
 	public bool _spotLeft;
 	public bool _spotCentral;
 	public bool _spotRight;
 	public bool _grabTools;
+	public float _leftTrigger;
+	public float _rightTrigger;
+	public bool _leftTriggerIsInUse = false;
+	public bool _rightTriggerIsInUse = false;
 
 	private void Update()
 	{
@@ -32,5 +36,7 @@ public class InputManager : MonoBehaviour
 		_spotCentral = Input.GetButton("Spot2");
 		_spotRight = Input.GetButton("Spot3");
 		_grabTools = Input.GetButton("GrabTools");
+		_leftTrigger = Input.GetAxisRaw("LeftTrigger");
+		_rightTrigger = Input.GetAxisRaw("RightTrigger");
 	}
 }

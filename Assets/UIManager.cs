@@ -9,6 +9,18 @@ public class UIManager : MonoBehaviour
 	public TextMeshProUGUI _speed;
 	public TextMeshProUGUI _dir;
 
+	//Minigame 1
+	public TextMeshProUGUI _playerScore;
+	public TextMeshProUGUI _scoreObjective;
+	public TextMeshProUGUI _timeLeft;
+
+	public virtual void UpdateMiniGame1(int score,int objective , float time)
+	{
+		_playerScore.text = score + "";
+		_scoreObjective.text = objective + "";
+		_timeLeft.text = time + "";
+	}
+
 	public virtual void changeSpeed (float speed)
 	{
 		float s = speed * 3.6f;
