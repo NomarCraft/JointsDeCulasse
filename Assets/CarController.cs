@@ -105,7 +105,7 @@ public class CarController : MonoBehaviour
 
 		bool grounded = CheckGround(_throttleWheels);
 
-		_rb.AddForce(transform.up * -2000, ForceMode.Force);
+		_rb.AddForce(Vector3.down * 3000, ForceMode.Force);
 	}
 
 	private void Companion()
