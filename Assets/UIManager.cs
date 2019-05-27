@@ -6,6 +6,8 @@ using TMPro;
 // ------------- SCRIPT CHECK 21.05.2019 ----------------- //
 public class UIManager : MonoBehaviour
 {
+
+	public TextMeshProUGUI _position;
 	public TextMeshProUGUI _speed;
 	public TextMeshProUGUI _dir;
 
@@ -19,6 +21,11 @@ public class UIManager : MonoBehaviour
 		_playerScore.text = score + "";
 		_scoreObjective.text = objective + "";
 		_timeLeft.text = time + "";
+	}
+
+	public virtual void UpdatePosition(int pos)
+	{
+		_position.text = pos + "";
 	}
 
 	public virtual void changeSpeed (float speed)

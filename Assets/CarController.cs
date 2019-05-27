@@ -9,9 +9,15 @@ public class CarController : MonoBehaviour
 {
 
 	//GameManagers
-	public InputManager _im;
+	[SerializeField] private InputManager _im;
 	public UIManager _uim;
-	public GameObject _companion;
+	[SerializeField] private GameObject _companion;
+	public int _playerIndex;
+
+	//Race
+	[HideInInspector] public int _currentLap = 1;
+	public int _currentWayPoint = 1;
+	public float _distanceFromWayPoints;
 
 	//Wheels
 	[SerializeField] private List<WheelCollider> _throttleWheels;
@@ -95,6 +101,7 @@ public class CarController : MonoBehaviour
 
 	private void Update()
 	{
+		CalculateDistanceToWayPoint();
 		//UIUpdate
 		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
 
@@ -113,6 +120,11 @@ public class CarController : MonoBehaviour
 		Accelerate();
 		BoostAmount();
 		Steer();
+	}
+
+	private void CalculateDistanceToWayPoint()
+	{
+		_distanceFromWayPoints = Vector3.Distance(transform.position, GameManager.Instance._wayPoints[_currentWayPoint].position);
 	}
 
 	private void Gravity()
