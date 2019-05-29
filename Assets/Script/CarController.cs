@@ -9,28 +9,47 @@ public class CarController : MonoBehaviour
 {
 
 	//GameManagers
+	[Header("Managers")]
 	[SerializeField] private InputManager _im;
 	public UIManager _uim;
 	[SerializeField] private GameObject _companion;
-	public int _playerIndex;
+
+	//Components
+	[Header("Components")]
+	public Transform _cm;
+	public Rigidbody _rb;
+	[SerializeField] private List<Material> _materials;
+
 
 	//Race
+	[Header ("Race Settings")]
+	public int _playerIndex;
 	[HideInInspector] public int _currentLap = 1;
 	public int _currentWayPoint = 1;
 	public float _distanceFromWayPoints;
 
 	//Wheels
+	[Header("Physical Settings")]
 	[SerializeField] private List<WheelCollider> _throttleWheels;
 	[SerializeField] private List<WheelCollider> _steeringWheels;
-	
-	//Lean & Turn
 	private bool _isLeaning = false;
 	private float _leanDir = 0;
 	public bool _turning = false;
 	public int _turningDir;
 	public bool _isTheCompanionHelping = false;
+	[SerializeField] private float _strenghtCoefficient = 10000f;
+	[SerializeField] private float _brakeStrenght;
+	[SerializeField] private float _maxTurnAngle = 20f;
+	[SerializeField] private float _boostUseSpeed = 50f;
+	[SerializeField] private float _boostRefillRate = 10f;
+	[SerializeField] private float _boostStartAmount = 50f;
+	[SerializeField] private float _boostAmount;
+	[SerializeField] private float _boostMaxAmount = 200f;
+	[HideInInspector] public float _currentSpeed;
+	[SerializeField] private float _additionalGravity = 4000f;
 
 	//Repair
+	[Header("Repair Settings")]
 	private int _carLife = 3;
 	public int _repairToolCount = 6;
 	public int _repairToolMaxCount = 6;
@@ -51,30 +70,13 @@ public class CarController : MonoBehaviour
 	private Coroutine _repair;
 
 	//Minigame
+	[Header("MiniGames")]
 	[SerializeField] private bool _miniGame1IsOn = false;
 	[SerializeField] private GameObject _miniGame1;
 	[SerializeField] private int _score1;
 	[SerializeField] private int _objective1;
 	[SerializeField] private float _timeLeft1;
 	[SerializeField] private float _initialTime1 = 10f;
-
-
-	//Car Specs
-	[SerializeField] private float _strenghtCoefficient = 10000f;
-	[SerializeField] private float _brakeStrenght;
-	[SerializeField] private float _maxTurnAngle = 20f;
-	[SerializeField] private float _boostUseSpeed = 50f;
-	[SerializeField] private float _boostRefillRate = 10f;
-	[SerializeField] private float _boostStartAmount = 50f;
-	[SerializeField] private float _boostAmount;
-	[SerializeField] private float _boostMaxAmount = 200f;
-	[HideInInspector] public float _currentSpeed;
-
-	//Components
-	public Transform _cm;
-	public Rigidbody _rb;
-	[SerializeField] private List<Material> _materials;
-
 
 	private void Start()
 	{
@@ -127,10 +129,15 @@ public class CarController : MonoBehaviour
 		_distanceFromWayPoints = Vector3.Distance(transform.position, GameManager.Instance._wayPoints[_currentWayPoint].position);
 	}
 
+	private void Respawn()
+	{
+		transform.SetPositionAndRotation(GameManager.Instance._wayPoints[_currentWayPoint - 1].position , GameManager.Instance._wayPoints[_currentWayPoint - 1].rotation);
+	}
+
 	private void Gravity()
 	{
 		bool grounded = CheckGround(_throttleWheels);
-		_rb.AddForce(Vector3.down * 5000, ForceMode.Force);
+		_rb.AddForce(Vector3.down * _additionalGravity, ForceMode.Force);
 	}
 
 	private void Companion()

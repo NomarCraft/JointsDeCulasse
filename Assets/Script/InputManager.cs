@@ -8,22 +8,23 @@ public class InputManager : MonoBehaviour
 {
 	private CarController _playerRef;
 
-	public float _throttle;
-	public float _steer;
-	public float _brake;
-	public bool _boost;
-	public float _horizontal;
+	[HideInInspector] public float _throttle;
+	[HideInInspector] public float _steer;
+	[HideInInspector] public float _brake;
+	[HideInInspector] public bool _boost;
 
-	public float _vertical;
-	public bool _boostComp;
-	public bool _spotLeft;
-	public bool _spotCentral;
-	public bool _spotRight;
-	public bool _grabTools;
-	public float _leftTrigger;
-	public float _rightTrigger;
-	public bool _leftTriggerIsInUse = false;
-	public bool _rightTriggerIsInUse = false;
+	[HideInInspector] public float _horizontal; 
+	[HideInInspector] public float _vertical;
+	[HideInInspector] public bool _boostComp;
+	[HideInInspector] public bool _spotLeft;
+	[HideInInspector] public bool _spotCentral;
+	[HideInInspector] public bool _spotRight;
+	[HideInInspector] public bool _grabTools;
+	[HideInInspector] public float _leftTrigger;
+	[HideInInspector] public float _rightTrigger;
+	[HideInInspector] public bool _leftTriggerIsInUse = false;
+	[HideInInspector] public bool _rightTriggerIsInUse = false;
+	[HideInInspector] public bool _respawn = false;
 
 	private void Start()
 	{
@@ -47,6 +48,7 @@ public class InputManager : MonoBehaviour
 			_grabTools = Input.GetButton("GrabTools");
 			_leftTrigger = Input.GetAxisRaw("LeftTrigger");
 			_rightTrigger = Input.GetAxisRaw("RightTrigger");
+			_respawn = Input.GetButton("Respawn");
 		}
 	
 		else if (_playerRef._playerIndex == 2)
@@ -64,6 +66,7 @@ public class InputManager : MonoBehaviour
 			_grabTools = Input.GetButton("GrabTools2");
 			_leftTrigger = Input.GetAxisRaw("LeftTrigger2");
 			_rightTrigger = Input.GetAxisRaw("RightTrigger2");
+			_respawn = Input.GetButton("Respawn2");
 		}
 	}
 }
