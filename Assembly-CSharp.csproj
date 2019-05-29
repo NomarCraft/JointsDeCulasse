@@ -62,17 +62,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\AntiRollScript.cs" />
+    <Compile Include="Assets\CameraManager.cs" />
+    <Compile Include="Assets\CarController.cs" />
+    <Compile Include="Assets\GameManager.cs" />
+    <Compile Include="Assets\InputManager.cs" />
     <Compile Include="Assets\race-track-lake\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
-    <Compile Include="Assets\Script\AntiRollScript.cs" />
-    <Compile Include="Assets\Script\CameraManager.cs" />
-    <Compile Include="Assets\Script\CarController.cs" />
-    <Compile Include="Assets\Script\GameManager.cs" />
-    <Compile Include="Assets\Script\InputManager.cs" />
-    <Compile Include="Assets\Script\Singleton.cs" />
-    <Compile Include="Assets\Script\Tools.cs" />
-    <Compile Include="Assets\Script\Turning.cs" />
-    <Compile Include="Assets\Script\UIManager.cs" />
-    <Compile Include="Assets\Script\WayPoint.cs" />
+    <Compile Include="Assets\Singleton.cs" />
+    <Compile Include="Assets\Tools.cs" />
+    <Compile Include="Assets\Turning.cs" />
+    <Compile Include="Assets\UIManager.cs" />
+    <Compile Include="Assets\WayPoint.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
@@ -96,9 +96,6 @@
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>D:/UnityProjects/JointsDeCulasse/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>D:/UnityProjects/JointsDeCulasse/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>D:/UnityProjects/JointsDeCulasse/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -110,9 +107,6 @@
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
       <HintPath>D:/UnityProjects/JointsDeCulasse/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>D:/UnityProjects/JointsDeCulasse/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>D:/UnityProjects/JointsDeCulasse/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
