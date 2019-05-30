@@ -73,6 +73,8 @@
     <Compile Include="Assets\Script\InputManager.cs" />
     <Compile Include="Assets\Script\Menus\MainMenu.cs" />
     <Compile Include="Assets\Script\Menus\SwitchCanevas.cs" />
+    <Compile Include="Assets\Script\Scripts Marco\Aiguille.cs" />
+    <Compile Include="Assets\Script\Scripts Marco\BoostUI.cs" />
     <Compile Include="Assets\Script\Singleton.cs" />
     <Compile Include="Assets\Script\Tools.cs" />
     <Compile Include="Assets\Script\Traps\Bumper.cs" />
