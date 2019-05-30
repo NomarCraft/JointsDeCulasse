@@ -46,33 +46,32 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: -7570049210134433722, guid: c00fc8f8cacf6834384f16755f2e8f85, type: 3}
---- !u!64 &4981024551236257964
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8112647149159292503}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 7858316463405388657, guid: 04125584136925942b54114462bead2e, type: 3}
---- !u!65 &7892198871575432022
+--- !u!65 &172086458032489666
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8112647149159292503}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b3669b831eacdcc409fb5f327858527c, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3000, y: 298.2332, z: 220.20692}
-  m_Center: {x: -1498.8499, y: 513.4723, z: -1358.428}
+  m_Size: {x: 3000, y: 341.92853, z: 212.54883}
+  m_Center: {x: -1500, y: -63.7, z: 103}
+--- !u!65 &3341876293054214485
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8112647149159292503}
+  m_Material: {fileID: 13400000, guid: b3669b831eacdcc409fb5f327858527c, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3000, y: 341.92853, z: 212.54883}
+  m_Center: {x: -1500, y: 491.62463, z: -1369}
 --- !u!1001 &266843290546390878
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,11 +144,6 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8f8da1df0b213ae40aae2dbe39b97b69, type: 2}
-    - target: {fileID: -1504981713932161579, guid: 04125584136925942b54114462bead2e,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04125584136925942b54114462bead2e, type: 3}
 --- !u!1 &8112647149159292503 stripped
@@ -175,11 +169,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Route_D_C
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: c00fc8f8cacf6834384f16755f2e8f85,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c00fc8f8cacf6834384f16755f2e8f85,
         type: 3}
