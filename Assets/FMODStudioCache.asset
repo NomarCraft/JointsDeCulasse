@@ -15,15 +15,35 @@ MonoBehaviour:
   Path: event:/New Event
   guid: 4270550b2df4bf4ab59b2728374930ed
   Banks:
-  - {fileID: -4043629631073956899}
+  - {fileID: -4219174105448181928}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 2574626653231340401}
+  - {fileID: 6309148720166126210}
   MinDistance: 1
   MaxDistance: 20
   Length: 1656
+--- !u!114 &-4219174105448181928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: D:\Cours Aries 1\PFA\le git\JointsDeCulasse\FmodSources\Build\Desktop\Master
+    Bank.bank
+  lastModified: 636948194725227734
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 35296
+  Exists: 1
 --- !u!114 &-4043629631073956899
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42,7 +62,7 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 35296
-  Exists: 1
+  Exists: 0
 --- !u!114 &-2926561608550000024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,15 +94,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: 4997009280098099565}
-  - {fileID: -4043629631073956899}
+  - {fileID: -4219174105448181928}
   EditorEvents:
   - {fileID: -5994029235212292306}
   - {fileID: 2557370396792645580}
   MasterBanks:
-  - {fileID: -4043629631073956899}
+  - {fileID: -4219174105448181928}
   StringsBanks:
   - {fileID: 4997009280098099565}
-  stringsBankWriteTime: 636947402944927353
+  stringsBankWriteTime: 636948194725237051
   cacheVersion: 3
 --- !u!114 &2557370396792645580
 MonoBehaviour:
@@ -99,7 +119,7 @@ MonoBehaviour:
   Path: event:/test2
   guid: 46177b6d61972944a159c4838fc65910
   Banks:
-  - {fileID: -4043629631073956899}
+  - {fileID: -4219174105448181928}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -123,7 +143,7 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
-  Exists: 1
+  Exists: 0
 --- !u!114 &4997009280098099565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,9 +157,26 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: FmodSources\Build\Desktop\Master Bank.strings.bank
-  lastModified: 636947402944927353
+  lastModified: 636948194725237051
   LoadResult: 0
   FileSizes:
   - Name: 
     Value: 768
+  Exists: 1
+--- !u!114 &6309148720166126210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/New Event/PLayerlowLife
+  m_EditorClassIdentifier: 
+  Name: PLayerlowLife
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
