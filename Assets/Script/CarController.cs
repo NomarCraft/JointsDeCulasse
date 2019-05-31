@@ -103,7 +103,7 @@ public class CarController : MonoBehaviour
 
 	private void Update()
 	{
-		//CalculateDistanceToWayPoint();
+		CalculateDistanceToWayPoint();
 		//UIUpdate
 		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
 
@@ -122,6 +122,11 @@ public class CarController : MonoBehaviour
 		Accelerate();
 		BoostAmount();
 		Steer();
+
+		if (_im._respawn)
+		{
+			Respawn();
+		}
 	}
 
 	private void CalculateDistanceToWayPoint()
@@ -131,7 +136,9 @@ public class CarController : MonoBehaviour
 
 	private void Respawn()
 	{
-		transform.SetPositionAndRotation(GameManager.Instance._wayPoints[_currentWayPoint - 1].position , GameManager.Instance._wayPoints[_currentWayPoint - 1].rotation);
+		Transform respawn = GameManager.Instance._wayPoints[_currentWayPoint - 1].transform.GetComponentInChildren<RespawnPoints>().transform;
+		_rb.velocity = Vector3.zero;
+		transform.SetPositionAndRotation(respawn.position , respawn.localRotation);
 	}
 
 	private void Gravity()

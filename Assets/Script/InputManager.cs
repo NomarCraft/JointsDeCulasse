@@ -48,7 +48,7 @@ public class InputManager : MonoBehaviour
 			_grabTools = Input.GetButton("GrabTools");
 			_leftTrigger = Input.GetAxisRaw("LeftTrigger");
 			_rightTrigger = Input.GetAxisRaw("RightTrigger");
-			_respawn = Input.GetButton("Respawn");
+			_respawn = Input.GetButtonDown("Respawn");
 		}
 	
 		else if (_playerRef._playerIndex == 2)
@@ -66,7 +66,7 @@ public class InputManager : MonoBehaviour
 			_grabTools = Input.GetButton("GrabTools2");
 			_leftTrigger = Input.GetAxisRaw("LeftTrigger2");
 			_rightTrigger = Input.GetAxisRaw("RightTrigger2");
-			_respawn = Input.GetButton("Respawn2");
+			_respawn = Input.GetButtonDown("Respawn2");
 		}
 	}
 }

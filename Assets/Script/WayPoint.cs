@@ -4,12 +4,6 @@ using UnityEngine;
 
 public class WayPoint : MonoBehaviour
 {
-	private void OnDrawGizmos()
-	{
-		Gizmos.matrix = transform.localToWorldMatrix;
-		Gizmos.DrawWireCube(Vector3.zero, this.gameObject.GetComponent<BoxCollider>().size);
-	}
-
 
 	private void OnTriggerEnter(Collider other)
 	{
@@ -28,4 +22,11 @@ public class WayPoint : MonoBehaviour
 			}
 		}
 	}
+
+	private void OnDrawGizmos()
+	{
+		Gizmos.matrix = transform.localToWorldMatrix;
+		Gizmos.DrawWireCube(Vector3.zero, this.gameObject.GetComponent<BoxCollider>().size);
+	}
+
 }
