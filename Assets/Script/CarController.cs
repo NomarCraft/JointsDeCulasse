@@ -24,6 +24,7 @@ public class CarController : MonoBehaviour
 	//Race
 	[Header ("Race Settings")]
 	public int _playerIndex;
+	[HideInInspector] public bool _raceHasStarted = false;
 	[HideInInspector] public int _currentLap = 1;
 	public int _currentWayPoint = 1;
 	public float _distanceFromWayPoints;
@@ -117,15 +118,18 @@ public class CarController : MonoBehaviour
 	{
 		_currentSpeed = Mathf.Round(transform.InverseTransformVector(_rb.velocity).z * 3.6f);
 
-		Gravity();
-		Companion();
-		Accelerate();
-		BoostAmount();
-		Steer();
-
-		if (_im._respawn)
+		if (_raceHasStarted == true)
 		{
-			Respawn();
+			Gravity();
+			Companion();
+			Accelerate();
+			BoostAmount();
+			Steer();
+
+			if (_im._respawn)
+			{
+				Respawn();
+			}
 		}
 	}
 
@@ -143,8 +147,10 @@ public class CarController : MonoBehaviour
 
 	private void Gravity()
 	{
-		bool grounded = CheckGround(_throttleWheels);
-		_rb.AddForce(Vector3.down * _additionalGravity, ForceMode.Force);
+		if (CheckGround(_throttleWheels))
+		{
+			_rb.AddForce(Vector3.down * _additionalGravity, ForceMode.Force);
+		}
 	}
 
 	private void Companion()
@@ -505,23 +511,45 @@ public class CarController : MonoBehaviour
 	{
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
-			if (_currentSpeed < 0.5f)
+			if (CheckGround(_throttleWheels))
 			{
-				wheel.steerAngle = _maxTurnAngle * _im._steer * 4;
-			}
-			else
-			{
-				if (_im._steer < 0.1f && _leanDir == 1)
+				if (_currentSpeed < 0.5f)
 				{
-					wheel.steerAngle = _maxTurnAngle * _im._steer;
-				}
-				else if (_im._steer > 0.1f && _leanDir == 2)
-				{
-					wheel.steerAngle = _maxTurnAngle * _im._steer;
+					wheel.steerAngle = _maxTurnAngle * _im._steer * 4;
 				}
 				else
 				{
-					wheel.steerAngle = _maxTurnAngle * _im._steer / 2.5f;
+					if (_im._steer < -0.1f && _leanDir == 1)
+					{
+						wheel.steerAngle = _maxTurnAngle * _im._steer;
+					}
+					else if (_im._steer > 0.1f && _leanDir == 2)
+					{
+						wheel.steerAngle = _maxTurnAngle * _im._steer;
+					}
+					else
+					{
+						wheel.steerAngle = _maxTurnAngle * _im._steer / 2.5f;
+					}
+				}
+			}
+			else
+			{
+				if (_im._brake > 0.25f)
+				{
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x - .5f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+				}
+				else if (_im._throttle > 0.25f)
+				{
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + .5f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+				}
+				else if (_im._steer < -0.25f)
+				{
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y -.5f, transform.rotation.eulerAngles.z);
+				}
+				else if (_im._steer > 0.25f)
+				{
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + .5f, transform.rotation.eulerAngles.z);
 				}
 			}
 		}

@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class GameManager : Singleton<GameManager>
 {
 	public CarController _player1;
 	public CarController _player2;
 
+	[SerializeField] private TextMeshProUGUI _startCounter;
+
 	public List<Transform> _wayPoints;
+
+	private void Start()
+	{
+		StartCoroutine(StartDelay());
+	}
 
 	private void Update()
 	{
@@ -15,6 +23,23 @@ public class GameManager : Singleton<GameManager>
 		{
 			CheckPositions();
 		}
+	}
+
+	private IEnumerator StartDelay()
+	{
+		yield return new WaitForSeconds(1);
+		UpdateStartCounter("2");
+		yield return new WaitForSeconds(1);
+		UpdateStartCounter("1");
+		yield return new WaitForSeconds(1);
+		UpdateStartCounter("GOOOOOO");
+		_player1._raceHasStarted = true;
+		if (_player2 != null)
+		{
+			_player2._raceHasStarted = true;
+		}
+		yield return new WaitForSeconds(1);
+		UpdateStartCounter("");
 	}
 
 	private void CheckPositions()
@@ -91,5 +116,10 @@ public class GameManager : Singleton<GameManager>
 			_player1._uim.UpdatePosition(2);
 			_player2._uim.UpdatePosition(1);
 		}
+	}
+
+	private void UpdateStartCounter(string text)
+	{
+		_startCounter.text = text;
 	}
 }
