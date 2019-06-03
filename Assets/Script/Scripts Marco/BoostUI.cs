@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class BoostUI : MonoBehaviour
 {
     public Image _boostBar;
-    private float _boostAmount;
+    public float _boostAmount;
     private bool _isBoosting = false;
 
     private void Start()
@@ -21,11 +21,11 @@ public class BoostUI : MonoBehaviour
         {
             _boostAmount = _boostAmount + 10f * Time.deltaTime;
         }
-        if(_boostAmount <=34)
+        if(_boostAmount <=50)
         {
-            _boostAmount = 34;
+            _boostAmount = 50;
         }
-        _boostBar.fillAmount = _boostAmount / 200f;
+        _boostBar.fillAmount = (_boostAmount / 200f);
 
         GoBoost();
         StopBoost();

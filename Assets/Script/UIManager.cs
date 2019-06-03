@@ -6,7 +6,6 @@ using TMPro;
 // ------------- SCRIPT CHECK 21.05.2019 ----------------- //
 public class UIManager : MonoBehaviour
 {
-
 	public TextMeshProUGUI _position;
 	public TextMeshProUGUI _speed;
 	public TextMeshProUGUI _dir;

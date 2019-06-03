@@ -31,7 +31,7 @@ public class CarController : MonoBehaviour
 
 	//Wheels
 	[Header("Physical Settings")]
-	[SerializeField] private List<WheelCollider> _throttleWheels;
+	public List<WheelCollider> _throttleWheels;
 	[SerializeField] private List<WheelCollider> _steeringWheels;
 	private bool _isLeaning = false;
 	private float _leanDir = 0;
@@ -112,6 +112,7 @@ public class CarController : MonoBehaviour
 		{
 			MiniGame1();
 		}
+
 	}
 
 	private void FixedUpdate()
@@ -128,6 +129,10 @@ public class CarController : MonoBehaviour
 
 			if (_im._respawn)
 			{
+				foreach (WheelCollider wheel in _throttleWheels)
+				{
+					wheel.brakeTorque = 200000;
+				}
 				Respawn();
 			}
 		}
@@ -142,6 +147,7 @@ public class CarController : MonoBehaviour
 	{
 		Transform respawn = GameManager.Instance._wayPoints[_currentWayPoint - 1].transform.GetComponentInChildren<RespawnPoints>().transform;
 		_rb.velocity = Vector3.zero;
+		_rb.angularVelocity = Vector3.zero;
 		transform.SetPositionAndRotation(respawn.position , respawn.localRotation);
 	}
 
@@ -454,7 +460,7 @@ public class CarController : MonoBehaviour
 
 			else
 			{
-				if (_im._boost == true && _im._boostComp == true && _boostAmount > 0f && _carLife >= 3)
+				if (_im._boost == true && /*_im._boostComp == true &&*/ _boostAmount > 0f && _carLife >= 3)
 				{
 					wheel.brakeTorque = 0;
 					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
@@ -463,22 +469,22 @@ public class CarController : MonoBehaviour
 				{
 					if (_currentSpeed < 100)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.5f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 100 && _currentSpeed < 170 && _carLife > 0)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.30f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.70f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 170 && _currentSpeed < 225 && _carLife > 1)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.90f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.20f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 225 && _currentSpeed < 300 && _carLife > 1)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.45f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.00f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 300 && _carLife > 2)
@@ -509,6 +515,8 @@ public class CarController : MonoBehaviour
 
 	private void Steer () // OK
 	{
+		float steerDamping = _currentSpeed / 100;
+
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
 			if (CheckGround(_throttleWheels))
@@ -521,36 +529,47 @@ public class CarController : MonoBehaviour
 				{
 					if (_im._steer < -0.1f && _leanDir == 1)
 					{
-						wheel.steerAngle = _maxTurnAngle * _im._steer;
+						wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
 					}
 					else if (_im._steer > 0.1f && _leanDir == 2)
 					{
-						wheel.steerAngle = _maxTurnAngle * _im._steer;
+						wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
 					}
 					else
 					{
-						wheel.steerAngle = _maxTurnAngle * _im._steer / 2.5f;
+						wheel.steerAngle = (_maxTurnAngle * _im._steer / 2.5f) / steerDamping;
 					}
 				}
 			}
 			else
 			{
-				if (_im._brake > 0.25f)
+				_rb.angularVelocity = Vector3.zero;
+				/*if (_im._brake > 0.25f)
 				{
-					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x - .5f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x - .25f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 				}
 				else if (_im._throttle > 0.25f)
 				{
-					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + .5f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x + .25f, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
 				}
 				else if (_im._steer < -0.25f)
 				{
-					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y -.5f, transform.rotation.eulerAngles.z);
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y -.25f, transform.rotation.eulerAngles.z);
 				}
 				else if (_im._steer > 0.25f)
 				{
-					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + .5f, transform.rotation.eulerAngles.z);
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + .25f, transform.rotation.eulerAngles.z);
 				}
+
+				if (transform.rotation.eulerAngles.z > 0f && transform.rotation.eulerAngles.z < 180f)
+				{
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z - 1f);
+				}
+
+				else if (transform.rotation.eulerAngles.z > -180f && transform.rotation.eulerAngles.z > 0f)
+				{
+					transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z + 1f);
+				}*/
 			}
 		}
 	}
@@ -625,7 +644,7 @@ public class CarController : MonoBehaviour
 
 	//Generic Functions
 
-	private bool CheckGround(List<WheelCollider> targets)
+	public bool CheckGround(List<WheelCollider> targets)
 	{
 		WheelHit hit = new WheelHit();
 
