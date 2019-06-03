@@ -76,17 +76,21 @@ public class CameraManager : MonoBehaviour
 		}
 		if (!_isJumping)
 		{
-			transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance));
-			transform.LookAt(_focusTarget.transform);
+			if (_distance > 0)
+			{
+				transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance));
+				transform.LookAt(_focusTarget.transform);
+			}
+			
 		}
 	}
 
 	private IEnumerator Reset(float time)
 	{
-		yield return new WaitForSeconds(time / 4f);
+		yield return new WaitForSeconds(time / 3f);
 		_hasJustFinishJumping = false;
+		_isJumping = false;
 		_bonusDistance = 0;
 		_height = _startingHeight;
-		_isJumping = false;
 	}
 }
