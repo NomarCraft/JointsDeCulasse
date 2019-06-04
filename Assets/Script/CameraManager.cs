@@ -11,12 +11,15 @@ public class CameraManager : MonoBehaviour
 	private Rigidbody _targetRB;
 
 	public float _distance = 4f;
+	public float _shakeMagnitude;
 	public float _bonusDistance = 0;
 	public float _height = 2f;
 	public float _startingHeight;
 	public float _dampening = 1f;
 
 	private float _jumpingTime;
+	float x;
+	float y;
 
 	private bool _isJumping = false;
 	private bool _hasJustFinishJumping = false;
@@ -62,26 +65,37 @@ public class CameraManager : MonoBehaviour
 				if (_height > _startingHeight)
 				{
 					_height -= 2f * Time.deltaTime;
-				}
-				
+				}	
 			}
 			else
 			{
-
 				_bonusDistance += 0.75f * Time.deltaTime;
 				_height += 1f * Time.deltaTime;
 			}
 			transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance - _bonusDistance));
 			transform.LookAt(_focusTarget.transform);
 		}
-		if (!_isJumping)
+		else if (!_isJumping)
 		{
-			if (_distance > 0)
+			if (_target._isBoosting == false)
 			{
+				if (x != 0)
+				{
+					x = 0;
+					y = 0;
+				}
 				transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance));
 				transform.LookAt(_focusTarget.transform);
 			}
-			
+
+			else if (_target._isBoosting)
+			{
+				x += Random.Range(-1f, 1f) * _shakeMagnitude;
+				y += Random.Range(-1f, 1f) * _shakeMagnitude;
+
+				transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f , _height + y, -_distance + x));
+				transform.LookAt(_focusTarget.transform);
+			}
 		}
 	}
 

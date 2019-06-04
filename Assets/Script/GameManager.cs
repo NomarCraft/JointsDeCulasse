@@ -9,8 +9,11 @@ public class GameManager : Singleton<GameManager>
 	public CarController _player2;
 
 	[SerializeField] private TextMeshProUGUI _startCounter;
+	[SerializeField] private TextMeshProUGUI _pauseScreen;
 
 	public List<Transform> _wayPoints;
+
+	private int _playerInd;
 
 	private void Start()
 	{
@@ -22,6 +25,11 @@ public class GameManager : Singleton<GameManager>
 		if (_player2 != null)
 		{
 			CheckPositions();
+		}
+
+		if (Time.timeScale == 0)
+		{
+			DePauseGame(_playerInd);
 		}
 	}
 
@@ -121,5 +129,41 @@ public class GameManager : Singleton<GameManager>
 	private void UpdateStartCounter(string text)
 	{
 		_startCounter.text = text;
+	}
+
+	public void PauseGame(int playerInd)
+	{
+		_playerInd = playerInd;
+		_pauseScreen.gameObject.SetActive(true);
+		if (playerInd == 1)
+		{
+			_player1._im._start = false;
+		}
+		else if (playerInd == 2)
+		{
+			_player2._im._start = false;
+		}
+		Time.timeScale = 0;
+	}
+
+	private void DePauseGame(int playerInd)
+	{
+		if (playerInd == 1)
+		{
+			Debug.Log(_player1._im._start);
+			if (_player1._im._start)
+			{
+				Time.timeScale = 1;
+				_pauseScreen.gameObject.SetActive(false);
+			}
+		}
+		else if (playerInd == 2)
+		{
+			if (_player2._im._start)
+			{
+				Time.timeScale = 1;
+				_pauseScreen.gameObject.SetActive(false);
+			}
+		}
 	}
 }

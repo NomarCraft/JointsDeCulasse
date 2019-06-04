@@ -10,7 +10,7 @@ public class CarController : MonoBehaviour
 
 	//GameManagers
 	[Header("Managers")]
-	[SerializeField] private InputManager _im;
+	public InputManager _im;
 	public UIManager _uim;
 	[SerializeField] private GameObject _companion;
 
@@ -46,6 +46,7 @@ public class CarController : MonoBehaviour
 	[SerializeField] private float _boostStartAmount = 50f;
 	[SerializeField] private float _boostAmount;
 	[SerializeField] private float _boostMaxAmount = 200f;
+	[HideInInspector] public bool _isBoosting = false;
 	[HideInInspector] public float _currentSpeed;
 	[SerializeField] private float _additionalGravity = 4000f;
 
@@ -108,11 +109,20 @@ public class CarController : MonoBehaviour
 		//UIUpdate
 		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
 
-		if (_miniGame1IsOn)
+		if (_im._start && Time.timeScale != 0)
+		{
+			GameManager.Instance.PauseGame(_playerIndex);
+		}
+
+		if (_im._klaxon && Time.timeScale != 0)
+		{
+			Debug.Log("MARCOOOOOOOOOOOOOOOOOO");
+		}
+
+		if (_miniGame1IsOn && Time.timeScale != 0)
 		{
 			MiniGame1();
 		}
-
 	}
 
 	private void FixedUpdate()
@@ -445,6 +455,7 @@ public class CarController : MonoBehaviour
 
 			if (_im._brake >= 0.2f)
 			{
+				_isBoosting = false;
 				if (transform.InverseTransformVector(_rb.velocity).z <= 0.5f )
 				{
 					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * -_im._brake) * 2;
@@ -462,11 +473,13 @@ public class CarController : MonoBehaviour
 			{
 				if (_im._boost == true && /*_im._boostComp == true &&*/ _boostAmount > 0f && _carLife >= 3)
 				{
+					_isBoosting = true;
 					wheel.brakeTorque = 0;
 					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
 				}
 				else
 				{
+					_isBoosting = false;
 					if (_currentSpeed < 100)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.5f;

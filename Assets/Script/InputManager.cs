@@ -25,6 +25,8 @@ public class InputManager : MonoBehaviour
 	[HideInInspector] public bool _leftTriggerIsInUse = false;
 	[HideInInspector] public bool _rightTriggerIsInUse = false;
 	[HideInInspector] public bool _respawn = false;
+	[HideInInspector] public bool _start = false;
+	[HideInInspector] public bool _klaxon = false;
 
 	private void Start()
 	{
@@ -49,6 +51,9 @@ public class InputManager : MonoBehaviour
 			_leftTrigger = Input.GetAxisRaw("LeftTrigger");
 			_rightTrigger = Input.GetAxisRaw("RightTrigger");
 			_respawn = Input.GetButtonDown("Respawn");
+			_start = Input.GetButtonDown("Start1");
+			_klaxon = Input.GetButtonDown("Klaxon1");
+			Debug.Log(_start);
 		}
 	
 		else if (_playerRef._playerIndex == 2)
@@ -67,6 +72,8 @@ public class InputManager : MonoBehaviour
 			_leftTrigger = Input.GetAxisRaw("LeftTrigger2");
 			_rightTrigger = Input.GetAxisRaw("RightTrigger2");
 			_respawn = Input.GetButtonDown("Respawn2");
+			_start = Input.GetButtonDown("Start2");
+			_klaxon = Input.GetButtonDown("Klaxon2");
 		}
 	}
 }
