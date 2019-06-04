@@ -12,15 +12,15 @@ public class WayPoint : MonoBehaviour
 		if (car != null)
 		{
 			Transform wayPoint = GameManager.Instance._wayPoints[car._currentWayPoint];
-			if (this.transform == wayPoint)
-			{
-				car._currentWayPoint += 1;
-			}
-
-			else if (car._currentWayPoint == GameManager.Instance._wayPoints.Count - 2)
+			if (car._currentWayPoint == GameManager.Instance._wayPoints.Count - 1)
 			{
 				car._currentWayPoint = 0;
 				car._currentLap += 1;
+				Debug.Log("Lap");
+			}
+			else if (this.transform == wayPoint)
+			{
+				car._currentWayPoint += 1;
 			}
 		}
 	}

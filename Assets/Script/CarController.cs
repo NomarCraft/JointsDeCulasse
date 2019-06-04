@@ -181,9 +181,10 @@ public class CarController : MonoBehaviour
 
 	private void TakeDamage(int amount)  //OK
 	{
-		if (_spotLeftLife > 0 && _spotCenterLife > 0 && _spotRightLife > 0)
+		if (_spotLeftLife > 0 || _spotCenterLife > 0 || _spotRightLife > 0)
 		{
-			int rand = Random.Range(0, 2);
+			int rand = Random.Range(0, 3);
+			Debug.Log(rand);
 			switch (rand)
 			{
 				case 2:
@@ -217,6 +218,7 @@ public class CarController : MonoBehaviour
 				case 0:
 					if (_spotRightLife > 0)
 					{
+						
 						_spotRightLife -= amount;
 						if (_spotRightLife == 0)
 						{
@@ -638,7 +640,7 @@ public class CarController : MonoBehaviour
 	{
 		if (other.gameObject.tag == "Obstacles")
 		{
-			_rb.AddForce(-transform.forward * 20000);
+			//_rb.AddForce(-transform.forward * 20000);
 			TakeDamage(1);
 			CheckDamage();
 			Debug.Log("hit");

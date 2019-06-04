@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mur_Transition_Gauche
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ac81f79fb73c70b42bdf8dec8a0ab00d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ac81f79fb73c70b42bdf8dec8a0ab00d,
         type: 3}
       propertyPath: m_LocalPosition.x
