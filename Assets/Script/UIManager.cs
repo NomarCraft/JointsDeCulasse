@@ -15,11 +15,10 @@ public class UIManager : MonoBehaviour
 	public TextMeshProUGUI _scoreObjective;
 	public TextMeshProUGUI _timeLeft;
 
-	public virtual void UpdateMiniGame1(int score,int objective , float time)
+	public virtual void UpdateMiniGame1(int score,int objective)
 	{
 		_playerScore.text = score + "";
 		_scoreObjective.text = objective + "";
-		_timeLeft.text = time + "";
 	}
 
 	public virtual void UpdatePosition(int pos)

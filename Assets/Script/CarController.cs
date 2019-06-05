@@ -58,6 +58,7 @@ public class CarController : MonoBehaviour
 	[SerializeField] private Transform _grabSpot;
 	private bool _grabingTools = false;
 	private bool _isRepairing = false;
+	private int _spotCurrentlyRepaired;
 	[SerializeField] private Transform _spotLeft;
 	[HideInInspector] public int _spotLeftLife = 3;
 	[SerializeField] private int _spotLeftMaxLife = 3;
@@ -75,7 +76,7 @@ public class CarController : MonoBehaviour
 	[Header("MiniGames")]
 	[SerializeField] private bool _miniGame1IsOn = false;
 	[SerializeField] private GameObject _miniGame1;
-	[SerializeField] private int _score1;
+	[SerializeField] private float _score1;
 	[SerializeField] private int _objective1;
 	[SerializeField] private float _timeLeft1;
 	[SerializeField] private float _initialTime1 = 10f;
@@ -296,57 +297,26 @@ public class CarController : MonoBehaviour
 		switch (spot)
 		{
 			case 0:
-				StartMiniGame1();
+				StartMiniGame1(0);
 				break;
 			case 1:
-				StartMiniGame1();
+				StartMiniGame1(1);
 				break;
 			case 2:
-				StartMiniGame1();
+				StartMiniGame1(2);
 				break;
 			default:
 				break;
 		}
-		yield return new WaitForSeconds(10);
-		switch (spot)
-		{
-			case 0:
-				if (_score1 >= _objective1)
-				{
-					_spotLeftLife = _spotLeftMaxLife;
-				}
-				StopMiniGame1();
-				break;
-			case 1:
-				if (_score1 >= _objective1)
-				{
-					_spotCenterLife = _spotCenterMaxLife;
-				}
-				StopMiniGame1();
-				break;
-			case 2:
-				if (_score1 >= _objective1)
-				{
-					_spotRightLife = _spotRightMaxLife;
-				}
-				StopMiniGame1();
-				break;
-			default:
-				break;
-		}
-
-		_repairToolCount -= 1;
-		_carLife += 1;
-		CheckDamage();
-		_companion.transform.position = _defaultSpot.position;
-		_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
+		yield return new WaitForSeconds(1);
 	} 
 
-	private void StartMiniGame1()
+	private void StartMiniGame1(int ind)
 	{
 		_miniGame1.SetActive(true);
-		_timeLeft1 = _initialTime1;
+		_timeLeft1 = 0;
 		_score1 = 0;
+		_spotCurrentlyRepaired = ind;
 		_miniGame1IsOn = true;
 	}
 
@@ -361,7 +331,7 @@ public class CarController : MonoBehaviour
 			}
 			
 		}
-		if (_im._leftTrigger == 0)
+		if (_im._leftTrigger == 0 && _im._rightTriggerIsInUse)
 		{
 			_im._leftTriggerIsInUse = false;
 		}
@@ -375,15 +345,55 @@ public class CarController : MonoBehaviour
 			}
 
 		}
-		if (_im._rightTrigger == 0)
+		if (_im._rightTrigger == 0 && _im._leftTriggerIsInUse)
 		{
 			_im._rightTriggerIsInUse = false;
 		}
 
-		_timeLeft1 -= Time.deltaTime;
-		
+		if (_timeLeft1 == 40)
+		{
+			_score1 -= 1 ;
+			_timeLeft1 = 0;
+		}
 
-		_uim.UpdateMiniGame1(_score1, _objective1, Mathf.RoundToInt(_timeLeft1));
+		_timeLeft1++;
+		_uim.UpdateMiniGame1(Mathf.RoundToInt(_score1), _objective1);
+
+		if (_score1 >= _objective1)
+		{
+			_repairToolCount -= 1;
+			_carLife += 1;
+			CheckDamage();
+			_companion.transform.position = _defaultSpot.position;
+			_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
+			switch (_spotCurrentlyRepaired)
+			{
+				case 0:
+					if (_score1 >= _objective1)
+					{
+						_spotLeftLife = _spotLeftMaxLife;
+					}
+					StopMiniGame1();
+					break;
+				case 1:
+					if (_score1 >= _objective1)
+					{
+						_spotCenterLife = _spotCenterMaxLife;
+					}
+					StopMiniGame1();
+					break;
+				case 2:
+					if (_score1 >= _objective1)
+					{
+						_spotRightLife = _spotRightMaxLife;
+					}
+					StopMiniGame1();
+					break;
+				default:
+					break;
+			}
+		}
 	}
 
 	private void StopMiniGame1()

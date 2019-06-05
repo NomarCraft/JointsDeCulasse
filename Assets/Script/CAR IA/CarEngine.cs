@@ -95,46 +95,46 @@ public class CarEngine : MonoBehaviour
         sensorStartPos += transform.right * frontSideSensorPosition;
         if (Physics.Raycast(sensorStartPos, transform.forward, out hit, sensorLenght))
         {
-            if (!hit.collider.CompareTag("Terrain"))
-            {
+            //if (!hit.collider.CompareTag("Terrain"))
+            //{
                 Debug.DrawLine(sensorStartPos, hit.point);
                 avoiding = true;
                 avoidMultiplier -= 1f;
-            }
+            //}
         }
 
         // front right angle sensor
         else if (Physics.Raycast(sensorStartPos, Quaternion.AngleAxis(frontSensorAngle, transform.up) * transform.forward, out hit, sensorLenght))
         {
-            if (!hit.collider.CompareTag("Terrain"))
-            {
+            //if (!hit.collider.CompareTag("Terrain"))
+            //{
                 Debug.DrawLine(sensorStartPos, hit.point);
                 avoiding = true;
                 avoidMultiplier -= 0.5f;
-            }
+            //}
         }
 
         // front left sensor
         sensorStartPos -= transform.right * frontSideSensorPosition * 2;
         if (Physics.Raycast(sensorStartPos, transform.forward, out hit, sensorLenght))
         {
-            if (!hit.collider.CompareTag("Terrain"))
-            {
+            //if (!hit.collider.CompareTag("Terrain"))
+            //{
                 Debug.DrawLine(sensorStartPos, hit.point);
                 avoiding = true;
                 avoidMultiplier += 1f;
-            }
+            //}
         }
 
         // front left angle sensor
         else if (Physics.Raycast(sensorStartPos, Quaternion.AngleAxis(-frontSensorAngle, transform.up) * transform.forward, out hit, sensorLenght))
         {
-            if (!hit.collider.CompareTag("Terrain"))
-            {
+            //if (!hit.collider.CompareTag("Terrain"))
+            //{
                 Debug.DrawLine(sensorStartPos, hit.point);
                 avoiding = true;
                 avoidMultiplier += 0.5f;
-            }
+            //}
         }
 
         // front center sensor
@@ -142,8 +142,8 @@ public class CarEngine : MonoBehaviour
         {
         if (Physics.Raycast(sensorStartPos, transform.forward, out hit, sensorLenght))
         {
-            if (!hit.collider.CompareTag("Terrain"))
-            {
+            //if (!hit.collider.CompareTag("Terrain"))
+            //{
                 Debug.DrawLine(sensorStartPos, hit.point);
                 avoiding = true;
                     if(hit.normal.x < 0)
@@ -154,7 +154,7 @@ public class CarEngine : MonoBehaviour
                     {
                         avoidMultiplier = 1;
                     }
-            }
+            //}
         }
         }
 
