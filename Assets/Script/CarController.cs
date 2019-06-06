@@ -18,6 +18,7 @@ public class CarController : MonoBehaviour
 	[Header("Components")]
 	public Transform _cm;
 	public Rigidbody _rb;
+	public Camera _cam;
 	[SerializeField] private List<Material> _materials;
 
 
@@ -71,13 +72,14 @@ public class CarController : MonoBehaviour
 	[SerializeField] private Transform _defaultSpot;
 	private bool _miniGameFailing = false;
 	private Coroutine _repair;
+	private bool _repairFeedBack = false;
 
 	//Minigame
 	[Header("MiniGames")]
 	[SerializeField] private bool _miniGame1IsOn = false;
-	[SerializeField] private GameObject _miniGame1;
+	[SerializeField] private RectTransform _miniGame1;
 	[SerializeField] private float _score1;
-	[SerializeField] private int _objective1;
+	[SerializeField] private float _objective1;
 	[SerializeField] private float _timeLeft1;
 	[SerializeField] private float _initialTime1 = 10f;
 
@@ -101,6 +103,8 @@ public class CarController : MonoBehaviour
 		}
 
 		CheckDamage();
+
+		InvokeRepeating("DisplayDamage", 2.0f, 0.5f);
 		
 	}
 
@@ -124,6 +128,8 @@ public class CarController : MonoBehaviour
 		{
 			MiniGame1();
 		}
+
+		_uim.UpdateToolsCount(_repairToolCount);
 	}
 
 	private void FixedUpdate()
@@ -248,6 +254,66 @@ public class CarController : MonoBehaviour
 		CheckLife(_spotLeftLife, _spotLeft);
 		CheckLife(_spotCenterLife, _spotCenter);
 		CheckLife(_spotRightLife, _spotRight);
+		UpdateLife();
+	}
+
+	private void DisplayDamage()
+	{
+		if (!_repairFeedBack && !_miniGame1IsOn)
+		{
+			if (_spotLeftLife <= 0)
+			{
+				_uim._buttonX.gameObject.SetActive(true);
+				Vector3 pos;
+				Canvas rect = _uim._buttonX.GetComponentInParent<Canvas>();
+				Vector2 localPoint;
+				pos = _cam.WorldToScreenPoint(_spotLeft.position);
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
+				_uim._buttonX.rectTransform.localPosition = localPoint;
+			}
+
+			if (_spotCenterLife <= 0)
+			{
+				_uim._buttonA.gameObject.SetActive(true);
+				Vector3 pos;
+				Canvas rect = _uim._buttonA.GetComponentInParent<Canvas>();
+				Vector2 localPoint;
+				pos = _cam.WorldToScreenPoint(_spotCenter.position);
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
+				_uim._buttonA.rectTransform.localPosition = localPoint;
+			}
+
+			if (_spotRightLife <= 0)
+			{
+				_uim._buttonB.gameObject.SetActive(true);
+				Vector3 pos;
+				Canvas rect = _uim._buttonB.GetComponentInParent<Canvas>();
+				Vector2 localPoint;
+				pos = _cam.WorldToScreenPoint(_spotRight.position);
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
+				_uim._buttonB.rectTransform.localPosition = localPoint;
+			}
+		}
+
+		else if (_repairFeedBack && !_miniGame1IsOn)
+		{
+			if (_spotLeftLife <= 0)
+			{
+				_uim._buttonX.gameObject.SetActive(false);
+			}
+
+			if (_spotCenterLife <= 0)
+			{
+				_uim._buttonA.gameObject.SetActive(false);
+			}
+
+			if (_spotRightLife <= 0)
+			{
+				_uim._buttonB.gameObject.SetActive(false);
+			}
+		}
+
+		_repairFeedBack = !_repairFeedBack;
 	}
 
 	private void Repair() // OK
@@ -313,7 +379,33 @@ public class CarController : MonoBehaviour
 
 	private void StartMiniGame1(int ind)
 	{
-		_miniGame1.SetActive(true);
+		_miniGame1.gameObject.SetActive(true);
+		Vector3 pos;
+		Canvas rect = _miniGame1.GetComponentInParent<Canvas>();
+		Vector2 localPoint;
+		switch (ind)
+		{
+			case 0:
+				pos = _cam.WorldToScreenPoint(_spotLeft.position);
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
+				_miniGame1.localPosition = localPoint;
+				break;
+			case 1:
+				pos = _cam.WorldToScreenPoint(_spotCenter.position);
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
+				_miniGame1.localPosition = localPoint;
+				break;
+			case 2:
+				pos = _cam.WorldToScreenPoint(_spotRight.position);
+				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
+				_miniGame1.localPosition = localPoint;
+				break;
+			default:
+				break;
+		}
+
+
+
 		_timeLeft1 = 0;
 		_score1 = 0;
 		_spotCurrentlyRepaired = ind;
@@ -328,12 +420,14 @@ public class CarController : MonoBehaviour
 			{
 				_score1 += 1;
 				_im._leftTriggerIsInUse = true;
+				_uim._LT.gameObject.SetActive(false);
 			}
 			
 		}
 		if (_im._leftTrigger == 0 && _im._rightTriggerIsInUse)
 		{
 			_im._leftTriggerIsInUse = false;
+			_uim._LT.gameObject.SetActive(true);
 		}
 
 		if (_im._rightTrigger != 0)
@@ -342,12 +436,14 @@ public class CarController : MonoBehaviour
 			{
 				_score1 += 1;
 				_im._rightTriggerIsInUse = true;
+				_uim._RT.gameObject.SetActive(false);
 			}
 
 		}
 		if (_im._rightTrigger == 0 && _im._leftTriggerIsInUse)
 		{
 			_im._rightTriggerIsInUse = false;
+			_uim._RT.gameObject.SetActive(true);
 		}
 
 		if (_timeLeft1 == 40)
@@ -357,7 +453,7 @@ public class CarController : MonoBehaviour
 		}
 
 		_timeLeft1++;
-		_uim.UpdateMiniGame1(Mathf.RoundToInt(_score1), _objective1);
+		_uim.UpdateMiniGame1(_score1, _objective1);
 
 		if (_score1 >= _objective1)
 		{
@@ -398,8 +494,39 @@ public class CarController : MonoBehaviour
 
 	private void StopMiniGame1()
 	{
-		_miniGame1.SetActive(false);
+		_uim._RT.gameObject.SetActive(true);
+		_uim._LT.gameObject.SetActive(true);
+		_miniGame1.gameObject.SetActive(false);
 		_miniGame1IsOn = false;
+	}
+
+	private void UpdateLife()
+	{
+		switch (_carLife)
+		{
+			case 0:
+				_uim._power1.color = Color.red;
+				_uim._power2.color = Color.red;
+				_uim._power3.color = Color.red;
+				break;
+			case 1:
+				_uim._power1.color = Color.green;
+				_uim._power2.color = Color.red;
+				_uim._power3.color = Color.red;
+				break;
+			case 2:
+				_uim._power1.color = Color.green;
+				_uim._power2.color = Color.green;
+				_uim._power3.color = Color.red;
+				break;
+			case 3:
+				_uim._power1.color = Color.green;
+				_uim._power2.color = Color.green;
+				_uim._power3.color = Color.green;
+				break;
+			default:
+				break;
+		}
 	}
 
 	private void Lean()  // OK
@@ -483,7 +610,7 @@ public class CarController : MonoBehaviour
 
 			else
 			{
-				if (_im._boost == true && /*_im._boostComp == true &&*/ _boostAmount > 0f && _carLife >= 3)
+				if (_im._boost == true && /*_im._boostComp == true &&*/ _boostAmount > 50f && _carLife >= 3)
 				{
 					_isBoosting = true;
 					wheel.brakeTorque = 0;
@@ -492,6 +619,7 @@ public class CarController : MonoBehaviour
 				else
 				{
 					_isBoosting = false;
+
 					if (_currentSpeed < 100)
 					{
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.5f;
@@ -517,10 +645,15 @@ public class CarController : MonoBehaviour
 						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.25f;
 						wheel.brakeTorque = 0;
 					}
-				}
-					
+				}                                                     
 			}
+			ClockRotation(_currentSpeed);
 		}
+	}
+
+	private void ClockRotation(float rotationValue)
+	{
+		_uim._clock.rectTransform.localRotation = Quaternion.Euler(0, 0,( -145 * rotationValue / 300) + 78);
 	}
 
 	private void BoostAmount() // OK
@@ -535,7 +668,9 @@ public class CarController : MonoBehaviour
 		{
 			_boostAmount = Mathf.Clamp(_boostAmount + (_boostRefillRate * Time.deltaTime), 0f, _boostMaxAmount);
 		}
-		    
+
+		_uim._fillAmountBoost.fillAmount = _boostAmount / 200f;
+		Debug.Log(_uim._fillAmountBoost.fillAmount);
 	}
 
 	private void Steer () // OK
