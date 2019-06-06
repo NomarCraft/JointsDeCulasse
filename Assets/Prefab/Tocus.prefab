@@ -2354,7 +2354,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 2
+  m_CollisionDetection: 3
 --- !u!65 &2827873746660004285
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2392,7 +2392,7 @@ MonoBehaviour:
   _playerIndex: 1
   _raceHasStarted: 0
   _currentLap: 1
-  _currentWayPoint: 0
+  _currentWayPoint: 1
   _distanceFromWayPoints: 0
   _throttleWheels:
   - {fileID: 2827873748058385956}
@@ -2413,7 +2413,6 @@ MonoBehaviour:
   _boostStartAmount: 50
   _boostAmount: 50
   _boostMaxAmount: 200
-  _isBoosting: 0
   _currentSpeed: 0
   _additionalGravity: 2000
   _repairToolCount: 4
@@ -2463,8 +2462,6 @@ MonoBehaviour:
   _leftTriggerIsInUse: 0
   _rightTriggerIsInUse: 0
   _respawn: 0
-  _start: 0
-  _klaxon: 0
 --- !u!114 &2826880368848292507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3167,7 +3164,7 @@ WheelCollider:
   m_SuspensionDistance: 0.75
   m_ForceAppPointDistance: 0.4
   m_Mass: 250
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 4
   m_ForwardFriction:
     m_ExtremumSlip: 3
     m_ExtremumValue: 4
@@ -3229,7 +3226,7 @@ WheelCollider:
   m_SuspensionDistance: 0.75
   m_ForceAppPointDistance: 0.4
   m_Mass: 200
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 4
   m_ForwardFriction:
     m_ExtremumSlip: 3
     m_ExtremumValue: 4
@@ -3291,7 +3288,7 @@ WheelCollider:
   m_SuspensionDistance: 0.75
   m_ForceAppPointDistance: 0.4
   m_Mass: 200
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 4
   m_ForwardFriction:
     m_ExtremumSlip: 3
     m_ExtremumValue: 4
@@ -3353,7 +3350,7 @@ WheelCollider:
   m_SuspensionDistance: 0.75
   m_ForceAppPointDistance: 0.4
   m_Mass: 250
-  m_WheelDampingRate: 5
+  m_WheelDampingRate: 4
   m_ForwardFriction:
     m_ExtremumSlip: 3
     m_ExtremumValue: 4
