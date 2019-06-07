@@ -76,6 +76,7 @@
     <Compile Include="Assets\3. SCRIPTS\Scripts Marco\BoostUI.cs" />
     <Compile Include="Assets\3. SCRIPTS\Scripts Marco\RepairKits.cs" />
     <Compile Include="Assets\3. SCRIPTS\Singleton.cs" />
+    <Compile Include="Assets\3. SCRIPTS\SoundManager.cs" />
     <Compile Include="Assets\3. SCRIPTS\Tools.cs" />
     <Compile Include="Assets\3. SCRIPTS\Traps\Bumper.cs" />
     <Compile Include="Assets\3. SCRIPTS\Traps\Slower.cs" />
