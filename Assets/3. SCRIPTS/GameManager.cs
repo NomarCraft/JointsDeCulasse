@@ -28,7 +28,7 @@ public class GameManager : Singleton<GameManager>
 
 	private void Update()
 	{
-		if (_player1._currentLap == 5 || _player2._currentLap == 5)
+		if (_player1._currentLap == 5) /*|| _player2._currentLap == 5)*/
 		{
 			StartCoroutine(EndGame());
 		}
