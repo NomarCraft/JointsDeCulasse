@@ -53,7 +53,6 @@ public class InputManager : MonoBehaviour
 			_respawn = Input.GetButtonDown("Respawn");
 			_start = Input.GetButtonDown("Start1");
 			_klaxon = Input.GetButtonDown("Klaxon1");
-			Debug.Log(_start);
 		}
 	
 		else if (_playerRef._playerIndex == 2)

@@ -33,7 +33,6 @@ public class UIManager : MonoBehaviour
 	public virtual void UpdateMiniGame1(float score,float objective)
 	{
 		_fillAmountMiniGame.fillAmount = score / objective;
-		Debug.Log(_fillAmountMiniGame.fillAmount);
 	}
 
 	public virtual void UpdateLapPosition(int lap)

@@ -21,6 +21,9 @@ public class CarController : MonoBehaviour
 	public Camera _cam;
 	[SerializeField] private List<Material> _materials;
 
+	//Animations
+	[Header("Animations")]
+	public Animator _anim;
 
 	//Race
 	[Header ("Race Settings")]
@@ -319,24 +322,30 @@ public class CarController : MonoBehaviour
 
 	private void Repair() // OK
 	{
-		if (!_isRepairing && _repairToolCount > 0)
+		if (!_isRepairing && _repairToolCount > 0 && _anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Center"))
 		{
 			
 			if (_im._spotLeft && _spotLeftLife < _spotLeftMaxLife)
 			{
 				_companion.transform.position = _spotLeft.position;
+				_anim.SetBool("Start_Repair_Left", true);
+				_anim.SetBool("Stop_Repair_Left", false);
 				_repair = StartCoroutine(Repairing(0));
 				_isRepairing = true;
 			}
 			if (_im._spotCentral && _spotCenterLife < _spotCenterMaxLife)
 			{
 				_companion.transform.position = _spotCenter.position;
+				_anim.SetBool("Start_Repair_Center", true);
+				_anim.SetBool("Stop_Repair_Center", false);
 				_repair = StartCoroutine(Repairing(1));
 				_isRepairing = true;
 			}
 			if (_im._spotRight && _spotRightLife < _spotRightMaxLife)
 			{
 				_companion.transform.position = _spotRight.position;
+				_anim.SetBool("Start_Repair_Right", true);
+				_anim.SetBool("Stop_Repair_Right", false);
 				_repair = StartCoroutine(Repairing(2));
 				_isRepairing = true;
 			}
@@ -350,8 +359,6 @@ public class CarController : MonoBehaviour
 				{
 					StopMiniGame1();
 				}
-				_companion.transform.position = _defaultSpot.position;
-				_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
 				_isRepairing = false;
 				CheckDamage();
 				StopCoroutine(_repair);
@@ -361,16 +368,20 @@ public class CarController : MonoBehaviour
 
 	private IEnumerator Repairing(int spot)  // OK
 	{
+		yield return new WaitForSeconds(1f);
 		switch (spot)
 		{
 			case 0:
 				StartMiniGame1(0);
+				_uim._buttonX.gameObject.SetActive(false);
 				break;
 			case 1:
 				StartMiniGame1(1);
+				_uim._buttonY.gameObject.SetActive(false);
 				break;
 			case 2:
 				StartMiniGame1(2);
+				_uim._buttonB.gameObject.SetActive(false);
 				break;
 			default:
 				break;
@@ -461,8 +472,7 @@ public class CarController : MonoBehaviour
 			_repairToolCount -= 1;
 			_carLife += 1;
 			CheckDamage();
-			_companion.transform.position = _defaultSpot.position;
-			_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
+
 
 			switch (_spotCurrentlyRepaired)
 			{
@@ -495,6 +505,14 @@ public class CarController : MonoBehaviour
 
 	private void StopMiniGame1()
 	{
+		_companion.transform.position = _defaultSpot.position;
+		_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
+		_anim.SetBool("Stop_Repair_Left", true);
+		_anim.SetBool("Start_Repair_Left", false);
+		_anim.SetBool("Start_Repair_Right", false);
+		_anim.SetBool("Stop_Repair_Right", true);
+		_anim.SetBool("Start_Repair_Center", false);
+		_anim.SetBool("Stop_Repair_Center", true);
 		_uim._RT.gameObject.SetActive(true);
 		_uim._LT.gameObject.SetActive(true);
 		_miniGame1.gameObject.SetActive(false);
@@ -537,39 +555,69 @@ public class CarController : MonoBehaviour
 			{
 				if (_im._vertical > -0.2f && _im._vertical < 0.2f && _im._horizontal > -0.2f && _im._horizontal < 0.2f)
 				{
+					_anim.SetBool("Start_Lean_Left", false);
+					_anim.SetBool("Start_Lean_Right", false);
+					_anim.SetBool("Stop_Lean_Left", true);
+					_anim.SetBool("Stop_Lean_Right", true);
+					_anim.SetBool("From_Left_To_Right", false);
+					_anim.SetBool("From_Right_To_Left", false);
 					_companion.transform.position = _defaultSpot.position;
 					_companion.transform.localRotation = Quaternion.Euler(0, 0, 0);
 					_isLeaning = false;
 					_leanDir = 0;
 				}
-				else if (_im._vertical < -0.2f)
-				{
-					if (CanLean(4))
+				//else if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Center"))
+				//{
+					else if (_im._vertical < -0.2f)
 					{
-						_companion.transform.localRotation = Quaternion.Euler(-30, 0, 0);
+						if (CanLean(4))
+						{
+							_companion.transform.localRotation = Quaternion.Euler(-30, 0, 0);
+						}
 					}
-				}
-				else if (_im._vertical > 0.2f)
-				{
-					if (CanLean(3))
+					else if (_im._vertical > 0.2f)
 					{
-						_companion.transform.localRotation = Quaternion.Euler(30, 0, 0);
+						if (CanLean(3))
+						{
+							_companion.transform.localRotation = Quaternion.Euler(30, 0, 0);
+						}
 					}
-				}
-				else if (_im._horizontal > 0.2f)
-				{
-					if (CanLean(2))
+					else if (_im._horizontal > 0.2f)
 					{
-						_companion.transform.localRotation = Quaternion.Euler(0, 0, -30);
+						if (CanLean(2))
+						{
+							if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Left") || _anim.GetCurrentAnimatorStateInfo(0).IsName("Stop_Lean_Left"))
+							{
+								_anim.SetBool("Stop_Lean_Left", true);
+								_anim.SetBool("From_Left_To_Right", true);
+						}
+							else
+							{
+								_anim.SetBool("Start_Lean_Right", true);
+								_anim.SetBool("Stop_Lean_Right", false);
+								_companion.transform.localRotation = Quaternion.Euler(0, 0, -30);
+							}
+
+						}
 					}
-				}
-				else if (_im._horizontal < -0.2f)
-				{
-					if (CanLean(1))
+					else if (_im._horizontal < -0.2f)
 					{
-						_companion.transform.localRotation = Quaternion.Euler(0, 0, 30);
+						if (CanLean(1))
+							{
+							if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Right") || _anim.GetCurrentAnimatorStateInfo(0).IsName("Stop_Lean_Right"))
+							{
+								_anim.SetBool("Stop_Lean_Right", true);
+								_anim.SetBool("From_Right_To_Left", true);
+							}
+							else
+							{
+								_anim.SetBool("Start_Lean_Left", true);
+								_anim.SetBool("Stop_Lean_Left", false);
+								_companion.transform.localRotation = Quaternion.Euler(0, 0, 30);
+							}
+						}
 					}
-				}
+				//}
 			}
 		}
 	}
@@ -578,11 +626,20 @@ public class CarController : MonoBehaviour
 	{
 		if (!_isRepairing && !_isLeaning && _im._grabTools)
 		{
-			_grabingTools = true;
-			_companion.transform.position = _grabSpot.position;
+
+			_anim.SetBool("Start_Grab", true);
+			_anim.SetBool("Stop_Grab", false);
+			if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Grab"))
+			{
+				Debug.Log("grab");
+				_grabingTools = true;
+				_companion.transform.position = _grabSpot.position;
+			}
 		}
 		else
 		{
+			_anim.SetBool("Start_Grab", false);
+			_anim.SetBool("Stop_Grab", true);
 			_grabingTools = false;
 			_companion.transform.position = _defaultSpot.position;
 		}
@@ -688,7 +745,7 @@ public class CarController : MonoBehaviour
 				}
 				else
 				{
-					if (_leanDir == 1)
+					if (/*_leanDir == 1 && */(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Left") || _anim.GetCurrentAnimatorStateInfo(0).IsName("Lean_Left")))
 					{
 						if (_im._steer < -0.1f)
 						{
@@ -700,7 +757,7 @@ public class CarController : MonoBehaviour
 						}
 						
 					}
-					else if (_leanDir == 2)
+					else if (/*_leanDir == 2 && */(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Right") || _anim.GetCurrentAnimatorStateInfo(0).IsName("Lean_Right")))
 					{
 						if (_im._steer > 0.1f)
 						{
