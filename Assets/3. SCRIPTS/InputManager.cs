@@ -61,7 +61,7 @@ public class InputManager : MonoBehaviour
 			_throttle = Input.GetAxis("Accelerate2");
 			_steer = Input.GetAxis("Horizontal2");
 			_brake = Input.GetAxis("Brake2");
-			_boost = Input.GetButton("Boost");
+			_boost = Input.GetButton("Boost2");
 			_horizontal = Input.GetAxis("LeftRight2");
 			_vertical = Input.GetAxis("UpDown2");
 			_boostComp = Input.GetButton("BoostComp2");

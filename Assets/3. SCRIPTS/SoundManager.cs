@@ -7,18 +7,17 @@ public class SoundManager : MonoBehaviour
     [FMODUnity.EventRef]
     public string _car1Event = "";
     FMOD.Studio.EventInstance _car1Sound;
+    public CarController _carOne;
 
-
-    // Start is called before the first frame update
     void Start()
     {
         _car1Sound = FMODUnity.RuntimeManager.CreateInstance(_car1Event);
         _car1Sound.start();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        _car1Sound.getParameter("Velocity", out FMOD.Studio.ParameterInstance velocityS1);
+        velocityS1.setValue(_carOne._currentSpeed);
     }
 }

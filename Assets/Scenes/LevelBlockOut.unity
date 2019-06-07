@@ -1933,6 +1933,11 @@ PrefabInstance:
       propertyPath: _spotRightLife
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2827873746660004281, guid: 4a540a7e2431cbb46bb2addf4dda1420,
+        type: 3}
+      propertyPath: _currentLap
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2826880368848292507, guid: 4a540a7e2431cbb46bb2addf4dda1420,
         type: 3}
       propertyPath: _position
@@ -21717,6 +21722,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c189492ab4ba4bb44a8ff168407c4d17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1797575720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797575714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ad39e7faa16bf5469cc1a0774f67252, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _car1Event: event:/CAR_2
+  _carOne: {fileID: 1797575718}
 --- !u!1001 &1807838358
 PrefabInstance:
   m_ObjectHideFlags: 0
