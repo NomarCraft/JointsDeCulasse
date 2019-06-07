@@ -16,6 +16,7 @@ public class WayPoint : MonoBehaviour
 			{
 				car._currentWayPoint = 0;
 				car._currentLap += 1;
+				car.gameObject.GetComponent<UIManager>().UpdateLapPosition(car._currentLap);
 				Debug.Log("Lap");
 			}
 			else if (this.transform == wayPoint)

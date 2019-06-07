@@ -26,7 +26,8 @@ public class CarController : MonoBehaviour
 	[Header ("Race Settings")]
 	public int _playerIndex;
 	[HideInInspector] public bool _raceHasStarted = false;
-	[HideInInspector] public int _currentLap = 1;
+	[HideInInspector] public int _positionInRace;
+	public int _currentLap = 0;
 	public int _currentWayPoint = 1;
 	public float _distanceFromWayPoints;
 
@@ -771,13 +772,13 @@ public class CarController : MonoBehaviour
 		{
 			_turning = false;
 			_turningDir = 0;
-			_uim.changeDir(_turningDir);
+			//_uim.changeDir(_turningDir);
 		}
 		else
 		{
 			_turning = true;
 			_turningDir = dir;
-			_uim.changeDir(_turningDir);
+			//_uim.changeDir(_turningDir);
 		}
 	}
 
