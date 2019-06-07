@@ -12,12 +12,12 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         _car1Sound = FMODUnity.RuntimeManager.CreateInstance(_car1Event);
-        _car1Sound.start();
+		_car1Sound.start();
     }
 
     void Update()
     {
-        _car1Sound.getParameter("Velocity", out FMOD.Studio.ParameterInstance velocityS1);
-        velocityS1.setValue(_carOne._currentSpeed);
+		_car1Sound.getParameter("Velocity", out FMOD.Studio.ParameterInstance velocityS1);
+		velocityS1.setValue(_carOne._currentSpeed);
     }
 }
