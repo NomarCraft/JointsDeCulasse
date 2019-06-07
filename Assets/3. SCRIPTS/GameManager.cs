@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -18,10 +19,19 @@ public class GameManager : Singleton<GameManager>
 	private void Start()
 	{
 		StartCoroutine(StartDelay());
+
+		if (_player2 == null)
+		{
+			_player1._positionInRace = 1;
+		}
 	}
 
 	private void Update()
 	{
+		if (_player1._currentLap == 5 || _player2._currentLap == 5)
+		{
+			StartCoroutine(EndGame());
+		}
 		if (_player2 != null)
 		{
 			CheckPositions();
@@ -116,13 +126,17 @@ public class GameManager : Singleton<GameManager>
 	{
 		if (player == 1)
 		{
-			_player1._uim.UpdatePosition(1);
-			_player2._uim.UpdatePosition(2);
+			_player1._positionInRace = 1;
+			_player2._positionInRace = 2;
+			_player1._uim.UpdatePosition(_player1._positionInRace);
+			_player2._uim.UpdatePosition(_player2._positionInRace);
 		}
 		else if (player == 2)
 		{
-			_player1._uim.UpdatePosition(2);
-			_player2._uim.UpdatePosition(1);
+			_player1._positionInRace = 2;
+			_player2._positionInRace = 1;
+			_player1._uim.UpdatePosition(_player1._positionInRace);
+			_player2._uim.UpdatePosition(_player2._positionInRace);
 		}
 	}
 
@@ -165,5 +179,28 @@ public class GameManager : Singleton<GameManager>
 				_pauseScreen.gameObject.SetActive(false);
 			}
 		}
+	}
+
+	private IEnumerator EndGame()
+	{
+		if (_player1._positionInRace == 1)
+		{
+			_player1._uim._WIN.gameObject.SetActive(true);
+			if (_player2 != null)
+			{
+				_player2._uim._LOOSE.gameObject.SetActive(true);
+			}
+		}
+		else
+		{
+			_player1._uim._LOOSE.gameObject.SetActive(true);
+			if (_player2 != null)
+			{
+				_player2._uim._WIN.gameObject.SetActive(true);
+			}
+		}
+
+		yield return new WaitForSeconds(10);
+		SceneManager.LoadScene("LevelBlockOut", LoadSceneMode.Single);
 	}
 }

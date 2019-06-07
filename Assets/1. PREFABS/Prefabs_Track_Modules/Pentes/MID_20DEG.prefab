@@ -72,6 +72,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mur_D_20
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: bd3fd9f32dca2d14ab48aa78f0848ed6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: bd3fd9f32dca2d14ab48aa78f0848ed6,
         type: 3}
       propertyPath: m_LocalPosition.x

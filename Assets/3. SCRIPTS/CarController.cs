@@ -26,7 +26,8 @@ public class CarController : MonoBehaviour
 	[Header ("Race Settings")]
 	public int _playerIndex;
 	[HideInInspector] public bool _raceHasStarted = false;
-	[HideInInspector] public int _currentLap = 1;
+	[HideInInspector] public int _positionInRace;
+	public int _currentLap = 0;
 	public int _currentWayPoint = 1;
 	public float _distanceFromWayPoints;
 
@@ -61,13 +62,13 @@ public class CarController : MonoBehaviour
 	private bool _isRepairing = false;
 	private int _spotCurrentlyRepaired;
 	[SerializeField] private Transform _spotLeft;
-	[HideInInspector] public int _spotLeftLife = 3;
+	 public int _spotLeftLife = 2;
 	[SerializeField] private int _spotLeftMaxLife = 3;
 	[SerializeField] private Transform _spotCenter;
-	[HideInInspector] public int _spotCenterLife = 3;
+	 public int _spotCenterLife = 3;
 	[SerializeField] private int _spotCenterMaxLife = 3;
 	[SerializeField] private Transform _spotRight;
-	[HideInInspector] public int _spotRightLife = 3;
+	public int _spotRightLife = 3;
 	[SerializeField] private int _spotRightMaxLife = 3;
 	[SerializeField] private Transform _defaultSpot;
 	private bool _miniGameFailing = false;
@@ -121,7 +122,7 @@ public class CarController : MonoBehaviour
 
 		if (_im._klaxon && Time.timeScale != 0)
 		{
-			Debug.Log("MARCOOOOOOOOOOOOOOOOOO");
+			//Debug.Log("MARCOOOOOOOOOOOOOOOOOO");
 		}
 
 		if (_miniGame1IsOn && Time.timeScale != 0)
@@ -191,7 +192,7 @@ public class CarController : MonoBehaviour
 		if (_spotLeftLife > 0 || _spotCenterLife > 0 || _spotRightLife > 0)
 		{
 			int rand = Random.Range(0, 3);
-			Debug.Log(rand);
+			//Debug.Log(rand);
 			switch (rand)
 			{
 				case 2:
@@ -670,12 +671,12 @@ public class CarController : MonoBehaviour
 		}
 
 		_uim._fillAmountBoost.fillAmount = _boostAmount / 200f;
-		Debug.Log(_uim._fillAmountBoost.fillAmount);
+		
 	}
 
 	private void Steer () // OK
 	{
-		float steerDamping = _currentSpeed / 100;
+		float steerDamping = _currentSpeed / 125;
 
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
@@ -687,13 +688,28 @@ public class CarController : MonoBehaviour
 				}
 				else
 				{
-					if (_im._steer < -0.1f && _leanDir == 1)
+					if (_leanDir == 1)
 					{
-						wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
+						if (_im._steer < -0.1f)
+						{
+							wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
+						}
+						else
+						{
+							wheel.steerAngle = (-_maxTurnAngle / 5f) / steerDamping;
+						}
+						
 					}
-					else if (_im._steer > 0.1f && _leanDir == 2)
+					else if (_leanDir == 2)
 					{
-						wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
+						if (_im._steer > 0.1f)
+						{
+							wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
+						}
+						else
+						{
+							wheel.steerAngle = (_maxTurnAngle  / 5f) / steerDamping;
+						}
 					}
 					else
 					{
@@ -771,13 +787,13 @@ public class CarController : MonoBehaviour
 		{
 			_turning = false;
 			_turningDir = 0;
-			_uim.changeDir(_turningDir);
+			//_uim.changeDir(_turningDir);
 		}
 		else
 		{
 			_turning = true;
 			_turningDir = dir;
-			_uim.changeDir(_turningDir);
+			//_uim.changeDir(_turningDir);
 		}
 	}
 
@@ -824,10 +840,10 @@ public class CarController : MonoBehaviour
 	{
 		switch (life)
 		{
-			case int n when n > 2:
+			case int n when n >= 2:
 				target.GetComponentInChildren<MeshRenderer>().material = _materials[0];
 				break;
-			case int n when n > 0 && n <= 2:
+			case int n when n > 0 && n < 2:
 				target.GetComponentInChildren<MeshRenderer>().material = _materials[1];
 				break;
 			case 0:

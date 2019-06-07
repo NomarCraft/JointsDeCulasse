@@ -8,7 +8,7 @@ public class WayPoint : MonoBehaviour
 	private void OnTriggerEnter(Collider other)
 	{
 		CarController car = other.gameObject.GetComponent<CarController>();
-
+		
 		if (car != null)
 		{
 			Transform wayPoint = GameManager.Instance._wayPoints[car._currentWayPoint];
@@ -16,6 +16,7 @@ public class WayPoint : MonoBehaviour
 			{
 				car._currentWayPoint = 0;
 				car._currentLap += 1;
+				car.gameObject.GetComponent<UIManager>().UpdateLapPosition(car._currentLap);
 				Debug.Log("Lap");
 			}
 			else if (this.transform == wayPoint)

@@ -8,22 +8,23 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
 	public TextMeshProUGUI _position;
+	public TextMeshProUGUI _laps;
 	public TextMeshProUGUI _speed;
-	public TextMeshProUGUI _dir;
+	public TextMeshProUGUI _WIN;
+	public TextMeshProUGUI _LOOSE;
 
 	//Minigame 1
 	public TextMeshProUGUI _playerScore;
 	public TextMeshProUGUI _scoreObjective;
-	public TextMeshProUGUI _timeLeft;
 	public TextMeshProUGUI _toolsLeft;
 	public Image _power1;
 	public Image _power2;
 	public Image _power3;
 	public Image _clock;
-	public Image _buttonA;
+	public Image _buttonY;
 	public Image _buttonB;
 	public Image _buttonX;
-	public Image _buttonY;
+	public Image _buttonA;
 	public Image _fillAmountMiniGame;
 	public Image _fillAmountBoost;
 	public Image _LT;
@@ -33,6 +34,11 @@ public class UIManager : MonoBehaviour
 	{
 		_fillAmountMiniGame.fillAmount = score / objective;
 		Debug.Log(_fillAmountMiniGame.fillAmount);
+	}
+
+	public virtual void UpdateLapPosition(int lap)
+	{
+		_laps.text = lap + "";
 	}
 
 	public virtual void UpdatePosition(int pos)
@@ -51,7 +57,7 @@ public class UIManager : MonoBehaviour
 		_speed.text = Mathf.Round(s) + "KM/H";
 	}
 
-	public virtual void changeDir (float ind)
+	/*public virtual void changeDir (float ind)
 	{
 		switch (ind)
 		{
@@ -73,5 +79,5 @@ public class UIManager : MonoBehaviour
 			default:
 			break;
 		}
-	}
+	}*/
 }

@@ -183,6 +183,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Mur_Module_Droit
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: c10076b61355d3d4ea5543a40c077e5f,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: c10076b61355d3d4ea5543a40c077e5f,
         type: 3}
       propertyPath: m_LocalPosition.x
