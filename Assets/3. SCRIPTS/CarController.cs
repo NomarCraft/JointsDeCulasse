@@ -170,6 +170,7 @@ public class CarController : MonoBehaviour
 		_rb.velocity = Vector3.zero;
 		_rb.angularVelocity = Vector3.zero;
 		transform.SetPositionAndRotation(respawn.position , respawn.localRotation);
+		_cam.transform.SetPositionAndRotation(respawn.position - new Vector3(0 , 1.5f, 3), respawn.localRotation);
 	}
 
 	private void Gravity()

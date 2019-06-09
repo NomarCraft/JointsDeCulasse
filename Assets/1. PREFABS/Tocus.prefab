@@ -2395,7 +2395,7 @@ MonoBehaviour:
   _maxTurnAngle: 9
   _boostUseSpeed: 8
   _boostRefillRate: 4
-  _boostStartAmount: 50
+  _boostStartAmount: 200
   _boostAmount: 50
   _boostMaxAmount: 200
   _isBoosting: 0
@@ -3391,10 +3391,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AM_Idle_Center
       objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: d68d3a6f5a47bd8458206dc628d71a03, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: d68d3a6f5a47bd8458206dc628d71a03, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 190c9040bdbb91e4dbbf6004be2ce968, type: 2}
     - target: {fileID: 400002, guid: d68d3a6f5a47bd8458206dc628d71a03, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.3929464
@@ -3451,10 +3451,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 98.23201
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: d68d3a6f5a47bd8458206dc628d71a03, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 190c9040bdbb91e4dbbf6004be2ce968, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d68d3a6f5a47bd8458206dc628d71a03, type: 3}
 --- !u!95 &1779876812 stripped

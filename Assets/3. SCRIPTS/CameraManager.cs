@@ -7,6 +7,7 @@ using UnityEngine;
 public class CameraManager : MonoBehaviour
 {
 	private Vector3 _targetPos;
+	private Quaternion _lookAtTarget;
 
 	public GameObject _focusTarget;
 	private CarController _target;
@@ -63,6 +64,7 @@ public class CameraManager : MonoBehaviour
 	void FixedUpdate()
 	{
 		_distance = 2.5f + ((_focusTarget.transform.InverseTransformVector(_focusTarget.GetComponent<Rigidbody>().velocity).z * 3.6f) / 100f);
+		_lookAtTarget = Quaternion.LookRotation(_focusTarget.transform.position - transform.position);
 
 		if (!_isJumping)
 		{
@@ -101,14 +103,14 @@ public class CameraManager : MonoBehaviour
 				_height += 1f * Time.deltaTime;
 			}
 			_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance - _bonusDistance));
-			transform.LookAt(_focusTarget.transform);
+			
 		}
 		else if (!_isJumping)
 		{
 			if (_target._isBoosting == false)
 			{
 				_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance));
-				transform.LookAt(_focusTarget.transform);
+				
 			}
 
 			else if (_target._isBoosting)
@@ -116,18 +118,22 @@ public class CameraManager : MonoBehaviour
 				_timeCounter += Time.deltaTime * Mathf.Pow(_trauma, 0.3f) * _traumaMultiply;
 				Vector3 shakePos = GetVect3() * _traumaMagnitude;
 				_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f , _height, -_distance) + shakePos) ;
-				transform.LookAt(_focusTarget.transform);
+				
 			}
 		}
 
 		if (_focusTarget.transform.InverseTransformVector(_targetRB.velocity).z > 1)
 		{
-			transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 13);
+			transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 15);
+			//transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime);
 		}
 		else
 		{
 			transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 1.5f);
+			//transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime * 200);
 		}
+
+		transform.LookAt(_focusTarget.transform.position);
 		
 	}
 
