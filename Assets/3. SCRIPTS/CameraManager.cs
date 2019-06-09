@@ -6,23 +6,41 @@ using UnityEngine;
 // ------------- SCRIPT CHECK 21.05.2019 ----------------- //
 public class CameraManager : MonoBehaviour
 {
+	private Vector3 _targetPos;
+
 	public GameObject _focusTarget;
 	private CarController _target;
 	private Rigidbody _targetRB;
 
 	public float _distance = 4f;
-	public float _shakeMagnitude;
+	//public float _shakeMagnitude;
 	public float _bonusDistance = 0;
 	public float _height = 2f;
 	public float _startingHeight;
 	public float _dampening = 1f;
 
 	private float _jumpingTime;
-	float x;
-	float y;
-
 	private bool _isJumping = false;
 	private bool _hasJustFinishJumping = false;
+
+	[Header("Camera Shake")]
+	[Range(0, 1)] public float _trauma;
+	[SerializeField] private float _traumaMultiply = 5f;
+	[SerializeField] private float _traumaMagnitude = 0.8f;
+	private float _timeCounter;
+
+	public float Trauma
+	{
+		get
+		{
+			return _trauma;
+		}
+		set
+		{
+			_trauma = Mathf.Clamp01(value);
+		}
+	}
+
 
 	private void Start()
 	{
@@ -31,10 +49,20 @@ public class CameraManager : MonoBehaviour
 		_targetRB = _focusTarget.GetComponent<Rigidbody>();
 	}
 
+	private float GetFloat(float seed)
+	{
+		return (Mathf.PerlinNoise(seed, _timeCounter) - 0.5f) * 2;
+	}
+
+	private Vector3 GetVect3()
+	{
+		return new Vector3(GetFloat(1), GetFloat(10), 0);
+	}
+
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		_distance = 3.5f + ((_focusTarget.transform.InverseTransformVector(_focusTarget.GetComponent<Rigidbody>().velocity).z * 3.6f) / 70f);
+		_distance = 2.5f + ((_focusTarget.transform.InverseTransformVector(_focusTarget.GetComponent<Rigidbody>().velocity).z * 3.6f) / 100f);
 
 		if (!_isJumping)
 		{
@@ -72,31 +100,35 @@ public class CameraManager : MonoBehaviour
 				_bonusDistance += 0.75f * Time.deltaTime;
 				_height += 1f * Time.deltaTime;
 			}
-			transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance - _bonusDistance));
+			_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance - _bonusDistance));
 			transform.LookAt(_focusTarget.transform);
 		}
 		else if (!_isJumping)
 		{
 			if (_target._isBoosting == false)
 			{
-				if (x != 0)
-				{
-					x = 0;
-					y = 0;
-				}
-				transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance));
+				_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance));
 				transform.LookAt(_focusTarget.transform);
 			}
 
 			else if (_target._isBoosting)
 			{
-				x += Random.Range(-1f, 1f) * _shakeMagnitude;
-				y += Random.Range(-1f, 1f) * _shakeMagnitude;
-
-				transform.position = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f , _height + y, -_distance + x));
+				_timeCounter += Time.deltaTime * Mathf.Pow(_trauma, 0.3f) * _traumaMultiply;
+				Vector3 shakePos = GetVect3() * _traumaMagnitude;
+				_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f , _height, -_distance) + shakePos) ;
 				transform.LookAt(_focusTarget.transform);
 			}
 		}
+
+		if (_focusTarget.transform.InverseTransformVector(_targetRB.velocity).z > 1)
+		{
+			transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 13);
+		}
+		else
+		{
+			transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 1.5f);
+		}
+		
 	}
 
 	private IEnumerator Reset(float time)
