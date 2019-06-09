@@ -322,7 +322,7 @@ public class CarController : MonoBehaviour
 
 	private void Repair() // OK
 	{
-		if (!_isRepairing && _repairToolCount > 0 && _anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Center"))
+		if (!_isRepairing && _repairToolCount > 0 /*&& _anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Center")*/)
 		{
 			
 			if (_im._spotLeft && _spotLeftLife < _spotLeftMaxLife)
