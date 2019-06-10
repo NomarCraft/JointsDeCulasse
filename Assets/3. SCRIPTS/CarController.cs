@@ -22,8 +22,9 @@ public class CarController : MonoBehaviour
 	[SerializeField] private List<Material> _materials;
 
 	//Animations
-	[Header("Animations")]
+	[Header("Animations & FXs")]
 	public Animator _anim;
+	public ParticleSystem[] _boostFX;
 
 	//Race
 	[Header ("Race Settings")]
@@ -646,6 +647,30 @@ public class CarController : MonoBehaviour
 		}
 	}
 
+	private void StartBoost()
+	{
+		if (_boostFX[0].isStopped)
+		{
+			foreach (ParticleSystem boost in _boostFX)
+			{
+				boost.gameObject.SetActive(true);
+				boost.Play();
+			}
+		}
+	}
+
+	private void StopBoost()
+	{
+		if (_boostFX[0].isPlaying)
+		{
+			foreach (ParticleSystem boost in _boostFX)
+			{
+				boost.gameObject.SetActive(false);
+				boost.Stop();
+			}
+		}
+	}
+
 	private void Accelerate() // OK
 	{
 		foreach (WheelCollider wheel in _throttleWheels)
@@ -672,12 +697,14 @@ public class CarController : MonoBehaviour
 				if (_im._boost == true && /*_im._boostComp == true &&*/ _boostAmount > 50f && _carLife >= 3)
 				{
 					_isBoosting = true;
+					StartBoost();
 					wheel.brakeTorque = 0;
 					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
 				}
 				else
 				{
 					_isBoosting = false;
+					StopBoost();
 
 					if (_currentSpeed < 100)
 					{
