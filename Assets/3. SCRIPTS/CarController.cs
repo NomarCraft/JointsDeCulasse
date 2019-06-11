@@ -94,7 +94,7 @@ public class CarController : MonoBehaviour
     [Header("Sounds")]
     [FMODUnity.EventRef]
     public string _carEngine = "";
-    FMOD.Studio.EventInstance _carEngineInstance;
+    public FMOD.Studio.EventInstance _carEngineInstance;
     [FMODUnity.EventRef]
     public string _carKlaxon = "";
     FMOD.Studio.EventInstance _carKlaxonInstance;
@@ -117,8 +117,17 @@ public class CarController : MonoBehaviour
     public string _repairFinished = "";
     FMOD.Studio.EventInstance _repairFinishedInstance;
     [FMODUnity.EventRef]
-    public string _steamLoop = "";
-    FMOD.Studio.EventInstance _steamLoopInstance;
+    public string _steamLoop1 = "";
+    FMOD.Studio.EventInstance _steamLoop1Instance;
+    [FMODUnity.EventRef]
+    public string _steamLoop2 = "";
+    FMOD.Studio.EventInstance _steamLoop2Instance;
+    [FMODUnity.EventRef]
+    public string _steamLoop3 = "";
+    FMOD.Studio.EventInstance _steamLoop3Instance;
+    [FMODUnity.EventRef]
+    public string _reloadSound = "";
+    FMOD.Studio.EventInstance _reloadSoundInstance;
 
     private void InstanceSounds()
     {
@@ -131,7 +140,10 @@ public class CarController : MonoBehaviour
         _carBoostInstance = FMODUnity.RuntimeManager.CreateInstance(_carBoost);
         _stopCarBoostInstance = FMODUnity.RuntimeManager.CreateInstance(_stopCarBoost);
         _repairFinishedInstance = FMODUnity.RuntimeManager.CreateInstance(_repairFinished);
-        _steamLoopInstance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop);
+        _steamLoop1Instance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop1);
+        _steamLoop2Instance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop2);
+        _steamLoop3Instance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop3);
+        _reloadSoundInstance = FMODUnity.RuntimeManager.CreateInstance(_reloadSound);
     }
 
     private void Start()
@@ -165,7 +177,15 @@ public class CarController : MonoBehaviour
 	{
         //Pitch du son moteur
         _carEngineInstance.getParameter("Velocity", out FMOD.Studio.ParameterInstance velocity);
-        velocity.setValue(_currentSpeed);
+        if (!CheckGround(_throttleWheels))
+        {
+            velocity.setValue(_currentSpeed + 30);
+        }
+        else
+        {
+            velocity.setValue(_currentSpeed);
+        }
+
 
         CalculateDistanceToWayPoint();
 		//UIUpdate
@@ -285,7 +305,7 @@ public class CarController : MonoBehaviour
 						_spotLeftLife -= amount;
 						if (_spotLeftLife == 0)
 						{
-							DamageSound();
+							DamageSound(0);
 							_carLife -= 1;
 						}
 					}
@@ -300,7 +320,7 @@ public class CarController : MonoBehaviour
 						_spotCenterLife -= amount;
 						if (_spotCenterLife == 0)
 						{
-							DamageSound();
+							DamageSound(1);
 							_carLife -= 1;
 						}
 					}
@@ -316,7 +336,7 @@ public class CarController : MonoBehaviour
 						_spotRightLife -= amount;
 						if (_spotRightLife == 0)
 						{
-							DamageSound();
+							DamageSound(2);
 							_carLife -= 1;
 						}
 					}
@@ -337,10 +357,23 @@ public class CarController : MonoBehaviour
 
 	}
 
-	private void DamageSound()
+	private void DamageSound(int ind)
 	{
         _carDamageInstance.start(); //Play Damage Sound
-
+        switch (ind)
+        {
+            case 0:
+                _steamLoop1Instance.start();// Play Steam 1
+                break;
+            case 1:
+                _steamLoop2Instance.start();// Play Steam 2
+                break;
+            case 2:
+                _steamLoop3Instance.start();// Play Steam 3
+                break;
+            default:
+                break;
+        }
     }
 
 	private void CheckDamage() // OK
@@ -571,22 +604,25 @@ public class CarController : MonoBehaviour
 					if (_score1 >= _objective1)
 					{
 						_spotLeftLife = _spotLeftMaxLife;
-					}
-					StopMiniGame1();
+                        _steamLoop1Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 1
+                    }
+                    StopMiniGame1();
 					break;
 				case 1:
 					if (_score1 >= _objective1)
 					{
 						_spotCenterLife = _spotCenterMaxLife;
-					}
-					StopMiniGame1();
+                        _steamLoop2Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 2
+                    }
+                    StopMiniGame1();
 					break;
 				case 2:
 					if (_score1 >= _objective1)
 					{
 						_spotRightLife = _spotRightMaxLife;
-					}
-					StopMiniGame1();
+                        _steamLoop3Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 3
+                    }
+                    StopMiniGame1();
 					break;
 				default:
 					break;
@@ -615,22 +651,26 @@ public class CarController : MonoBehaviour
 		switch (_carLife)
 		{
 			case 0:
+                _uim._fillAmountBoost.color = Color.red;
 				_uim._power1.color = Color.red;
 				_uim._power2.color = Color.red;
 				_uim._power3.color = Color.red;
 				break;
 			case 1:
-				_uim._power1.color = Color.green;
+                _uim._fillAmountBoost.color = Color.red;
+                _uim._power1.color = Color.green;
 				_uim._power2.color = Color.red;
 				_uim._power3.color = Color.red;
 				break;
 			case 2:
-				_uim._power1.color = Color.green;
+                _uim._fillAmountBoost.color = Color.red;
+                _uim._power1.color = Color.green;
 				_uim._power2.color = Color.green;
 				_uim._power3.color = Color.red;
 				break;
 			case 3:
-				_uim._power1.color = Color.green;
+                _uim._fillAmountBoost.color = Color.green;
+                _uim._power1.color = Color.green;
 				_uim._power2.color = Color.green;
 				_uim._power3.color = Color.green;
 				break;
@@ -988,21 +1028,26 @@ public class CarController : MonoBehaviour
 
             StartCoroutine(JustBeenHit());
 		}
-
-		if (other.gameObject.tag == "Tools")
-		{
-			if (_repairToolCount < _repairToolMaxCount && _grabingTools && !other.gameObject.GetComponent<Tools>()._hasBeenUsed)
-			{
-				_repairToolCount += other.gameObject.GetComponent<Tools>()._toolsAmount;
-				StartCoroutine(other.gameObject.GetComponent<Tools>().RegenTime());
-				Debug.Log(_repairToolCount);
-			}
-		}
 	}
 
-	//Generic Functions
 
-	public bool CheckGround(List<WheelCollider> targets)
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Tools")
+        {
+            if (_repairToolCount < _repairToolMaxCount && _grabingTools && !other.gameObject.GetComponent<Tools>()._hasBeenUsed)
+            {
+                _reloadSoundInstance.start();//Play sound reload
+                _repairToolCount += other.gameObject.GetComponent<Tools>()._toolsAmount;
+                StartCoroutine(other.gameObject.GetComponent<Tools>().RegenTime());
+                Debug.Log(_repairToolCount);
+            }
+        }
+    }
+
+    //Generic Functions
+
+    public bool CheckGround(List<WheelCollider> targets)
 	{
 		WheelHit hit = new WheelHit();
 

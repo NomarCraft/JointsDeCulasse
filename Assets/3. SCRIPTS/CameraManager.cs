@@ -30,7 +30,11 @@ public class CameraManager : MonoBehaviour
 	[SerializeField] private float _traumaMagnitude = 0.8f;
 	private float _timeCounter;
 
-	public float Trauma
+    [FMODUnity.EventRef]
+    public string _carLandingSound = "";
+    FMOD.Studio.EventInstance _carLandingSoundInstance;
+
+    public float Trauma
 	{
 		get
 		{
@@ -45,7 +49,8 @@ public class CameraManager : MonoBehaviour
 
 	private void Start()
 	{
-		_startingHeight = _height;
+        _carLandingSoundInstance = FMODUnity.RuntimeManager.CreateInstance(_carLandingSound);
+        _startingHeight = _height;
 		_target = _focusTarget.GetComponent<CarController>();
 		_targetRB = _focusTarget.GetComponent<Rigidbody>();
 	}
@@ -78,7 +83,8 @@ public class CameraManager : MonoBehaviour
 		{
 			if (_target.CheckGround(_target._throttleWheels) && !_hasJustFinishJumping)
 			{
-				_hasJustFinishJumping = true;
+                _carLandingSoundInstance.start();// Play Landing Sound
+                _hasJustFinishJumping = true;
 				StartCoroutine(Reset(_jumpingTime));
 			}
 		}
@@ -88,8 +94,7 @@ public class CameraManager : MonoBehaviour
 			_jumpingTime += Time.deltaTime;
 			if (_hasJustFinishJumping)
 			{
-				// Play Landing Sound
-				if (_bonusDistance + _distance > _distance)
+                if (_bonusDistance + _distance > _distance)
 				{
 					_bonusDistance -= 1.5f * Time.deltaTime;
 				}

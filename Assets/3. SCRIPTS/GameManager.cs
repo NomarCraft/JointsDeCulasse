@@ -174,6 +174,11 @@ public class GameManager : Singleton<GameManager>
 		_playerInd = playerInd;
 		_pauseScreen.gameObject.SetActive(true);
         _ostInstance.setPaused(true);// Stop OST
+        _player1._carEngineInstance.setPaused(true);
+        if(_player2 != null)
+        {
+            _player2._carEngineInstance.setPaused(true);
+        }
 
         if (playerInd == 1)
 		{
@@ -197,6 +202,11 @@ public class GameManager : Singleton<GameManager>
 				Time.timeScale = 1;
 				_pauseScreen.gameObject.SetActive(false);
                 _ostInstance.setPaused(false);//Restart OST
+                _player1._carEngineInstance.setPaused(false);
+                if (_player2 != null)
+                {
+                    _player2._carEngineInstance.setPaused(false);
+                }
             }
 		}
 		else if (playerInd == 2)
@@ -206,6 +216,11 @@ public class GameManager : Singleton<GameManager>
 				Time.timeScale = 1;
 				_pauseScreen.gameObject.SetActive(false);
                 _ostInstance.setPaused(false);//Restart OST
+                _player1._carEngineInstance.setPaused(false);
+                if (_player2 != null)
+                {
+                    _player2._carEngineInstance.setPaused(false);
+                }
             }
 		}
         
