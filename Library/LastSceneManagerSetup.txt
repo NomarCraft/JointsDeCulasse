@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Les_Tests/LVLARTTEST.unity
+- path: Assets/Scenes/Les_Tests/TEST_CINEM.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
