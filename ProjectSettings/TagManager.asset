@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Obstacles
   - Tools
+  - Sand
   layers:
   - Default
   - TransparentFX

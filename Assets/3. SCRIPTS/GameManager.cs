@@ -45,17 +45,22 @@ public class GameManager : Singleton<GameManager>
 
 	private IEnumerator StartDelay()
 	{
+		// Sound 3
 		yield return new WaitForSeconds(1);
 		UpdateStartCounter("2");
+		// Sound 2
 		yield return new WaitForSeconds(1);
 		UpdateStartCounter("1");
+		// Sound 1
 		yield return new WaitForSeconds(1);
+		//Sound GO
 		UpdateStartCounter("GOOOOOO");
 		_player1._raceHasStarted = true;
 		if (_player2 != null)
 		{
 			_player2._raceHasStarted = true;
 		}
+		// Start the OST
 		yield return new WaitForSeconds(1);
 		UpdateStartCounter("");
 	}
@@ -149,6 +154,7 @@ public class GameManager : Singleton<GameManager>
 	{
 		_playerInd = playerInd;
 		_pauseScreen.gameObject.SetActive(true);
+		// Stop OST
 		if (playerInd == 1)
 		{
 			_player1._im._start = false;
@@ -162,6 +168,7 @@ public class GameManager : Singleton<GameManager>
 
 	private void DePauseGame(int playerInd)
 	{
+		
 		if (playerInd == 1)
 		{
 			Debug.Log(_player1._im._start);
@@ -179,6 +186,7 @@ public class GameManager : Singleton<GameManager>
 				_pauseScreen.gameObject.SetActive(false);
 			}
 		}
+		//Restart OST
 	}
 
 	private IEnumerator EndGame()

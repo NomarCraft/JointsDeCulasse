@@ -88,6 +88,7 @@ public class CameraManager : MonoBehaviour
 			_jumpingTime += Time.deltaTime;
 			if (_hasJustFinishJumping)
 			{
+				// Play Landing Sound
 				if (_bonusDistance + _distance > _distance)
 				{
 					_bonusDistance -= 1.5f * Time.deltaTime;

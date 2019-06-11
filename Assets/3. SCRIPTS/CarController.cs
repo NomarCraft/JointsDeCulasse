@@ -25,6 +25,7 @@ public class CarController : MonoBehaviour
 	[Header("Animations & FXs")]
 	public Animator _anim;
 	public ParticleSystem[] _boostFX;
+	public ParticleSystem _speed_Sand;
 
 	//Race
 	[Header ("Race Settings")]
@@ -78,6 +79,7 @@ public class CarController : MonoBehaviour
 	private bool _miniGameFailing = false;
 	private Coroutine _repair;
 	private bool _repairFeedBack = false;
+	private bool _hasJustBeenHit = false;
 
 	//Minigame
 	[Header("MiniGames")]
@@ -126,7 +128,7 @@ public class CarController : MonoBehaviour
 
 		if (_im._klaxon && Time.timeScale != 0)
 		{
-			//Debug.Log("MARCOOOOOOOOOOOOOOOOOO");
+			//Joue le son du klaxon
 		}
 
 		if (_miniGame1IsOn && Time.timeScale != 0)
@@ -143,6 +145,7 @@ public class CarController : MonoBehaviour
 
 		if (_raceHasStarted == true)
 		{
+			FXCheck();
 			Gravity();
 			Companion();
 			Accelerate();
@@ -165,6 +168,27 @@ public class CarController : MonoBehaviour
 		_distanceFromWayPoints = Vector3.Distance(transform.position, GameManager.Instance._wayPoints[_currentWayPoint].position);
 	}
 
+	private void FXCheck()
+	{
+		foreach (WheelCollider wheel in _throttleWheels)
+		{
+			WheelHit hit;
+			if (wheel.GetGroundHit(out hit))
+			{
+				if (hit.collider.tag == "Sand" && _speed_Sand.isStopped)
+				{
+					_speed_Sand.Play();
+				}
+
+				else if (hit.collider.tag != "Sand" && _speed_Sand.isPlaying)
+				{
+					_speed_Sand.Stop();
+				}
+			}
+
+		}
+	}
+
 	private void Respawn()
 	{
 		Transform respawn = GameManager.Instance._wayPoints[_currentWayPoint - 1].transform.GetComponentInChildren<RespawnPoints>().transform;
@@ -172,6 +196,7 @@ public class CarController : MonoBehaviour
 		_rb.angularVelocity = Vector3.zero;
 		transform.SetPositionAndRotation(respawn.position , respawn.localRotation);
 		_cam.transform.SetPositionAndRotation(respawn.position - new Vector3(0 , 1.5f, 3), respawn.localRotation);
+		// Play Sound Respawn
 	}
 
 	private void Gravity()
@@ -206,6 +231,7 @@ public class CarController : MonoBehaviour
 						_spotLeftLife -= amount;
 						if (_spotLeftLife == 0)
 						{
+							DamageSound();
 							_carLife -= 1;
 						}
 					}
@@ -220,6 +246,7 @@ public class CarController : MonoBehaviour
 						_spotCenterLife -= amount;
 						if (_spotCenterLife == 0)
 						{
+							DamageSound();
 							_carLife -= 1;
 						}
 					}
@@ -235,6 +262,7 @@ public class CarController : MonoBehaviour
 						_spotRightLife -= amount;
 						if (_spotRightLife == 0)
 						{
+							DamageSound();
 							_carLife -= 1;
 						}
 					}
@@ -253,6 +281,11 @@ public class CarController : MonoBehaviour
 			return;
 		}
 
+	}
+
+	private void DamageSound()
+	{
+		//Play Damage Sound
 	}
 
 	private void CheckDamage() // OK
@@ -474,7 +507,7 @@ public class CarController : MonoBehaviour
 			_repairToolCount -= 1;
 			_carLife += 1;
 			CheckDamage();
-
+			// Play Repair Finished Sound
 
 			switch (_spotCurrentlyRepaired)
 			{
@@ -656,6 +689,7 @@ public class CarController : MonoBehaviour
 				boost.gameObject.SetActive(true);
 				boost.Play();
 			}
+		// Play Sound
 		}
 	}
 
@@ -668,6 +702,7 @@ public class CarController : MonoBehaviour
 				boost.gameObject.SetActive(false);
 				boost.Stop();
 			}
+		//Stop Sound
 		}
 	}
 
@@ -882,22 +917,25 @@ public class CarController : MonoBehaviour
 		}
 	}
 
-	private void OnTriggerEnter(Collider other)
+	private void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.tag == "Obstacles")
+		if (other.gameObject.tag == "Obstacles" && !_hasJustBeenHit)
 		{
 			//_rb.AddForce(-transform.forward * 20000);
 			TakeDamage(1);
 			CheckDamage();
 			Debug.Log("hit");
+			_hasJustBeenHit = true;
+			// Play Sound Col
+			StartCoroutine(JustBeenHit());
 		}
 
 		if (other.gameObject.tag == "Tools")
 		{
-			if (_repairToolCount < _repairToolMaxCount && _grabingTools && !other.GetComponent<Tools>()._hasBeenUsed)
+			if (_repairToolCount < _repairToolMaxCount && _grabingTools && !other.gameObject.GetComponent<Tools>()._hasBeenUsed)
 			{
-				_repairToolCount += other.GetComponent<Tools>()._toolsAmount;
-				StartCoroutine(other.GetComponent<Tools>().RegenTime());
+				_repairToolCount += other.gameObject.GetComponent<Tools>()._toolsAmount;
+				StartCoroutine(other.gameObject.GetComponent<Tools>().RegenTime());
 				Debug.Log(_repairToolCount);
 			}
 		}
@@ -926,17 +964,42 @@ public class CarController : MonoBehaviour
 		switch (life)
 		{
 			case int n when n >= 2:
-				target.GetComponentInChildren<MeshRenderer>().material = _materials[0];
+				//target.GetComponentInChildren<MeshRenderer>().material = _materials[0];
 				break;
 			case int n when n > 0 && n < 2:
-				target.GetComponentInChildren<MeshRenderer>().material = _materials[1];
+				//target.GetComponentInChildren<MeshRenderer>().material = _materials[1];
 				break;
 			case 0:
-				target.GetComponentInChildren<MeshRenderer>().material = _materials[2];
+				//target.GetComponentInChildren<MeshRenderer>().material = _materials[2];
 				break;
 			default:
 				break;
 		}
+	}
+
+	private IEnumerator JustBeenHit()
+	{
+		yield return new WaitForSeconds(1);
+		_hasJustBeenHit = false;
+	}
+
+	public void PlayRepairFX (int pos)
+	{
+		switch (pos)
+		{
+			case 0:
+				Debug.Log("0");
+				break;
+			case 1:
+				Debug.Log("1");
+				break;
+			case 2:
+				Debug.Log("2");
+				break;
+			default:
+				break;
+		}
+
 	}
 
 }
