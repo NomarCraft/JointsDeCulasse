@@ -12168,7 +12168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _event1: event:/OST_MENU
-  _skratch: event:/NavigateMenu
+  _skratch: event:/NavigateMenu2
 --- !u!4 &1958428896
 Transform:
   m_ObjectHideFlags: 0
