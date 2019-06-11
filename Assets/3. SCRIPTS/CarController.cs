@@ -90,9 +90,55 @@ public class CarController : MonoBehaviour
 	[SerializeField] private float _timeLeft1;
 	[SerializeField] private float _initialTime1 = 10f;
 
-	private void Start()
+    // Sons
+    [Header("Sounds")]
+    [FMODUnity.EventRef]
+    public string _carEngine = "";
+    FMOD.Studio.EventInstance _carEngineInstance;
+    [FMODUnity.EventRef]
+    public string _carKlaxon = "";
+    FMOD.Studio.EventInstance _carKlaxonInstance;
+    [FMODUnity.EventRef]
+    public string _carRespawn = "";
+    FMOD.Studio.EventInstance _carRespawnInstance;
+    [FMODUnity.EventRef]
+    public string _carDamage = "";
+    FMOD.Studio.EventInstance _carDamageInstance;
+    [FMODUnity.EventRef]
+    public string _carCollision = "";
+    FMOD.Studio.EventInstance _carCollisionInstance;
+    [FMODUnity.EventRef]
+    public string _carBoost = "";
+    FMOD.Studio.EventInstance _carBoostInstance;
+    [FMODUnity.EventRef]
+    public string _stopCarBoost = "";
+    FMOD.Studio.EventInstance _stopCarBoostInstance;
+    [FMODUnity.EventRef]
+    public string _repairFinished = "";
+    FMOD.Studio.EventInstance _repairFinishedInstance;
+    [FMODUnity.EventRef]
+    public string _steamLoop = "";
+    FMOD.Studio.EventInstance _steamLoopInstance;
+
+    private void InstanceSounds()
+    {
+        _carEngineInstance = FMODUnity.RuntimeManager.CreateInstance(_carEngine);
+        _carEngineInstance.start();
+        _carKlaxonInstance = FMODUnity.RuntimeManager.CreateInstance(_carKlaxon);
+        _carRespawnInstance = FMODUnity.RuntimeManager.CreateInstance(_carRespawn);
+        _carDamageInstance = FMODUnity.RuntimeManager.CreateInstance(_carDamage);
+        _carCollisionInstance = FMODUnity.RuntimeManager.CreateInstance(_carCollision);
+        _carBoostInstance = FMODUnity.RuntimeManager.CreateInstance(_carBoost);
+        _stopCarBoostInstance = FMODUnity.RuntimeManager.CreateInstance(_stopCarBoost);
+        _repairFinishedInstance = FMODUnity.RuntimeManager.CreateInstance(_repairFinished);
+        _steamLoopInstance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop);
+    }
+
+    private void Start()
 	{
-		_im = GetComponent<InputManager>();
+        InstanceSounds(); //Instantiate Sounds
+
+        _im = GetComponent<InputManager>();
 		_rb = GetComponent<Rigidbody>();
 		_uim = GetComponent<UIManager>();
 
@@ -117,7 +163,11 @@ public class CarController : MonoBehaviour
 
 	private void Update()
 	{
-		CalculateDistanceToWayPoint();
+        //Pitch du son moteur
+        _carEngineInstance.getParameter("Velocity", out FMOD.Studio.ParameterInstance velocity);
+        velocity.setValue(_currentSpeed);
+
+        CalculateDistanceToWayPoint();
 		//UIUpdate
 		_uim.changeSpeed(transform.InverseTransformVector(_rb.velocity).z);
 
@@ -128,8 +178,9 @@ public class CarController : MonoBehaviour
 
 		if (_im._klaxon && Time.timeScale != 0)
 		{
-			//Joue le son du klaxon
-		}
+            _carKlaxonInstance.start(); //Joue le son du klaxon
+
+        }
 
 		if (_miniGame1IsOn && Time.timeScale != 0)
 		{
@@ -162,6 +213,8 @@ public class CarController : MonoBehaviour
 			}
 		}
 	}
+
+   
 
 	private void CalculateDistanceToWayPoint()
 	{
@@ -196,8 +249,9 @@ public class CarController : MonoBehaviour
 		_rb.angularVelocity = Vector3.zero;
 		transform.SetPositionAndRotation(respawn.position , respawn.localRotation);
 		_cam.transform.SetPositionAndRotation(respawn.position - new Vector3(0 , 1.5f, 3), respawn.localRotation);
-		// Play Sound Respawn
-	}
+        _carRespawnInstance.start(); // Play Sound Respawn
+
+    }
 
 	private void Gravity()
 	{
@@ -285,8 +339,9 @@ public class CarController : MonoBehaviour
 
 	private void DamageSound()
 	{
-		//Play Damage Sound
-	}
+        _carDamageInstance.start(); //Play Damage Sound
+
+    }
 
 	private void CheckDamage() // OK
 	{
@@ -507,9 +562,10 @@ public class CarController : MonoBehaviour
 			_repairToolCount -= 1;
 			_carLife += 1;
 			CheckDamage();
-			// Play Repair Finished Sound
+            _repairFinishedInstance.start();// Play Repair Finished Sound
 
-			switch (_spotCurrentlyRepaired)
+
+            switch (_spotCurrentlyRepaired)
 			{
 				case 0:
 					if (_score1 >= _objective1)
@@ -689,8 +745,9 @@ public class CarController : MonoBehaviour
 				boost.gameObject.SetActive(true);
 				boost.Play();
 			}
-		// Play Sound
-		}
+
+            _carBoostInstance.start(); // Play Sound
+        }
 	}
 
 	private void StopBoost()
@@ -702,8 +759,9 @@ public class CarController : MonoBehaviour
 				boost.gameObject.SetActive(false);
 				boost.Stop();
 			}
-		//Stop Sound
-		}
+            _carBoostInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);//Stop Sound
+            _stopCarBoostInstance.start();
+        }
 	}
 
 	private void Accelerate() // OK
@@ -926,8 +984,9 @@ public class CarController : MonoBehaviour
 			CheckDamage();
 			Debug.Log("hit");
 			_hasJustBeenHit = true;
-			// Play Sound Col
-			StartCoroutine(JustBeenHit());
+            _carCollisionInstance.start();// Play Sound Col
+
+            StartCoroutine(JustBeenHit());
 		}
 
 		if (other.gameObject.tag == "Tools")

@@ -16,9 +16,28 @@ public class GameManager : Singleton<GameManager>
 
 	private int _playerInd;
 
-	private void Start()
+    [FMODUnity.EventRef]
+    public string _cdStart = "";
+    FMOD.Studio.EventInstance _cdStartInstance;
+    [FMODUnity.EventRef]
+    public string _goStart = "";
+    FMOD.Studio.EventInstance _goStartInstance;
+    [FMODUnity.EventRef]
+    public string _ost = "";
+    FMOD.Studio.EventInstance _ostInstance;
+    [FMODUnity.EventRef]
+    public string _backGround = "";
+    FMOD.Studio.EventInstance _backGroundInstance;
+
+    private void Start()
 	{
-		StartCoroutine(StartDelay());
+        _cdStartInstance = FMODUnity.RuntimeManager.CreateInstance(_cdStart);
+        _goStartInstance = FMODUnity.RuntimeManager.CreateInstance(_goStart);
+        _ostInstance = FMODUnity.RuntimeManager.CreateInstance(_ost);
+        _backGroundInstance = FMODUnity.RuntimeManager.CreateInstance(_backGround);
+        _backGroundInstance.start();
+
+        StartCoroutine(StartDelay());
 
 		if (_player2 == null)
 		{
@@ -45,22 +64,22 @@ public class GameManager : Singleton<GameManager>
 
 	private IEnumerator StartDelay()
 	{
-		// Sound 3
-		yield return new WaitForSeconds(1);
+        _cdStartInstance.start();// Sound 3
+        yield return new WaitForSeconds(1);
 		UpdateStartCounter("2");
-		// Sound 2
-		yield return new WaitForSeconds(1);
+        _cdStartInstance.start();// Sound 2
+        yield return new WaitForSeconds(1);
 		UpdateStartCounter("1");
-		// Sound 1
-		yield return new WaitForSeconds(1);
-		//Sound GO
-		UpdateStartCounter("GOOOOOO");
+        _cdStartInstance.start();// Sound 1
+        yield return new WaitForSeconds(1);
+        _goStartInstance.start();//Sound GO
+        UpdateStartCounter("GOOOOOO");
 		_player1._raceHasStarted = true;
 		if (_player2 != null)
 		{
 			_player2._raceHasStarted = true;
 		}
-		// Start the OST
+        _ostInstance.start();// Start the OST
 		yield return new WaitForSeconds(1);
 		UpdateStartCounter("");
 	}
@@ -154,8 +173,9 @@ public class GameManager : Singleton<GameManager>
 	{
 		_playerInd = playerInd;
 		_pauseScreen.gameObject.SetActive(true);
-		// Stop OST
-		if (playerInd == 1)
+        _ostInstance.setPaused(true);// Stop OST
+
+        if (playerInd == 1)
 		{
 			_player1._im._start = false;
 		}
@@ -176,7 +196,8 @@ public class GameManager : Singleton<GameManager>
 			{
 				Time.timeScale = 1;
 				_pauseScreen.gameObject.SetActive(false);
-			}
+                _ostInstance.setPaused(false);//Restart OST
+            }
 		}
 		else if (playerInd == 2)
 		{
@@ -184,10 +205,11 @@ public class GameManager : Singleton<GameManager>
 			{
 				Time.timeScale = 1;
 				_pauseScreen.gameObject.SetActive(false);
-			}
+                _ostInstance.setPaused(false);//Restart OST
+            }
 		}
-		//Restart OST
-	}
+        
+    }
 
 	private IEnumerator EndGame()
 	{
