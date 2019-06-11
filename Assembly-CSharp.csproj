@@ -71,7 +71,9 @@
     <Compile Include="Assets\3. SCRIPTS\GameManager.cs" />
     <Compile Include="Assets\3. SCRIPTS\InputManager.cs" />
     <Compile Include="Assets\3. SCRIPTS\Menus\MainMenu.cs" />
+    <Compile Include="Assets\3. SCRIPTS\Menus\ost_menu.cs" />
     <Compile Include="Assets\3. SCRIPTS\Menus\SwitchCanevas.cs" />
+    <Compile Include="Assets\3. SCRIPTS\Menus\test_skratch_move.cs" />
     <Compile Include="Assets\3. SCRIPTS\Scripts Marco\Aiguille.cs" />
     <Compile Include="Assets\3. SCRIPTS\Scripts Marco\BoostUI.cs" />
     <Compile Include="Assets\3. SCRIPTS\Scripts Marco\RepairKits.cs" />
@@ -174,6 +176,12 @@
     <Compile Include="Assets\GoogleVR\Scripts\Audio\FmodGvrAudio.cs" />
     <Compile Include="Assets\GoogleVR\Scripts\Audio\FmodGvrAudioRoom.cs" />
     <Compile Include="Assets\race-track-lake\Standard Assets\Environment\Water (Basic)\Scripts\WaterBasic.cs" />
+    <Compile Include="Assets\Raphaël\Scripts\Menus\ChangementBouton.cs" />
+    <Compile Include="Assets\Raphaël\Scripts\Menus\Funders.cs" />
+    <Compile Include="Assets\Raphaël\Scripts\Menus\MenuDeroulant.cs" />
+    <Compile Include="Assets\Raphaël\Scripts\Menus\MenuDisparait.cs" />
+    <Compile Include="Assets\Raphaël\Scripts\Menus\PressStart.cs" />
+    <Compile Include="Assets\Raphaël\Scripts\Tools\AnimationLerp.cs" />
     <Compile Include="Assets\ResonanceAudio\Scripts\FmodResonanceAudio.cs" />
     <Compile Include="Assets\ResonanceAudio\Scripts\FmodResonanceAudioRoom.cs" />
     <Compile Include="Assets\RespawnPoints.cs" />
