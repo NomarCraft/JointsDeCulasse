@@ -32,7 +32,7 @@ public class MenuManager : MonoBehaviour
 
     public void RACE_1_Player()
     {
-        SceneManager.LoadScene("LVLARTTEST", LoadSceneMode.Single);
+        LoadScene("LVLARTTEST");
     }
 
     public void RACE_2_Players()

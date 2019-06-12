@@ -9,66 +9,13 @@
 [LOG] DownMix::init                            : done.
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 000001CD57E051B8 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 000002BB8D904318 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] PlaybackSystem::init                     : done
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
-[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SoundI::release                          :  (000001CD50E5A3E8)
-[LOG] SoundI::release                          :     Collision2 (000001CD475ACA78)
-[LOG] SoundI::release                          :  (000001CD50E5B808)
-[LOG] SoundI::release                          :     Collision3 (000001CD475AC8D8)
-[LOG] SoundI::release                          :  (000001CD50E5B248)
-[LOG] SoundI::release                          :     Collision1 (000001CD471D5298)
-[LOG] SoundI::release                          :  (000001CD50E5AC88)
-[LOG] SoundI::release                          :     Steam1 (000001CD475ADDF8)
-[LOG] SoundI::release                          :  (000001CD50E57FF8)
-[LOG] SoundI::release                          :     RepairedOK_2 (000001CD475ACF58)
-[LOG] SoundI::release                          :  (000001CD50E5B698)
-[LOG] SoundI::release                          :     Steam3 (000001CD475AD0F8)
-[LOG] SoundI::release                          : CAR_1_GRAVE_LONG (000001CD5D1A3888)
-[LOG] SoundI::release                          :     CAR_1_GRAVE_LONG (000001CD471D4738)
-[LOG] SoundI::release                          :     CAR_1_GRAVE_LONG (000001CD5D1A3F48)
-[LOG] SoundI::release                          : wind_general_soft_low_loop_04 (000001CD5D1A3528)
-[LOG] SoundI::release                          :     wind_general_soft_low_loop_04 (000001CD475AB558)
-[LOG] SoundI::release                          :     wind_general_soft_low_loop_04 (000001CD5D1A3A38)
-[LOG] SoundI::release                          :  (000001CD50E58B78)
-[LOG] SoundI::release                          :     Steam2 (000001CD475ACC18)
-[LOG] SoundI::release                          :  (000001CD50E58E58)
-[LOG] SoundI::release                          :     Klaxon2 (000001CD471D4C18)
-[LOG] SoundI::release                          :  (000001CD50E58728)
-[LOG] SoundI::release                          :     3-2-1_massive (000001CD475ACDB8)
-[LOG] SoundI::release                          :  (000001CD50E5BC58)
-[LOG] SoundI::release                          :     Explosion2 (000001CD475AE138)
-[LOG] SoundI::release                          :  (000001CD50E5A9A8)
-[LOG] SoundI::release                          :     Explosion3 (000001CD475AD5D8)
-[LOG] SoundI::release                          :  (000001CD50E5ADF8)
-[LOG] SoundI::release                          :     Explosion4 (000001CD471D4F58)
-[LOG] SoundI::release                          :  (000001CD50E59588)
-[LOG] SoundI::release                          :     Explosion1 (000001CD475AEAF8)
-[LOG] SoundI::release                          :  (000001CD50E5AB18)
-[LOG] SoundI::release                          :     Landing_car_1 (000001CD475ADAB8)
-[LOG] SoundI::release                          :  (000001CD50E582D8)
-[LOG] SoundI::release                          :     Boost1_end (000001CD471D3F18)
-[LOG] SoundI::release                          :  (000001CD50E5AF68)
-[LOG] SoundI::release                          :     Respawn (000001CD475AE958)
-[LOG] SoundI::release                          :  (000001CD50E58168)
-[LOG] SoundI::release                          :     rldd2 (000001CD471D4DB8)
-[LOG] SoundI::release                          :  (000001CD50E59418)
-[LOG] SoundI::release                          :     GO_massive (000001CD475ADF98)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
@@ -82,6 +29,4 @@
 [LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
 [LOG] Thread::callback                         : FMOD stream thread finished.
 [LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.
 [LOG] SystemI::close                           : Closed.

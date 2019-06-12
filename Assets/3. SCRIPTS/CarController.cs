@@ -133,8 +133,11 @@ public class CarController : MonoBehaviour
     [FMODUnity.EventRef]
     public string _reloadSound = "";
     public FMOD.Studio.EventInstance _reloadSoundInstance;
+	[FMODUnity.EventRef]
+	public string _hammerSound = "";
+	public FMOD.Studio.EventInstance _hammerSoundInstance;
 
-    public List<FMOD.Studio.EventInstance> _soundInstances = new List<FMOD.Studio.EventInstance>();
+	public List<FMOD.Studio.EventInstance> _soundInstances = new List<FMOD.Studio.EventInstance>();
 
 
     private void InstanceSounds()
@@ -163,7 +166,9 @@ public class CarController : MonoBehaviour
         _soundInstances.Add(_steamLoop3Instance);
         _reloadSoundInstance = FMODUnity.RuntimeManager.CreateInstance(_reloadSound);
         _soundInstances.Add(_reloadSoundInstance);
-        Debug.Log("les sons du caca");
+		_hammerSoundInstance = FMODUnity.RuntimeManager.CreateInstance(_hammerSound);
+		_soundInstances.Add(_hammerSoundInstance);
+		Debug.Log("les sons du caca");
     }
 
     private void Start()
@@ -438,6 +443,10 @@ public class CarController : MonoBehaviour
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
 				_uim._buttonX.rectTransform.localPosition = localPoint;
 			}
+			else
+			{
+				_uim._buttonX.gameObject.SetActive(false);
+			}
 
 			if (_spotCenterLife <= 0)
 			{
@@ -449,6 +458,10 @@ public class CarController : MonoBehaviour
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
 				_uim._buttonA.rectTransform.localPosition = localPoint;
 			}
+			else
+			{
+				_uim._buttonA.gameObject.SetActive(false);
+			}
 
 			if (_spotRightLife <= 0)
 			{
@@ -459,6 +472,10 @@ public class CarController : MonoBehaviour
 				pos = _cam.WorldToScreenPoint(_spotRight.position);
 				RectTransformUtility.ScreenPointToLocalPointInRectangle(rect.GetComponent<RectTransform>(), pos, rect.worldCamera, out localPoint);
 				_uim._buttonB.rectTransform.localPosition = localPoint;
+			}
+			else
+			{
+				_uim._buttonB.gameObject.SetActive(false);
 			}
 		}
 
@@ -889,7 +906,7 @@ public class CarController : MonoBehaviour
 
 			else
 			{
-				if (_im._boost == true && /*_im._boostComp == true &&*/ _boostAmount > 50f && _carLife >= 3)
+				if (_im._boost == true && _im._boostComp == true && _boostAmount > 50f && _carLife >= 3)
 				{
 					_isBoosting = true;
 					StartBoost();
@@ -975,7 +992,7 @@ public class CarController : MonoBehaviour
 	{
 		bool grounded = CheckGround(_throttleWheels);
 
-		if (grounded && _im._boost)
+		if (grounded && _im._boost && _im._boostComp)
 		{
 			_boostAmount = Mathf.Clamp(_boostAmount - (_boostUseSpeed * Time.deltaTime), 0f, _boostMaxAmount);
 		}
@@ -1008,21 +1025,12 @@ public class CarController : MonoBehaviour
 						{
 							wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
 						}
-						else
-						{
-							wheel.steerAngle = (-_maxTurnAngle / 5f) / steerDamping;
-						}
-						
 					}
 					else if (/*_leanDir == 2 && */(_anim.GetCurrentAnimatorStateInfo(0).IsName("Idle_Right") || _anim.GetCurrentAnimatorStateInfo(0).IsName("Lean_Right")))
 					{
 						if (_im._steer > 0.1f)
 						{
 							wheel.steerAngle = (_maxTurnAngle * _im._steer) / steerDamping;
-						}
-						else
-						{
-							wheel.steerAngle = (_maxTurnAngle  / 5f) / steerDamping;
 						}
 					}
 					else
@@ -1137,6 +1145,7 @@ public class CarController : MonoBehaviour
                 _repairToolCount += other.gameObject.GetComponent<Tools>()._toolsAmount;
                 StartCoroutine(other.gameObject.GetComponent<Tools>().RegenTime());
                 Debug.Log(_repairToolCount);
+				_reloadSoundInstance.start();
             }
         }
     }
@@ -1203,6 +1212,7 @@ public class CarController : MonoBehaviour
 				break;
 		}
 
+		_hammerSoundInstance.start();
 	}
 
 }
