@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/Les_Tests/LVLARTTEST.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0

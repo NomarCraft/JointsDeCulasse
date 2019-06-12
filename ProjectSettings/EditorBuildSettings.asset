@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/LevelBlockOut.unity
-    guid: 8db946260ef7b244ebadd811e229cb82
+    path: Assets/Scenes/Menu.unity
+    guid: f4b88a795c67c24469029182840d95a4
+  - enabled: 1
+    path: Assets/Scenes/Les_Tests/LVLARTTEST.unity
+    guid: ffe03736409f13647b1354cb316883ff
   m_configObjects: {}

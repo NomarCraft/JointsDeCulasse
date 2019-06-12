@@ -8,25 +8,25 @@ public class InputManager : MonoBehaviour
 {
 	private CarController _playerRef;
 
-	[HideInInspector] public float _throttle;
-	[HideInInspector] public float _steer;
-	[HideInInspector] public float _brake;
-	[HideInInspector] public bool _boost;
+	 public float _throttle;
+	 public float _steer;
+	 public float _brake;
+	 public bool _boost;
 
-	[HideInInspector] public float _horizontal; 
-	[HideInInspector] public float _vertical;
-	[HideInInspector] public bool _boostComp;
-	[HideInInspector] public bool _spotLeft;
-	[HideInInspector] public bool _spotCentral;
-	[HideInInspector] public bool _spotRight;
-	[HideInInspector] public bool _grabTools;
-	[HideInInspector] public float _leftTrigger;
-	[HideInInspector] public float _rightTrigger;
-	[HideInInspector] public bool _leftTriggerIsInUse = false;
-	[HideInInspector] public bool _rightTriggerIsInUse = false;
-	[HideInInspector] public bool _respawn = false;
-	[HideInInspector] public bool _start = false;
-	[HideInInspector] public bool _klaxon = false;
+	 public float _horizontal; 
+	 public float _vertical;
+	 public bool _boostComp;
+	 public bool _spotLeft;
+	 public bool _spotCentral;
+	 public bool _spotRight;
+	 public bool _grabTools;
+	 public float _leftTrigger;
+	 public float _rightTrigger;
+	 public bool _leftTriggerIsInUse = false;
+	 public bool _rightTriggerIsInUse = false;
+	 public bool _respawn = false;
+	 public bool _start = false;
+	 public bool _klaxon = false;
 
 	private void Start()
 	{

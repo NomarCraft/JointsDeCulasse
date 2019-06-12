@@ -92,63 +92,79 @@ public class CarController : MonoBehaviour
 
     // Sons
     [Header("Sounds")]
+
     [FMODUnity.EventRef]
     public string _carEngine = "";
     public FMOD.Studio.EventInstance _carEngineInstance;
     [FMODUnity.EventRef]
     public string _carKlaxon = "";
-    FMOD.Studio.EventInstance _carKlaxonInstance;
+    public FMOD.Studio.EventInstance _carKlaxonInstance;
     [FMODUnity.EventRef]
     public string _carRespawn = "";
-    FMOD.Studio.EventInstance _carRespawnInstance;
+    public FMOD.Studio.EventInstance _carRespawnInstance;
     [FMODUnity.EventRef]
     public string _carDamage = "";
-    FMOD.Studio.EventInstance _carDamageInstance;
+    public FMOD.Studio.EventInstance _carDamageInstance;
     [FMODUnity.EventRef]
     public string _carCollision = "";
-    FMOD.Studio.EventInstance _carCollisionInstance;
+    public FMOD.Studio.EventInstance _carCollisionInstance;
     [FMODUnity.EventRef]
     public string _carBoost = "";
-    FMOD.Studio.EventInstance _carBoostInstance;
+    public FMOD.Studio.EventInstance _carBoostInstance;
     [FMODUnity.EventRef]
     public string _stopCarBoost = "";
-    FMOD.Studio.EventInstance _stopCarBoostInstance;
+    public FMOD.Studio.EventInstance _stopCarBoostInstance;
     [FMODUnity.EventRef]
     public string _repairFinished = "";
-    FMOD.Studio.EventInstance _repairFinishedInstance;
+    public FMOD.Studio.EventInstance _repairFinishedInstance;
     [FMODUnity.EventRef]
     public string _steamLoop1 = "";
-    FMOD.Studio.EventInstance _steamLoop1Instance;
+    public FMOD.Studio.EventInstance _steamLoop1Instance;
     [FMODUnity.EventRef]
     public string _steamLoop2 = "";
-    FMOD.Studio.EventInstance _steamLoop2Instance;
+    public FMOD.Studio.EventInstance _steamLoop2Instance;
     [FMODUnity.EventRef]
     public string _steamLoop3 = "";
-    FMOD.Studio.EventInstance _steamLoop3Instance;
+    public FMOD.Studio.EventInstance _steamLoop3Instance;
     [FMODUnity.EventRef]
     public string _reloadSound = "";
-    FMOD.Studio.EventInstance _reloadSoundInstance;
+    public FMOD.Studio.EventInstance _reloadSoundInstance;
+
+    public List<FMOD.Studio.EventInstance> _soundInstances = new List<FMOD.Studio.EventInstance>();
+
 
     private void InstanceSounds()
     {
         _carEngineInstance = FMODUnity.RuntimeManager.CreateInstance(_carEngine);
-        _carEngineInstance.start();
+        _soundInstances.Add(_carEngineInstance);
         _carKlaxonInstance = FMODUnity.RuntimeManager.CreateInstance(_carKlaxon);
+        _soundInstances.Add(_carKlaxonInstance);
         _carRespawnInstance = FMODUnity.RuntimeManager.CreateInstance(_carRespawn);
+        _soundInstances.Add(_carRespawnInstance);
         _carDamageInstance = FMODUnity.RuntimeManager.CreateInstance(_carDamage);
+        _soundInstances.Add(_carDamageInstance);
         _carCollisionInstance = FMODUnity.RuntimeManager.CreateInstance(_carCollision);
+        _soundInstances.Add(_carCollisionInstance);
         _carBoostInstance = FMODUnity.RuntimeManager.CreateInstance(_carBoost);
+        _soundInstances.Add(_carBoostInstance);
         _stopCarBoostInstance = FMODUnity.RuntimeManager.CreateInstance(_stopCarBoost);
+        _soundInstances.Add(_stopCarBoostInstance);
         _repairFinishedInstance = FMODUnity.RuntimeManager.CreateInstance(_repairFinished);
+        _soundInstances.Add(_repairFinishedInstance);
         _steamLoop1Instance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop1);
+        _soundInstances.Add(_steamLoop1Instance);
         _steamLoop2Instance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop2);
+        _soundInstances.Add(_steamLoop2Instance);
         _steamLoop3Instance = FMODUnity.RuntimeManager.CreateInstance(_steamLoop3);
+        _soundInstances.Add(_steamLoop3Instance);
         _reloadSoundInstance = FMODUnity.RuntimeManager.CreateInstance(_reloadSound);
+        _soundInstances.Add(_reloadSoundInstance);
     }
 
     private void Start()
 	{
         InstanceSounds(); //Instantiate Sounds
+        _carEngineInstance.start();
 
         _im = GetComponent<InputManager>();
 		_rb = GetComponent<Rigidbody>();

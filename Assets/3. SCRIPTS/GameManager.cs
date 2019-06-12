@@ -11,6 +11,7 @@ public class GameManager : Singleton<GameManager>
 
 	[SerializeField] private TextMeshProUGUI _startCounter;
 	[SerializeField] private TextMeshProUGUI _pauseScreen;
+	[SerializeField] private Canvas _pauseCanvas;
 
 	public List<Transform> _wayPoints;
 
@@ -172,7 +173,8 @@ public class GameManager : Singleton<GameManager>
 	public void PauseGame(int playerInd)
 	{
 		_playerInd = playerInd;
-		_pauseScreen.gameObject.SetActive(true);
+		//_pauseScreen.gameObject.SetActive(true);
+		_pauseCanvas.gameObject.SetActive(true);
         _ostInstance.setPaused(true);// Stop OST
         _player1._carEngineInstance.setPaused(true);
         if(_player2 != null)
@@ -200,7 +202,9 @@ public class GameManager : Singleton<GameManager>
 			if (_player1._im._start)
 			{
 				Time.timeScale = 1;
-				_pauseScreen.gameObject.SetActive(false);
+				//_pauseScreen.gameObject.SetActive(false);
+                _pauseCanvas.gameObject.SetActive(false);
+
                 _ostInstance.setPaused(false);//Restart OST
                 _player1._carEngineInstance.setPaused(false);
                 if (_player2 != null)
@@ -214,7 +218,9 @@ public class GameManager : Singleton<GameManager>
 			if (_player2._im._start)
 			{
 				Time.timeScale = 1;
-				_pauseScreen.gameObject.SetActive(false);
+				//_pauseScreen.gameObject.SetActive(false);
+                _pauseCanvas.gameObject.SetActive(false);
+
                 _ostInstance.setPaused(false);//Restart OST
                 _player1._carEngineInstance.setPaused(false);
                 if (_player2 != null)
@@ -248,4 +254,37 @@ public class GameManager : Singleton<GameManager>
 		yield return new WaitForSeconds(10);
 		SceneManager.LoadScene("LevelBlockOut", LoadSceneMode.Single);
 	}
+    private void QuitMenu()
+    {
+        KillAllSounds();
+        SceneManager.LoadScene("Menu");
+    }
+
+    private void KillAllSounds()
+    {
+        _cdStartInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _cdStartInstance.release();
+        _goStartInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _goStartInstance.release();
+        _ostInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _ostInstance.release();
+        _backGroundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _backGroundInstance.release();
+
+        for (int i = 0, length = _player1._soundInstances.Count; i < length; i++)
+        {
+            _player1._soundInstances[i].stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            _player1._soundInstances[i].release();
+        }
+
+        if(_player2 != null)
+        {
+            for (int i = 0, length = _player2._soundInstances.Count; i < length; i++)
+            {
+                _player2._soundInstances[i].stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                _player2._soundInstances[i].release();
+            }
+        }
+
+    }
 }
