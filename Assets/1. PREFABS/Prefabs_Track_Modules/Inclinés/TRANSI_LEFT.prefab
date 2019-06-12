@@ -142,6 +142,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 8f8da1df0b213ae40aae2dbe39b97b69, type: 2}
+    - target: {fileID: -1504981713932161579, guid: ac81f79fb73c70b42bdf8dec8a0ab00d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: d74bfad94f879dc40a18c167fc84e8d4, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac81f79fb73c70b42bdf8dec8a0ab00d, type: 3}
 --- !u!1 &7678149618215947847 stripped
@@ -163,6 +168,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4469801282830887644}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: f152668e0af7e1147b0cf9aad6464edc,
+        type: 3}
+      propertyPath: m_Name
+      value: Route_Transition_Gauche
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: f152668e0af7e1147b0cf9aad6464edc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -217,11 +227,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: f152668e0af7e1147b0cf9aad6464edc,
-        type: 3}
-      propertyPath: m_Name
-      value: Route_Transition_Gauche
       objectReference: {fileID: 0}
     - target: {fileID: -2385698966788779384, guid: f152668e0af7e1147b0cf9aad6464edc,
         type: 3}

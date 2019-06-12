@@ -1,0 +1,76 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Meterial_shader
+  m_Shader: {fileID: 4800000, guid: a388bf5db6ffca44894257bc9147e752, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Deuxieme_test_patern:
+        m_Texture: {fileID: 2800000, guid: 57d2e394ede6e244db5d2ba951140785, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Masque:
+        m_Texture: {fileID: 2800000, guid: 2c1bfc31978949143a924a5f70ff2fc6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Masque1:
+        m_Texture: {fileID: 2800000, guid: bf5f419d0d0c4c74cb3ae0cd432ee39f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Patern_Repair:
+        m_Texture: {fileID: 2800000, guid: 272f4bea4c38cde4291601dfedff5d1b, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TextureSample0:
+        m_Texture: {fileID: 2800000, guid: d7125a157350968459a6907e1b43d18e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _UVMESCOUILLES:
+        m_Texture: {fileID: 2800000, guid: d7125a157350968459a6907e1b43d18e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _azeazezaaezazeeaz:
+        m_Texture: {fileID: 2800000, guid: 592436286777a2447b331dc1e2b723dc, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _masque2:
+        m_Texture: {fileID: 2800000, guid: e78443c4f7eeb8949af3f82f5553f709, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _onsenbrnale:
+        m_Texture: {fileID: 2800000, guid: b63275dcf45cd38419e6e18727a678a2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _uvRecovered:
+        m_Texture: {fileID: 2800000, guid: 3286397f547193e40956d168b061893c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _uvmask:
+        m_Texture: {fileID: 2800000, guid: 2c1bfc31978949143a924a5f70ff2fc6, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Emisivintensity: 2
+    - _Emissive_intensity: 4
+    - _Float0: 2
+    - __dirty: 0
+    m_Colors:
+    - _Albedo_emissive: {r: 0, g: 0.6972993, b: 0.7169812, a: 0}
