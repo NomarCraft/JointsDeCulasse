@@ -10,12 +10,13 @@ public class GameManager : Singleton<GameManager>
 	public CarController _player2;
 
 	[SerializeField] private TextMeshProUGUI _startCounter;
-	[SerializeField] private TextMeshProUGUI _pauseScreen;
-	[SerializeField] private Canvas _pauseCanvas;
+	//[SerializeField] private TextMeshProUGUI _pauseScreen;
+	[SerializeField] private GameObject _pauseCanvas;
 
 	public List<Transform> _wayPoints;
 
 	private int _playerInd;
+    public bool _cameraGo = false;
 
     [FMODUnity.EventRef]
     public string _cdStart = "";
@@ -57,16 +58,18 @@ public class GameManager : Singleton<GameManager>
 			CheckPositions();
 		}
 
-		if (Time.timeScale == 0)
+		/*if (Time.timeScale == 0)
 		{
 			DePauseGame(_playerInd);
-		}
+		}*/
 	}
 
 	private IEnumerator StartDelay()
 	{
-		UpdateStartCounter("");
-		yield return new WaitForSeconds(5);
+        UpdateStartCounter("");
+        yield return new WaitForSeconds(3);
+        _cameraGo = true;
+		yield return new WaitForSeconds(9);
         _cdStartInstance.start();// Sound 3
 		UpdateStartCounter("3");
         yield return new WaitForSeconds(1);
@@ -177,13 +180,23 @@ public class GameManager : Singleton<GameManager>
 	{
 		_playerInd = playerInd;
 		//_pauseScreen.gameObject.SetActive(true);
-		_pauseCanvas.gameObject.SetActive(true);
+		_pauseCanvas.SetActive(true);
         _ostInstance.setPaused(true);// Stop OST
-        _player1._carEngineInstance.setPaused(true);
-        if(_player2 != null)
+        //_player1._carEngineInstance.setPaused(true);
+
+        for (int i = 0, length = _player1._soundInstances.Count; i < length; i++)
         {
-            _player2._carEngineInstance.setPaused(true);
+            _player1._soundInstances[i].setPaused(true);
         }
+
+        if (_player2 != null)
+        {
+            for (int i = 0, length = _player2._soundInstances.Count; i < length; i++)
+            {
+                _player2._soundInstances[i].setPaused(true);
+            }
+        }
+
 
         if (playerInd == 1)
 		{
@@ -196,30 +209,35 @@ public class GameManager : Singleton<GameManager>
 		Time.timeScale = 0;
 	}
 
-	private void DePauseGame(int playerInd)
+	public void DePauseGame(int playerInd)
 	{
 		
 		if (playerInd == 1)
 		{
 			Debug.Log(_player1._im._start);
-			if (_player1._im._start)
-			{
 				Time.timeScale = 1;
 				//_pauseScreen.gameObject.SetActive(false);
                 _pauseCanvas.gameObject.SetActive(false);
 
                 _ostInstance.setPaused(false);//Restart OST
-                _player1._carEngineInstance.setPaused(false);
+                //_player1._carEngineInstance.setPaused(false);
+
+                for (int i = 0, length = _player1._soundInstances.Count; i < length; i++)
+                {
+                    _player1._soundInstances[i].setPaused(false);
+                }
+
                 if (_player2 != null)
                 {
-                    _player2._carEngineInstance.setPaused(false);
+                    for (int i = 0, length = _player2._soundInstances.Count; i < length; i++)
+                    {
+                        _player2._soundInstances[i].setPaused(false);
+                    }
                 }
-            }
 		}
 		else if (playerInd == 2)
 		{
-			if (_player2._im._start)
-			{
+
 				Time.timeScale = 1;
 				//_pauseScreen.gameObject.SetActive(false);
                 _pauseCanvas.gameObject.SetActive(false);
@@ -230,7 +248,6 @@ public class GameManager : Singleton<GameManager>
                 {
                     _player2._carEngineInstance.setPaused(false);
                 }
-            }
 		}
         
     }
@@ -255,12 +272,12 @@ public class GameManager : Singleton<GameManager>
 		}
 
 		yield return new WaitForSeconds(10);
-		SceneManager.LoadScene("LevelBlockOut", LoadSceneMode.Single);
+		//SceneManager.LoadScene("LevelBlockOut", LoadSceneMode.Single);
 	}
-    private void QuitMenu()
+    public void QuitMenu()
     {
         KillAllSounds();
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
     }
 
     private void KillAllSounds()

@@ -163,6 +163,7 @@ public class CarController : MonoBehaviour
         _soundInstances.Add(_steamLoop3Instance);
         _reloadSoundInstance = FMODUnity.RuntimeManager.CreateInstance(_reloadSound);
         _soundInstances.Add(_reloadSoundInstance);
+        Debug.Log("les sons du caca");
     }
 
     private void Start()
@@ -902,32 +903,66 @@ public class CarController : MonoBehaviour
 
 					if (_currentSpeed < 100)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.5f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.75f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 100 && _currentSpeed < 170 && _carLife > 0)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.70f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.25f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 170 && _currentSpeed < 225 && _carLife > 1)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.20f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.00f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 225 && _currentSpeed < 300 && _carLife > 1)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.00f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.75f;
 						wheel.brakeTorque = 0;
 					}
 					else if (_currentSpeed > 300 && _carLife > 2)
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 0.25f;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.00f;
 						wheel.brakeTorque = 0;
 					}
 				}                                                     
 			}
 			ClockRotation(_currentSpeed);
+
+            switch (_carLife)
+            {
+                case 0 : 
+                    foreach (WheelCollider _wheel in _throttleWheels)
+                    {
+                        _wheel.wheelDampingRate = 20;
+                        
+                    }
+                    break;
+                case 1:
+                    foreach (WheelCollider _wheel in _throttleWheels)
+                    {
+                        _wheel.wheelDampingRate = 13;
+
+                    }
+                    break;
+                case 2:
+                    foreach (WheelCollider _wheel in _throttleWheels)
+                    {
+                        _wheel.wheelDampingRate = 8;
+
+                    }
+                    break;
+                case 3:
+                    foreach (WheelCollider _wheel in _throttleWheels)
+                    {
+                        _wheel.wheelDampingRate = 5;
+
+                    }
+                    break;
+                default:
+                    break;
+            }
 		}
 	}
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class MenuManager : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         _ostMenusInstance = FMODUnity.RuntimeManager.CreateInstance(_ostMenus);
         _clickSoundInstance = FMODUnity.RuntimeManager.CreateInstance(_clickSound);
         _ostMenusInstance.start();
@@ -30,7 +32,7 @@ public class MenuManager : MonoBehaviour
 
     public void RACE_1_Player()
     {
-        LoadScene("LVLARTTEST");
+        SceneManager.LoadScene("LVLARTTEST", LoadSceneMode.Single);
     }
 
     public void RACE_2_Players()

@@ -8,7 +8,8 @@ using UnityEngine.Rendering.PostProcessing;
 public class CameraManager : MonoBehaviour
 {
 	private Vector3 _targetPos;
-	private Quaternion _lookAtTarget;
+	private Vector3 _lookAtTarget;
+    public Transform _lookAtStart;
 
 	public GameObject _focusTarget;
 	private CarController _target;
@@ -72,7 +73,7 @@ public class CameraManager : MonoBehaviour
 	void FixedUpdate()
 	{
 		_distance = 2.5f + ((_focusTarget.transform.InverseTransformVector(_focusTarget.GetComponent<Rigidbody>().velocity).z * 3.6f) / 100f);
-		_lookAtTarget = Quaternion.LookRotation(_focusTarget.transform.position - transform.position);
+
 
 		if (!_isJumping)
 		{
@@ -139,19 +140,28 @@ public class CameraManager : MonoBehaviour
 			}
 		}
 
-		if (_focusTarget.transform.InverseTransformVector(_targetRB.velocity).z > 1)
-		{
-			transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 15);
-			//transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime);
-		}
-		else
-		{
-			transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 1.5f);
-			//transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime * 200);
-		}
+        if (GameManager.Instance._cameraGo)
+        {
+            if (_focusTarget.transform.InverseTransformVector(_targetRB.velocity).z > 1)
+            {
+                transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 15);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime);
+            }
+            else
+            {
+                transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime / 2.25f);
+                //transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime * 200);
+            }
 
-		transform.LookAt(_focusTarget.transform.position);
-		
+            if (_target._raceHasStarted)
+            {
+                transform.LookAt(Vector3.Lerp(_lookAtStart.position, _focusTarget.transform.position, Time.deltaTime * 3));
+            }
+            else
+            {
+                transform.LookAt(_lookAtStart.position);
+            }
+        }
 	}
 
 	private IEnumerator Reset(float time)
