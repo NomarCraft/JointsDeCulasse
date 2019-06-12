@@ -25,7 +25,11 @@ public class CarController : MonoBehaviour
 	[Header("Animations & FXs")]
 	public Animator _anim;
 	public ParticleSystem[] _boostFX;
+	public ParticleSystem[] _flameFX;
 	public ParticleSystem _speed_Sand;
+	public ParticleSystem[] _damageLights;
+	public ParticleSystem[] _sparkRepair;
+	
 
 	//Race
 	[Header ("Race Settings")]
@@ -185,6 +189,13 @@ public class CarController : MonoBehaviour
 
 		CheckDamage();
 
+		foreach (ParticleSystem light in _damageLights)
+		{
+			ParticleSystem.MainModule settings = light.main;
+			settings.startColor = Color.green;
+			light.GetComponentInChildren<Light>().color = Color.green;
+		}
+
 		InvokeRepeating("DisplayDamage", 2.0f, 0.5f);
 		
 	}
@@ -322,6 +333,10 @@ public class CarController : MonoBehaviour
 						if (_spotLeftLife == 0)
 						{
 							DamageSound(0);
+							ParticleSystem.MainModule settings = _damageLights[0].main;
+							settings.startColor = Color.red;
+							_damageLights[0].GetComponentInChildren<Light>().color = Color.red;
+							_spotLeft.GetComponentInChildren<ParticleSystem>().Play();
 							_carLife -= 1;
 						}
 					}
@@ -337,6 +352,10 @@ public class CarController : MonoBehaviour
 						if (_spotCenterLife == 0)
 						{
 							DamageSound(1);
+							ParticleSystem.MainModule settings = _damageLights[1].main;
+							settings.startColor = Color.red;
+							_damageLights[1].GetComponentInChildren<Light>().color = Color.red;
+							_spotCenter.GetComponentInChildren<ParticleSystem>().Play();
 							_carLife -= 1;
 						}
 					}
@@ -353,6 +372,10 @@ public class CarController : MonoBehaviour
 						if (_spotRightLife == 0)
 						{
 							DamageSound(2);
+							ParticleSystem.MainModule settings = _damageLights[2].main;
+							settings.startColor = Color.red;
+							_damageLights[2].GetComponentInChildren<Light>().color = Color.red;
+							_spotRight.GetComponentInChildren<ParticleSystem>().Play();
 							_carLife -= 1;
 						}
 					}
@@ -620,7 +643,11 @@ public class CarController : MonoBehaviour
 					if (_score1 >= _objective1)
 					{
 						_spotLeftLife = _spotLeftMaxLife;
-                        _steamLoop1Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 1
+						ParticleSystem.MainModule settings = _damageLights[0].main;
+						settings.startColor = Color.green;
+						_damageLights[0].GetComponentInChildren<Light>().color = Color.green;
+						_spotLeft.GetComponentInChildren<ParticleSystem>().Stop();
+						_steamLoop1Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 1
                     }
                     StopMiniGame1();
 					break;
@@ -628,14 +655,22 @@ public class CarController : MonoBehaviour
 					if (_score1 >= _objective1)
 					{
 						_spotCenterLife = _spotCenterMaxLife;
-                        _steamLoop2Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 2
+						ParticleSystem.MainModule settings = _damageLights[1].main;
+						settings.startColor = Color.green;
+						_damageLights[1].GetComponentInChildren<Light>().color = Color.green;
+						_spotCenter.GetComponentInChildren<ParticleSystem>().Stop();
+						_steamLoop2Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 2
                     }
                     StopMiniGame1();
 					break;
 				case 2:
 					if (_score1 >= _objective1)
 					{
+						ParticleSystem.MainModule settings = _damageLights[2].main;
+						settings.startColor = Color.green;
+						_damageLights[2].GetComponentInChildren<Light>().color = Color.green;
 						_spotRightLife = _spotRightMaxLife;
+						_spotRight.GetComponentInChildren<ParticleSystem>().Stop();
                         _steamLoop3Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);// Stop Steam 3
                     }
                     StopMiniGame1();
@@ -801,8 +836,13 @@ public class CarController : MonoBehaviour
 				boost.gameObject.SetActive(true);
 				boost.Play();
 			}
+			foreach (ParticleSystem flame in _flameFX)
+			{
+				flame.gameObject.SetActive(false);
+				flame.Stop();
+			}
 
-            _carBoostInstance.start(); // Play Sound
+			_carBoostInstance.start(); // Play Sound
         }
 	}
 
@@ -814,6 +854,11 @@ public class CarController : MonoBehaviour
 			{
 				boost.gameObject.SetActive(false);
 				boost.Stop();
+			}
+			foreach (ParticleSystem flame in _flameFX)
+			{
+				flame.gameObject.SetActive(true);
+				flame.Play();
 			}
             _carBoostInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);//Stop Sound
             _stopCarBoostInstance.start();
@@ -1109,12 +1154,15 @@ public class CarController : MonoBehaviour
 		{
 			case 0:
 				Debug.Log("0");
+				_sparkRepair[0].Play();
 				break;
 			case 1:
 				Debug.Log("1");
+				_sparkRepair[1].Play();
 				break;
 			case 2:
 				Debug.Log("2");
+				_sparkRepair[2].Play();
 				break;
 			default:
 				break;

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 
 
 // ------------- SCRIPT CHECK 21.05.2019 ----------------- //
@@ -12,6 +13,8 @@ public class CameraManager : MonoBehaviour
 	public GameObject _focusTarget;
 	private CarController _target;
 	private Rigidbody _targetRB;
+	public PostProcessProfile _postProcess;
+	public PostProcessProfile _boostPostProcess;
 
 	public float _distance = 4f;
 	//public float _shakeMagnitude;
@@ -115,12 +118,20 @@ public class CameraManager : MonoBehaviour
 		{
 			if (_target._isBoosting == false)
 			{
+				if (GetComponent<PostProcessVolume>().profile != _postProcess)
+				{
+					GetComponent<PostProcessVolume>().profile = _postProcess;
+				}
 				_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f, _height, -_distance));
 				
 			}
 
 			else if (_target._isBoosting)
 			{
+				if (GetComponent<PostProcessVolume>().profile != _boostPostProcess)
+				{
+					GetComponent<PostProcessVolume>().profile = _boostPostProcess;
+				}
 				_timeCounter += Time.deltaTime * Mathf.Pow(_trauma, 0.3f) * _traumaMultiply;
 				Vector3 shakePos = GetVect3() * _traumaMagnitude;
 				_targetPos = _focusTarget.transform.position + _focusTarget.transform.TransformDirection(new Vector3(0f , _height, -_distance) + shakePos) ;

@@ -1,0 +1,97 @@
+[LOG] System::create                           : Header version = 1.10.13. Current version = 1.10.13.
+[LOG] Manager::init                            : maxchannels = 256 studioflags = 00000006 flags 00000000 extradriverdata 0000000000000000.
+[LOG] SystemI::init                            : Initialize version=11013 (102169), maxchannels=256, flags=0x00020000
+[LOG] SystemI::setOutputInternal               : Setting output to 'FMOD WASAPI Output'
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEX): wFormatTag=0xFFFE, nChannels=2, nSamplesPerSec=48000, nAvgBytesPerSec=384000, nBlockAlign=8, wBitsPerSample=32, cbSize=22.
+[LOG] OutputWASAPI::init                       : Mix Format (WAVEFORMATEXTENSIBLE): wValidBitsPerSample=32, dwChannelMask=0x00000003, SubFormat=00000003-0000-0010-8000-00AA00389B71.
+[LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
+[LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
+[LOG] AsyncManager::init                       : manager 0000026C93A6B458 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : done
+[LOG] PlaybackSystem::init                     : 
+[LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] PlaybackSystem::init                     : done
+[LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
+[LOG] Manager::init                            : done.
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SystemI::createSound                     : filename = Build_FMOD\Desktop/Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000026C9364CA68 : node = 0000026CFD6D7520
+[LOG] SystemI::createSound                     : add node to async list : head = 0000026CB63A5DA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000026C9364CA68
+[LOG] SystemI::createSoundInternal             :     Create name='Build_FMOD\Desktop/Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 24263488
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 47456
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 0000026CFD6D7638
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='1000mods-electric-carve-official-video', format=2, channels=2, frequency=48000, lengthbytes=2813728, lengthpcm=10142462, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000026C9364CA68
+[LOG] SoundI::getSubSound                      : sound 0000026C9364CA68.  Subsound index 0 / 1
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] SoundI::release                          :  (0000026D3D0CA1C8)
+[LOG] SoundI::release                          :     Collision2 (0000026CB63A62D8)
+[LOG] SoundI::release                          :  (0000026D3D0CBA38)
+[LOG] SoundI::release                          :     Collision3 (0000026CB63A7B38)
+[LOG] SoundI::release                          :  (0000026C93459868)
+[LOG] SoundI::release                          :     Collision1 (0000026C84EC50A8)
+[LOG] SoundI::release                          :  (0000026D3D0CA8F8)
+[LOG] SoundI::release                          :     Steam1 (0000026CB63A74B8)
+[LOG] SoundI::release                          :  (0000026C9345AC88)
+[LOG] SoundI::release                          :     RepairedOK_2 (0000026CB63A6958)
+[LOG] SoundI::release                          :  (0000026D3D0C8678)
+[LOG] SoundI::release                          :     Steam3 (0000026CB63A6138)
+[LOG] SoundI::release                          : CAR_1_GRAVE_LONG (0000026D3CD71E28)
+[LOG] SoundI::release                          :     CAR_1_GRAVE_LONG (0000026C84EC6428)
+[LOG] SoundI::release                          :     CAR_1_GRAVE_LONG (0000026CFDC25D58)
+[LOG] SoundI::release                          : 1000mods-electric-carve-official-video (0000026C9364CA68)
+[LOG] SoundI::release                          :     1000mods-electric-carve-official-video (0000026CDB84F778)
+[LOG] SoundI::release                          :     1000mods-electric-carve-official-video (0000026CDB559898)
+[LOG] SoundI::release                          : wind_general_soft_low_loop_04 (0000026C81F9C968)
+[LOG] SoundI::release                          :     wind_general_soft_low_loop_04 (0000026CB63A7318)
+[LOG] SoundI::release                          :     wind_general_soft_low_loop_04 (0000026CFDC25848)
+[LOG] SoundI::release                          :  (0000026C934596F8)
+[LOG] SoundI::release                          :     Steam2 (0000026CB63A67B8)
+[LOG] SoundI::release                          :  (0000026C9345ADF8)
+[LOG] SoundI::release                          :     Klaxon2 (0000026CB63A7CD8)
+[LOG] SoundI::release                          :  (0000026D3D0C8508)
+[LOG] SoundI::release                          :     3-2-1_massive (0000026CB63A5298)
+[LOG] SoundI::release                          :  (0000026C9345A558)
+[LOG] SoundI::release                          :     Explosion2 (0000026CB63A6618)
+[LOG] SoundI::release                          :  (0000026D3D0C9D78)
+[LOG] SoundI::release                          :     Explosion3 (0000026CB63A6C98)
+[LOG] SoundI::release                          :  (0000026C934592A8)
+[LOG] SoundI::release                          :     Explosion4 (0000026CB63A7E78)
+[LOG] SoundI::release                          :  (0000026D3D0CABD8)
+[LOG] SoundI::release                          :     Explosion1 (0000026CB63A7998)
+[LOG] SoundI::release                          :  (0000026D3D0CA058)
+[LOG] SoundI::release                          :     Landing_car_1 (0000026CB63A5AB8)
+[LOG] SoundI::release                          :  (0000026C9345AF68)
+[LOG] SoundI::release                          :     Boost1_end (0000026CB63A7178)
+[LOG] SoundI::release                          :  (0000026D3D0C8DA8)
+[LOG] SoundI::release                          :     Respawn (0000026CB63A7658)
+[LOG] SoundI::release                          :  (0000026C9345A108)
+[LOG] SoundI::release                          :     rldd2 (0000026CB63A6FD8)
+[LOG] SoundI::release                          :  (0000026D3D0CAA68)
+[LOG] SoundI::release                          :     GO_massive (0000026CB63A6478)
+[LOG] Thread::callback                         : FMOD Studio update thread finished.
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
+[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6

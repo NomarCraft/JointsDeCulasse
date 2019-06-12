@@ -65,7 +65,10 @@ public class GameManager : Singleton<GameManager>
 
 	private IEnumerator StartDelay()
 	{
+		UpdateStartCounter("");
+		yield return new WaitForSeconds(5);
         _cdStartInstance.start();// Sound 3
+		UpdateStartCounter("3");
         yield return new WaitForSeconds(1);
 		UpdateStartCounter("2");
         _cdStartInstance.start();// Sound 2
