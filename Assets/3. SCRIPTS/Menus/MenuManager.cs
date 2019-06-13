@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
+
+	public GameObject _loadingScreen;
+	public Image _loadingBarFillAmount;
+
+	private float _progressAmount = 0f;
+
     [FMODUnity.EventRef]
     public string _ostMenus = "";
     FMOD.Studio.EventInstance _ostMenusInstance;
@@ -28,11 +35,15 @@ public class MenuManager : MonoBehaviour
         {
             _clickSoundInstance.start();
         }
+		if (_progressAmount != 0)
+		{
+			_loadingBarFillAmount.fillAmount = _progressAmount;
+		}
     }
 
     public void RACE_1_Player()
     {
-        LoadScene("LVLARTTEST");
+        StartCoroutine(LoadSceneAsync("LVLARTTEST"));
     }
 
     public void RACE_2_Players()
@@ -55,16 +66,31 @@ public class MenuManager : MonoBehaviour
         LoadScene("LVLARTTEST");
     }
 
-    public void LoadScene(string SceneName)
+    public AsyncOperation LoadScene(string SceneName)
     {
         _ostMenusInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         _ostMenusInstance.release();
         _clickSoundInstance.release();
-        SceneManager.LoadScene(SceneName); 
+        return SceneManager.LoadSceneAsync(SceneName); 
     }
 
     public void QuitGame()
     {
         Application.Quit();
     }
+	
+	IEnumerator LoadSceneAsync(string sceneName)
+	{
+		_loadingScreen.SetActive(true);
+		yield return new WaitForSeconds(.5f);
+
+		AsyncOperation operation = LoadScene(sceneName);
+
+		while (!operation.isDone)
+		{
+			_progressAmount = operation.progress;
+
+			yield return null;
+		}
+	}
 }
