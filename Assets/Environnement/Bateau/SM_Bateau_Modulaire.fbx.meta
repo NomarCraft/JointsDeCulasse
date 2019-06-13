@@ -3,7 +3,12 @@ guid: 6abb28a6952081a47be487da111801b0
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Boat_modulaire_initialShadingGroup1
+    second: {fileID: 2100000, guid: 2092d3c125a61e0469850245b8b22b76, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

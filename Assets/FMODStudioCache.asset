@@ -500,7 +500,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -595,7 +598,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1134,6 +1140,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 465
+--- !u!114 &-7440981833933010897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_2/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 0
 --- !u!114 &-7418280075831744562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1271,6 +1294,25 @@ MonoBehaviour:
   Max: 325
   Default: 0
   Exists: 0
+--- !u!114 &-7123028640525629858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: D:\UnityProjects\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank
+  lastModified: 636960215798421269
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 72769504
+  Exists: 1
 --- !u!114 &-7091407631566375760
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1358,7 +1400,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1522,7 +1567,7 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 72769504
-  Exists: 1
+  Exists: 0
 --- !u!114 &-6604777162168362553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1963,7 +2008,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -2157,7 +2205,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -2165,6 +2216,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 21385
+--- !u!114 &-5669398034626201170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_1/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 0
 --- !u!114 &-5627830805792752195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2252,12 +2320,15 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 4117919916201023394}
+  - {fileID: 939994971195941779}
   MinDistance: 0
   MaxDistance: 0
   Length: 6500
@@ -2481,7 +2552,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -2743,7 +2817,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -3025,7 +3102,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3229,7 +3309,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3474,6 +3557,23 @@ MonoBehaviour:
   Max: 325
   Default: 0
   Exists: 0
+--- !u!114 &-4000700190024246971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_1/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 1
 --- !u!114 &-3993727279778311152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3514,6 +3614,23 @@ MonoBehaviour:
   Max: 325
   Default: 0
   Exists: 1
+--- !u!114 &-3930544500588661718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_1/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 0
 --- !u!114 &-3879660693580371490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4162,7 +4279,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -4497,7 +4617,7 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: Build_FMOD\Desktop\Master Bank.strings.bank
-  lastModified: 636960213202687138
+  lastModified: 636959805830240783
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -4779,7 +4899,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -5031,6 +5154,25 @@ MonoBehaviour:
   Max: 325
   Default: 0
   Exists: 0
+--- !u!114 &-1535752016667505209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: D:\UnityProjects\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank
+  lastModified: 636960215798421269
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 72769504
+  Exists: 1
 --- !u!114 &-1520670098330155424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5074,6 +5216,23 @@ MonoBehaviour:
   - Name: 
     Value: 24310944
   Exists: 1
+--- !u!114 &-1487699142389381833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_2/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 0
 --- !u!114 &-1476050236319404153
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5571,7 +5730,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5709,7 +5871,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5808,7 +5973,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -2419976472286884569}
-  - {fileID: -6716595683763707164}
+  - {fileID: 984824667023338251}
   EditorEvents:
   - {fileID: -5612799004694316246}
   - {fileID: 1994683499967483504}
@@ -5840,10 +6005,10 @@ MonoBehaviour:
   - {fileID: 4925399204534470283}
   - {fileID: 904896126160244107}
   MasterBanks:
-  - {fileID: -6716595683763707164}
+  - {fileID: 984824667023338251}
   StringsBanks:
   - {fileID: -2419976472286884569}
-  stringsBankWriteTime: 636960213202687138
+  stringsBankWriteTime: 636959805830240783
   cacheVersion: 3
 --- !u!114 &25490642468165569
 MonoBehaviour:
@@ -5998,7 +6163,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -6361,6 +6529,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 842
+--- !u!114 &665183076727664895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_1/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 0
 --- !u!114 &686085025419378628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6520,7 +6705,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -6605,7 +6793,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -6636,6 +6827,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 21385
+--- !u!114 &939994971195941779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_2/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 1
 --- !u!114 &955200969272980230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6706,7 +6914,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -6714,6 +6925,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1022
+--- !u!114 &984824667023338251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: D:\UnityProjects\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank
+  lastModified: 636960215798421269
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 72769504
+  Exists: 1
 --- !u!114 &1083213786825109796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7134,12 +7364,15 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 476813855618545092}
+  - {fileID: -4000700190024246971}
   MinDistance: 0
   MaxDistance: 0
   Length: 9800
@@ -7376,7 +7609,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -7646,7 +7882,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -7976,7 +8215,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -8370,7 +8612,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -8764,7 +9009,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -8973,7 +9221,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -9307,7 +9558,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -10032,6 +10286,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 796
+--- !u!114 &7100478000228689923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_2/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 0
 --- !u!114 &7100542846874389627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10382,7 +10653,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -10498,7 +10772,10 @@ MonoBehaviour:
   - {fileID: 5481420330758633048}
   - {fileID: -8384161338130135231}
   - {fileID: -5529894188061920858}
-  - {fileID: -6716595683763707164}
+  - {fileID: 8034624265253153358}
+  - {fileID: -1535752016667505209}
+  - {fileID: -7123028640525629858}
+  - {fileID: 984824667023338251}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -10650,6 +10927,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 6500
+--- !u!114 &8034624265253153358
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master Bank.bank
+  m_EditorClassIdentifier: 
+  Path: D:\UnityProjects\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank
+  lastModified: 636960215798421269
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 72769504
+  Exists: 1
 --- !u!114 &8092175241563578737
 MonoBehaviour:
   m_ObjectHideFlags: 0
