@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 5272735009020297163}
   - component: {fileID: 3780633567246452221}
   - component: {fileID: 7443055288949635332}
+  - component: {fileID: 1977351298858514244}
   m_Layer: 0
   m_Name: Bidon_petit
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -77,3 +78,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &1977351298858514244
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9185053322606628312}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 1006625679231885655, guid: ffc423406fc051d429f22a4ff8d966b3, type: 3}

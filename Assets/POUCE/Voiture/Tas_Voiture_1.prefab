@@ -1,5 +1,89 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!64 &6936974574819005832
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8446338370194500757}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -8921432634075689042, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!64 &6658875621206666530
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8446338369908915560}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -8921432634075689042, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!64 &7724202356830111440
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8446338369802312805}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -8921432634075689042, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!64 &2368318389820541258
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8446338369761016192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -8921432634075689042, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!64 &7749770727726087284
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8446338370029331678}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -8921432634075689042, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!64 &6658096719106436385
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9090629284841358760}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -8921432634075689042, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
 --- !u!1 &8537924458055613169
 GameObject:
   m_ObjectHideFlags: 0
@@ -11,7 +95,7 @@ GameObject:
   - component: {fileID: 5196874275727711720}
   m_Layer: 0
   m_Name: Tas_Voiture_1
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,6 +131,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Carcasse_voiture_Complette (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
         type: 3}
@@ -115,6 +204,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!1 &8446338370194500757 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 438686349776565660}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4858313244058001030 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
@@ -132,6 +227,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Carcasse_voiture_Complette (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
         type: 3}
@@ -200,6 +300,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!1 &8446338369908915560 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 438686350093542497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4858313244344504187 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
@@ -217,6 +323,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Carcasse_voiture_Complette (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
         type: 3}
@@ -275,6 +386,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!1 &8446338369802312805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 438686350189708652}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4858313244454383222 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
@@ -292,6 +409,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Carcasse_voiture_Complette (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
         type: 3}
@@ -350,6 +472,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!1 &8446338369761016192 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 438686350214176905}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4858313244496726931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
@@ -367,6 +495,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Carcasse_voiture_Complette
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
         type: 3}
@@ -425,6 +558,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!1 &8446338370029331678 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 438686350482800087}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4858313244765279949 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
@@ -442,6 +581,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SM_Carcasse_voiture_Complette (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+        type: 3}
+      propertyPath: m_TagString
+      value: Obstacles
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
         type: 3}
@@ -515,6 +659,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 68a0a7ad34cd8e14698893f6a70d6d2d, type: 3}
+--- !u!1 &9090629284841358760 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,
+    type: 3}
+  m_PrefabInstance: {fileID: 939433996003368097}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5220585608399648699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 68a0a7ad34cd8e14698893f6a70d6d2d,

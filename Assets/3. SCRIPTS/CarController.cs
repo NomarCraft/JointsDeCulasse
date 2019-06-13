@@ -29,6 +29,7 @@ public class CarController : MonoBehaviour
 	public ParticleSystem _speed_Sand;
 	public ParticleSystem[] _damageLights;
 	public ParticleSystem[] _sparkRepair;
+	public ParticleSystem _fxRepairGround;
 	
 
 	//Race
@@ -297,7 +298,15 @@ public class CarController : MonoBehaviour
 
 	private void Respawn()
 	{
-		Transform respawn = GameManager.Instance._wayPoints[_currentWayPoint - 1].transform.GetComponentInChildren<RespawnPoints>().transform;
+		Transform respawn;
+		if (_currentWayPoint == 0)
+		{
+			respawn = GameManager.Instance._wayPoints[GameManager.Instance._wayPoints.Count - 1].transform.GetComponentInChildren<RespawnPoints>().transform;
+		}
+		else
+		{
+			respawn = GameManager.Instance._wayPoints[_currentWayPoint - 1].transform.GetComponentInChildren<RespawnPoints>().transform;
+		}
 		_rb.velocity = Vector3.zero;
 		_rb.angularVelocity = Vector3.zero;
 		transform.SetPositionAndRotation(respawn.position , respawn.localRotation);
@@ -532,17 +541,35 @@ public class CarController : MonoBehaviour
 		}
 		else if (_isRepairing)
 		{
-			if (Input.GetButtonUp("Spot1") || Input.GetButtonUp("Spot2") || Input.GetButtonUp("Spot3"))
+			if (_playerIndex == 1)
 			{
-				//Stop All Repair fonctions
-				if (_miniGame1IsOn)
+				if (Input.GetButtonUp("Spot1") || Input.GetButtonUp("Spot2") || Input.GetButtonUp("Spot3"))
 				{
-					StopMiniGame1();
+					//Stop All Repair fonctions
+					if (_miniGame1IsOn)
+					{
+						StopMiniGame1();
+					}
+					_isRepairing = false;
+					CheckDamage();
+					StopCoroutine(_repair);
 				}
-				_isRepairing = false;
-				CheckDamage();
-				StopCoroutine(_repair);
 			}
+			if (_playerIndex == 2)
+			{
+				if (Input.GetButtonUp("Spot12") || Input.GetButtonUp("Spot22") || Input.GetButtonUp("Spot32"))
+				{
+					//Stop All Repair fonctions
+					if (_miniGame1IsOn)
+					{
+						StopMiniGame1();
+					}
+					_isRepairing = false;
+					CheckDamage();
+					StopCoroutine(_repair);
+				}
+			}
+
 		}
 	}
 
@@ -831,6 +858,10 @@ public class CarController : MonoBehaviour
 			_anim.SetBool("Stop_Grab", false);
 			if (_anim.GetCurrentAnimatorStateInfo(0).IsName("Grab"))
 			{
+				if (_fxRepairGround.isStopped)
+				{
+					_fxRepairGround.Play();
+				}
 				Debug.Log("grab");
 				_grabingTools = true;
 				_companion.transform.position = _grabSpot.position;
@@ -838,6 +869,10 @@ public class CarController : MonoBehaviour
 		}
 		else
 		{
+			if (_fxRepairGround.isPlaying)
+			{
+				_fxRepairGround.Stop();
+			}
 			_anim.SetBool("Start_Grab", false);
 			_anim.SetBool("Stop_Grab", true);
 			_grabingTools = false;

@@ -1564,9 +1564,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4829013497894427409}
+  - component: {fileID: 649212006540362460}
   m_Layer: 0
   m_Name: Conteneur_bleu
-  m_TagString: Untagged
+  m_TagString: Obstacles
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1601,6 +1602,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &649212006540362460
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8457553288970545410}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.352249, y: 3.605688, z: 2.9784565}
+  m_Center: {x: -0.008804321, y: 1.302844, z: 0.04650402}
 --- !u!1 &8579068247386801275
 GameObject:
   m_ObjectHideFlags: 0

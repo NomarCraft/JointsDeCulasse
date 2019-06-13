@@ -1,0 +1,149 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1983393087165554646
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 9119932604023472600, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_Name
+      value: Aura Camera (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472600, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472550, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472550, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 10.96
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 42.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.0025997101
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.98780334
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.15479884
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.016589368
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 17.813002
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -178.076
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472551, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472601, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: frustumSettings.baseSettings
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472601, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: frustumSettings.qualitySettings
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _focusTarget
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _carLandingSound
+      value: event:/Landing2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _postProcess
+      value: 
+      objectReference: {fileID: 11400000, guid: 97dc92890b02fb440957f23ee7e0eb1a,
+        type: 2}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _boostPostProcess
+      value: 
+      objectReference: {fileID: 11400000, guid: 05d9ef1049cf7c644a98e45429d73c45,
+        type: 2}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _distance
+      value: 9.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _trauma
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _traumaMagnitude
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _traumaMultiply
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472546, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: _lookAtStart
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 9119932604023472549, guid: ae542aa444a081549afc153f513a553e,
+        type: 3}
+      propertyPath: sharedProfile
+      value: 
+      objectReference: {fileID: 11400000, guid: 97dc92890b02fb440957f23ee7e0eb1a,
+        type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ae542aa444a081549afc153f513a553e, type: 3}
