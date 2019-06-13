@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
 {
 	public CarController _player1;
 	public CarController _player2;
+	public int _lapNumber = 5;
 
 	[SerializeField] private TextMeshProUGUI _startCounter;
 	//[SerializeField] private TextMeshProUGUI _pauseScreen;
@@ -50,10 +51,18 @@ public class GameManager : Singleton<GameManager>
 
 	private void Update()
 	{
-		if (_player1._currentLap == 5) /*|| _player2._currentLap == 5)*/
+		if (_player2 != null)
+		{
+			if (_player1._currentLap == _lapNumber)
+			{
+				StartCoroutine(EndGame());
+			}
+		}
+		else if (_player1._currentLap == _lapNumber || _player2._currentLap == _lapNumber)
 		{
 			StartCoroutine(EndGame());
 		}
+
 		if (_player2 != null)
 		{
 			CheckPositions();
@@ -279,7 +288,7 @@ public class GameManager : Singleton<GameManager>
 			}
 		}
 
-		yield return new WaitForSeconds(10);
+		yield return new WaitForSeconds(20);
 		//SceneManager.LoadScene("LevelBlockOut", LoadSceneMode.Single);
 	}
     public void QuitMenu()
