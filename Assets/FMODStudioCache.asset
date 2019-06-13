@@ -2334,7 +2334,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 2740285462906659168}
+  - {fileID: -2994311641015348341}
   MinDistance: 0
   MaxDistance: 0
   Length: 6500
@@ -4202,6 +4202,23 @@ MonoBehaviour:
   Max: 325
   Default: 0
   Exists: 0
+--- !u!114 &-2994311641015348341
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_2/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 1
 --- !u!114 &-2942030385033382886
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4628,11 +4645,11 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.strings.bank
   m_EditorClassIdentifier: 
   Path: Build_FMOD\Desktop\Master Bank.strings.bank
-  lastModified: 636959805830240783
+  lastModified: 636960624110782334
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 1912
+    Value: 1950
   Exists: 1
 --- !u!114 &-2413138470120596304
 MonoBehaviour:
@@ -4651,6 +4668,29 @@ MonoBehaviour:
   Max: 325
   Default: 0
   Exists: 0
+--- !u!114 &-2409173740827792586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/WIN_OST
+  m_EditorClassIdentifier: 
+  Path: event:/WIN_OST
+  guid: f9e8bd1291509f498c3e79bbfaf96e24
+  Banks:
+  - {fileID: -2333712835566975994}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 153416
 --- !u!114 &-2355371824853815063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4687,11 +4727,11 @@ MonoBehaviour:
   m_Name: bank:/Master Bank.bank
   m_EditorClassIdentifier: 
   Path: D:\UnityProjects\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank
-  lastModified: 636960215798421269
+  lastModified: 636960624110672393
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 72769504
+    Value: 74781696
   Exists: 1
 --- !u!114 &-2286929957710939261
 MonoBehaviour:
@@ -6054,11 +6094,12 @@ MonoBehaviour:
   - {fileID: -5469521442387837979}
   - {fileID: 4925399204534470283}
   - {fileID: 904896126160244107}
+  - {fileID: -2409173740827792586}
   MasterBanks:
   - {fileID: -2333712835566975994}
   StringsBanks:
   - {fileID: -2419976472286884569}
-  stringsBankWriteTime: 636959805830240783
+  stringsBankWriteTime: 636960624110782334
   cacheVersion: 3
 --- !u!114 &25490642468165569
 MonoBehaviour:
@@ -7119,6 +7160,23 @@ MonoBehaviour:
   Max: 325
   Default: 0
   Exists: 1
+--- !u!114 &1313990872090053917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/CAR_1/Velocity
+  m_EditorClassIdentifier: 
+  Name: Velocity
+  Min: 0
+  Max: 325
+  Default: 0
+  Exists: 1
 --- !u!114 &1316709445959632088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7444,7 +7502,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 3892028179956786368}
+  - {fileID: 1313990872090053917}
   MinDistance: 0
   MaxDistance: 0
   Length: 9800

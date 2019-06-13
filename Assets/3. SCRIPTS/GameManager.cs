@@ -9,6 +9,7 @@ public class GameManager : Singleton<GameManager>
 	public CarController _player1;
 	public CarController _player2;
 	public int _lapNumber = 5;
+	private bool _endGame = false;
 
 	[SerializeField] private TextMeshProUGUI _startCounter;
 	//[SerializeField] private TextMeshProUGUI _pauseScreen;
@@ -32,14 +33,19 @@ public class GameManager : Singleton<GameManager>
     [FMODUnity.EventRef]
     public string _backGround = "";
     FMOD.Studio.EventInstance _backGroundInstance;
+	[FMODUnity.EventRef]
+	public string _winOst = "";
+	FMOD.Studio.EventInstance _winOstInstance;
 
-    private void Start()
+	private void Start()
 	{
         _cdStartInstance = FMODUnity.RuntimeManager.CreateInstance(_cdStart);
         _goStartInstance = FMODUnity.RuntimeManager.CreateInstance(_goStart);
         _ostInstance = FMODUnity.RuntimeManager.CreateInstance(_ost);
         _backGroundInstance = FMODUnity.RuntimeManager.CreateInstance(_backGround);
-        _backGroundInstance.start();
+		_winOstInstance = FMODUnity.RuntimeManager.CreateInstance(_winOst);
+		_backGroundInstance.start();
+		Debug.Log("bite");
 
         StartCoroutine(StartDelay());
 
@@ -51,16 +57,21 @@ public class GameManager : Singleton<GameManager>
 
 	private void Update()
 	{
-		if (_player2 == null)
+		if (!_endGame)
 		{
-			if (_player1._currentLap == _lapNumber)
+			if (_player2 == null)
 			{
+				if (_player1._currentLap == _lapNumber)
+				{
+					_winOstInstance.start();
+					StartCoroutine(EndGame());
+				}
+			}
+			else if (_player1._currentLap == _lapNumber || _player2._currentLap == _lapNumber)
+			{
+				_winOstInstance.start();
 				StartCoroutine(EndGame());
 			}
-		}
-		else if (_player1._currentLap == _lapNumber || _player2._currentLap == _lapNumber)
-		{
-			StartCoroutine(EndGame());
 		}
 
 		if (_player2 != null)
@@ -271,6 +282,7 @@ public class GameManager : Singleton<GameManager>
 
 	private IEnumerator EndGame()
 	{
+		_endGame = true;
 		if (_player1._positionInRace == 1)
 		{
 			_player1._uim._WIN.gameObject.SetActive(true);
@@ -288,8 +300,11 @@ public class GameManager : Singleton<GameManager>
 			}
 		}
 
-		yield return new WaitForSeconds(20);
-		//SceneManager.LoadScene("LevelBlockOut", LoadSceneMode.Single);
+		
+		_ostInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		_ostInstance.release();
+		yield return new WaitForSeconds(40);
+		QuitMenu();
 	}
     public void QuitMenu()
     {
@@ -307,8 +322,11 @@ public class GameManager : Singleton<GameManager>
         _ostInstance.release();
         _backGroundInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
         _backGroundInstance.release();
+		_winOstInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		_winOstInstance.release();
 
-        for (int i = 0, length = _player1._soundInstances.Count; i < length; i++)
+
+		for (int i = 0, length = _player1._soundInstances.Count; i < length; i++)
         {
             _player1._soundInstances[i].stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
             _player1._soundInstances[i].release();
