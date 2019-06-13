@@ -11,7 +11,6 @@ public class MenuDisparait : MonoBehaviour
 
     public GameObject playButton;
     public GameObject inputButton;
-    public GameObject settingButton;
     public GameObject creditButton;
     public GameObject quitButton;
     public GameObject fenders;
@@ -26,7 +25,6 @@ public class MenuDisparait : MonoBehaviour
                 pressStart.SetActive(true);
                 playButton.SetActive(false);
                 inputButton.SetActive(false);
-                settingButton.SetActive(false);
                 creditButton.SetActive(false);
                 quitButton.SetActive(false);
                 fenders.SetActive(false);
@@ -39,7 +37,6 @@ public class MenuDisparait : MonoBehaviour
                 pressStart.SetActive(false);
                 playButton.SetActive(true);
                 inputButton.SetActive(true);
-                settingButton.SetActive(true);
                 creditButton.SetActive(true);
                 quitButton.SetActive(true);
                 fenders.SetActive(true);

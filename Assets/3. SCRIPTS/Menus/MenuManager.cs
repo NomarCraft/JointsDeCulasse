@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour
 {
-
 	public GameObject _loadingScreen;
 	public Image _loadingBarFillAmount;
 
@@ -33,6 +32,7 @@ public class MenuManager : MonoBehaviour
     {
         if (Input.GetButton("Boost") || Input.GetButton("Start1") || Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0)
         {
+
             _clickSoundInstance.start();
         }
 		if (_progressAmount != 0)
