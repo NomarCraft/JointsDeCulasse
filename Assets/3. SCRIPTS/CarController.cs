@@ -557,7 +557,7 @@ public class CarController : MonoBehaviour
 				break;
 			case 1:
 				StartMiniGame1(1);
-				_uim._buttonY.gameObject.SetActive(false);
+				_uim._buttonA.gameObject.SetActive(false);
 				break;
 			case 2:
 				StartMiniGame1(2);
@@ -1007,15 +1007,19 @@ public class CarController : MonoBehaviour
 
 	private void Steer () // OK
 	{
-		float steerDamping = _currentSpeed / 125;
+		float steerDamping = _currentSpeed / 120;
 
 		foreach (WheelCollider wheel in _steeringWheels)
 		{
 			if (CheckGround(_throttleWheels))
 			{
-				if (_currentSpeed < 0.5f)
+				if (_currentSpeed < -0.5f)
 				{
 					wheel.steerAngle = _maxTurnAngle * _im._steer * 4;
+				}
+				else if (_currentSpeed > 0 && _currentSpeed < 10)
+				{
+					wheel.steerAngle = 0;
 				}
 				else
 				{
