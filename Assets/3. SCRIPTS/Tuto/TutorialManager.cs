@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TutorialManager : MonoBehaviour
 {
 
     public List<Tutorials> Tutorials = new List<Tutorials>();
 
-    public Text expText;
+    public TextMeshProUGUI expText;
 
 
     private static TutorialManager instance;
@@ -66,7 +67,7 @@ public class TutorialManager : MonoBehaviour
 
     public void CompletedAllTutorials()
     {
-        expText.text = "You have completed all the tutorials , hourra";
+        expText.text = "Explique le boost scripts TutoManager";
 
         // Loadnextscene
     }

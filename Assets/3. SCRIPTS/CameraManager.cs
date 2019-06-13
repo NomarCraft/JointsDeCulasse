@@ -149,8 +149,15 @@ public class CameraManager : MonoBehaviour
             }
             else
             {
-                transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime / 2.25f);
-                //transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime * 200);
+                if (GameManager.Instance._isTuto)
+                {
+                    transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime * 1.5f);
+                }
+                else
+                {
+                    transform.position = Vector3.Lerp(transform.position, _targetPos, Time.deltaTime / 2.25f);
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, _lookAtTarget, Time.deltaTime * 200);
+                }
             }
 
             if (_target._raceHasStarted)

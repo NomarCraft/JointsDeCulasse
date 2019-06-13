@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
 
 	private int _playerInd;
     public bool _cameraGo = false;
+    public bool _isTuto = false;
 
     [FMODUnity.EventRef]
     public string _cdStart = "";
@@ -67,9 +68,16 @@ public class GameManager : Singleton<GameManager>
 	private IEnumerator StartDelay()
 	{
         UpdateStartCounter("");
-        yield return new WaitForSeconds(3);
-        _cameraGo = true;
-		yield return new WaitForSeconds(9);
+        if (_isTuto)
+        {
+            _cameraGo = true;
+        }
+        else
+        {
+            yield return new WaitForSeconds(3);
+            _cameraGo = true;
+            yield return new WaitForSeconds(9);
+        }
         _cdStartInstance.start();// Sound 3
 		UpdateStartCounter("3");
         yield return new WaitForSeconds(1);

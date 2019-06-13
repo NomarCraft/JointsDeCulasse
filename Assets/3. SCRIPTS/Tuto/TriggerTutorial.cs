@@ -10,9 +10,11 @@ public class TriggerTutorial : Tutorials
 
     public Transform HitTransform;
 
+    public bool active;
+
     public override void CheckIfHappeneing()
     {
-        
+
         isCurrentTutorial = true;
     }
     public void OnTriggerEnter(Collider other)
@@ -21,9 +23,10 @@ public class TriggerTutorial : Tutorials
             return;
         if (other.transform == HitTransform)
         {
+
             TutorialManager.Instance.CompletedTutorial();
             isCurrentTutorial = false;
-            Debug.Log("Mange");
+   
         }
         else if (other.GetComponentInParent<Transform>() == HitTransform )
         {
@@ -31,4 +34,7 @@ public class TriggerTutorial : Tutorials
             isCurrentTutorial = false;
         }
     }
+
+
+
 }
