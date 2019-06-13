@@ -51,7 +51,7 @@ public class GameManager : Singleton<GameManager>
 
 	private void Update()
 	{
-		if (_player2 != null)
+		if (_player2 == null)
 		{
 			if (_player1._currentLap == _lapNumber)
 			{
