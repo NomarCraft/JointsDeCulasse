@@ -43,27 +43,27 @@ public class MenuManager : MonoBehaviour
 
     public void RACE_1_Player()
     {
-        StartCoroutine(LoadSceneAsync("LVLARTTEST"));
+        StartCoroutine(LoadSceneAsync("LVL1PLAYER"));
     }
 
     public void RACE_2_Players()
     {
-        LoadScene("LVLARTTEST");
+        StartCoroutine(LoadSceneAsync("LVL2PLAYER"));
     }
 
     public void RACE_4_Players()
     {
-        LoadScene("LVLARTTEST");
+		StartCoroutine(LoadSceneAsync("LVLARTTEST"));
     }
 
     public void TUTO_1_Players()
     {
-        LoadScene("LVLARTTEST");
+		StartCoroutine(LoadSceneAsync("TUTORIELP1"));
     }
 
     public void TUTO_2_Players()
     {
-        LoadScene("LVLARTTEST");
+		StartCoroutine(LoadSceneAsync("TUTORIEL"));
     }
 
     public AsyncOperation LoadScene(string SceneName)

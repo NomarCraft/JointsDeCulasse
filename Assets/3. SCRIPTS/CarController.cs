@@ -35,6 +35,7 @@ public class CarController : MonoBehaviour
 	//Race
 	[Header ("Race Settings")]
 	public int _playerIndex;
+	public bool _isPlayingSolo = false;
 	[HideInInspector] public bool _raceHasStarted = false;
 	[HideInInspector] public int _positionInRace;
 	public int _currentLap = 0;
@@ -941,44 +942,88 @@ public class CarController : MonoBehaviour
 
 			else
 			{
-				if (_im._boost == true && _im._boostComp == true && _boostAmount > 50f && _carLife >= 3)
+				if (!_isPlayingSolo)
 				{
-					_isBoosting = true;
-					StartBoost();
-					wheel.brakeTorque = 0;
-					wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
-				}
-				else
-				{
-					_isBoosting = false;
-					StopBoost();
+					if (_im._boost == true && _im._boostComp == true && _boostAmount > 50f && _carLife >= 3)
+					{
+						_isBoosting = true;
+						StartBoost();
+						wheel.brakeTorque = 0;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
+					}
+					else
+					{
+						_isBoosting = false;
+						StopBoost();
 
-					if (_currentSpeed < 100)
-					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.75f;
-						wheel.brakeTorque = 0;
+						if (_currentSpeed < 100)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.75f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 100 && _currentSpeed < 170 && _carLife > 0)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.25f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 170 && _currentSpeed < 225 && _carLife > 1)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.00f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 225 && _currentSpeed < 300 && _carLife > 1)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.75f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 300 && _carLife > 2)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.00f;
+							wheel.brakeTorque = 0;
+						}
 					}
-					else if (_currentSpeed > 100 && _currentSpeed < 170 && _carLife > 0)
+				}
+				else if (_isPlayingSolo)
+				{
+					if ((_im._boost == true && _boostAmount > 50f && _carLife >= 3))
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.25f;
+						_isBoosting = true;
+						StartBoost();
 						wheel.brakeTorque = 0;
+						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime) * 4f;
 					}
-					else if (_currentSpeed > 170 && _currentSpeed < 225 && _carLife > 1)
+					else
 					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.00f;
-						wheel.brakeTorque = 0;
+						_isBoosting = false;
+						StopBoost();
+
+						if (_currentSpeed < 100)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.75f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 100 && _currentSpeed < 170 && _carLife > 0)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.25f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 170 && _currentSpeed < 225 && _carLife > 1)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 2.00f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 225 && _currentSpeed < 300 && _carLife > 1)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.75f;
+							wheel.brakeTorque = 0;
+						}
+						else if (_currentSpeed > 300 && _carLife > 2)
+						{
+							wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.00f;
+							wheel.brakeTorque = 0;
+						}
 					}
-					else if (_currentSpeed > 225 && _currentSpeed < 300 && _carLife > 1)
-					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.75f;
-						wheel.brakeTorque = 0;
-					}
-					else if (_currentSpeed > 300 && _carLife > 2)
-					{
-						wheel.motorTorque = (_strenghtCoefficient * Time.deltaTime * _im._throttle) * 1.00f;
-						wheel.brakeTorque = 0;
-					}
-				}                                                     
+				}                                           
 			}
 			ClockRotation(_currentSpeed);
 

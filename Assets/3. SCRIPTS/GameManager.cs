@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -209,6 +210,7 @@ public class GameManager : Singleton<GameManager>
 		_playerInd = playerInd;
 		//_pauseScreen.gameObject.SetActive(true);
 		_pauseCanvas.SetActive(true);
+		EventSystem.current.SetSelectedGameObject(EventSystem.current.firstSelectedGameObject);
         _ostInstance.setPaused(true);// Stop OST
         //_player1._carEngineInstance.setPaused(true);
 
@@ -309,7 +311,7 @@ public class GameManager : Singleton<GameManager>
     public void QuitMenu()
     {
         KillAllSounds();
-        SceneManager.LoadScene("Menu", LoadSceneMode.Single);
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
     }
 
     private void KillAllSounds()

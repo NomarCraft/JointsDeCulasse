@@ -283,10 +283,10 @@ MonoBehaviour:
     value: 100
   lift:
     overrideState: 1
-    value: {x: 1, y: 0.8598107, z: 0.8941028, w: 0}
+    value: {x: 1, y: 0.9624667, z: 0.94853926, w: 0}
   gamma:
     overrideState: 1
-    value: {x: 1, y: 0.8278331, z: 0.7331687, w: 0}
+    value: {x: 0.9175117, y: 1, z: 0.94689214, w: 0}
   gain:
     overrideState: 0
     value: {x: 0.99671704, y: 1, z: 0.67759144, w: 0}

@@ -11,4 +11,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Les_Tests/LVLARTTEST.unity
     guid: ffe03736409f13647b1354cb316883ff
+  - enabled: 1
+    path: Assets/Scenes/Les_Tests/LVL2PLAYER.unity
+    guid: 15e46fdc44e4e8b4eb40a6a2ea7fead3
+  - enabled: 1
+    path: Assets/Scenes/Les_Tests/LVL1PLAYER.unity
+    guid: 5f585ca9bea1caf44b2937d34a694cd7
+  - enabled: 1
+    path: Assets/Scenes/Les_Tests/TUTORIEL.unity
+    guid: d9c49482340e1a94ab71c4039000f55f
+  - enabled: 1
+    path: Assets/Scenes/Les_Tests/TUTORIELP1.unity
+    guid: f4b9e235d878d834b85849570fceaf21
   m_configObjects: {}
