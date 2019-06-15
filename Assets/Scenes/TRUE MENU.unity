@@ -1066,7 +1066,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Inputs
+  m_text: Controls
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6f1d04c0b8497284c9fc0b4f744118c3, type: 2}
   m_sharedMaterial: {fileID: 6243372125175289179, guid: 6f1d04c0b8497284c9fc0b4f744118c3,
@@ -1550,11 +1550,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4350092526170920095, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
-        type: 3}
-      propertyPath: m_Name
-      value: Rock_Desert_2
-      objectReference: {fileID: 0}
     - target: {fileID: 4350092526170920088, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1624,6 +1619,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 572.1761
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350092526170920095, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
+        type: 3}
+      propertyPath: m_Name
+      value: Rock_Desert_2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85, type: 3}
@@ -1792,11 +1792,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5850263120856732214, guid: 706e474a9e05f9843a086cca1c5215b1,
-        type: 3}
-      propertyPath: m_Name
-      value: Route1
-      objectReference: {fileID: 0}
     - target: {fileID: 9088952781748088759, guid: 706e474a9e05f9843a086cca1c5215b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1866,6 +1861,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.8073
+      objectReference: {fileID: 0}
+    - target: {fileID: 5850263120856732214, guid: 706e474a9e05f9843a086cca1c5215b1,
+        type: 3}
+      propertyPath: m_Name
+      value: Route1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 706e474a9e05f9843a086cca1c5215b1, type: 3}
@@ -3456,7 +3456,7 @@ MonoBehaviour:
   overrideColor: 0
   overridingColor: {r: 1, g: 1, b: 1, a: 1}
   useShadow: 1
-  shadowMapRenderTexture: {fileID: 1677903567}
+  shadowMapRenderTexture: {fileID: 1225064046}
   useCookie: 1
   cookieMapRenderTexture: {fileID: 0}
   enableOutOfPhaseColor: 0
@@ -4269,29 +4269,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 510441573}
   m_CullTransparentMesh: 0
---- !u!114 &517342129
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
-  m_Name: New Aura Base Settings
-  m_EditorClassIdentifier: 
-  useDensity: 1
-  density: 0.25
-  useScattering: 1
-  scattering: 0.5
-  useAmbientLighting: 1
-  ambientLightingStrength: 1
-  useColor: 0
-  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
-  colorStrength: 1
-  useExtinction: 0
-  extinction: 0.75
 --- !u!4 &529454530 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 27a552983a964544ab2a49e4462d174d,
@@ -7017,7 +6994,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Perez Martin
+  m_text: Martin Perez
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6f1d04c0b8497284c9fc0b4f744118c3, type: 2}
   m_sharedMaterial: {fileID: 6243372125175289179, guid: 6f1d04c0b8497284c9fc0b4f744118c3,
@@ -7650,7 +7627,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 'Bazaud Marco '
+  m_text: Marco Bazaud
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6f1d04c0b8497284c9fc0b4f744118c3, type: 2}
   m_sharedMaterial: {fileID: 6243372125175289179, guid: 6f1d04c0b8497284c9fc0b4f744118c3,
@@ -7720,9 +7697,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 875129202}
-    characterCount: 13
+    characterCount: 12
     spriteCount: 0
-    spaceCount: 2
+    spaceCount: 1
     wordCount: 2
     linkCount: 0
     lineCount: 1
@@ -8279,11 +8256,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4350092526170920095, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
-        type: 3}
-      propertyPath: m_Name
-      value: Rock_Desert_2 (1)
-      objectReference: {fileID: 0}
     - target: {fileID: 4350092526170920088, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8353,6 +8325,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 572.1761
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350092526170920095, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
+        type: 3}
+      propertyPath: m_Name
+      value: Rock_Desert_2 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85, type: 3}
@@ -8491,7 +8468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -358}
+  m_AnchoredPosition: {x: 232, y: -362}
   m_SizeDelta: {x: 669.9, y: 64.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1005676328
@@ -8514,7 +8491,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Press Start to Continue
+  m_text: press start
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6f1d04c0b8497284c9fc0b4f744118c3, type: 2}
   m_sharedMaterial: {fileID: 6243372125175289179, guid: 6f1d04c0b8497284c9fc0b4f744118c3,
@@ -8524,7 +8501,7 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 1879048191
   m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
@@ -8581,13 +8558,13 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: 345.88593, w: 0}
   m_textInfo:
     textComponent: {fileID: 1005676328}
-    characterCount: 23
+    characterCount: 11
     spriteCount: 0
-    spaceCount: 3
-    wordCount: 4
+    spaceCount: 1
+    wordCount: 2
     linkCount: 0
     lineCount: 1
     pageCount: 1
@@ -8751,6 +8728,29 @@ RenderTexture:
     m_WrapW: 1
   m_Dimension: 2
   m_VolumeDepth: 1
+--- !u!114 &1028604499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59306422a2ca4454aabce3daa79c3334, type: 3}
+  m_Name: New Aura Base Settings
+  m_EditorClassIdentifier: 
+  useDensity: 1
+  density: 0.25
+  useScattering: 1
+  scattering: 0.5
+  useAmbientLighting: 1
+  ambientLightingStrength: 1
+  useColor: 0
+  color: {r: 0, g: 0.5, b: 0.5, a: 0.5}
+  colorStrength: 1
+  useExtinction: 0
+  extinction: 0.75
 --- !u!1 &1053707308
 GameObject:
   m_ObjectHideFlags: 0
@@ -9901,6 +9901,40 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!84 &1225064046
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 'Directional Light : Shadow Map Render Texture'
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  serializedVersion: 3
+  m_Width: 256
+  m_Height: 256
+  m_AntiAliasing: 1
+  m_DepthFormat: 0
+  m_ColorFormat: 52
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 0
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
 --- !u!1 &1243775646
 GameObject:
   m_ObjectHideFlags: 0
@@ -9929,7 +9963,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 2014667593}
   m_Father: {fileID: 109450279}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9958,7 +9993,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Marechal Raphael
+  m_text: Raphael Marechal
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6f1d04c0b8497284c9fc0b4f744118c3, type: 2}
   m_sharedMaterial: {fileID: 6243372125175289179, guid: 6f1d04c0b8497284c9fc0b4f744118c3,
@@ -10042,7 +10077,7 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_subTextObjects:
   - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 2014667594}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -10574,11 +10609,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4350092526170920095, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
-        type: 3}
-      propertyPath: m_Name
-      value: Rock_Desert_2 (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 4350092526170920088, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10648,6 +10678,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 572.1761
+      objectReference: {fileID: 0}
+    - target: {fileID: 4350092526170920095, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85,
+        type: 3}
+      propertyPath: m_Name
+      value: Rock_Desert_2 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d2d8c3a9c783df4e86246d0a0b1ca85, type: 3}
@@ -11935,40 +11970,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!84 &1677903567
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 'Directional Light : Shadow Map Render Texture'
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  serializedVersion: 3
-  m_Width: 256
-  m_Height: 256
-  m_AntiAliasing: 1
-  m_DepthFormat: 0
-  m_ColorFormat: 52
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 0
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
 --- !u!1 &1686082101
 GameObject:
   m_ObjectHideFlags: 0
@@ -14673,6 +14674,80 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1989318404}
+  m_CullTransparentMesh: 0
+--- !u!1 &2014667592
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014667593}
+  - component: {fileID: 2014667595}
+  - component: {fileID: 2014667594}
+  m_Layer: 5
+  m_Name: TMP SubMeshUI [LiberationSans SDF Material]
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2014667593
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014667592}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1243775647}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &2014667594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014667592}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 058cba836c1846c3aa1c5fd2e28aea77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_spriteAsset: {fileID: 0}
+  m_material: {fileID: 0}
+  m_sharedMaterial: {fileID: 0}
+  m_isDefaultMaterial: 0
+  m_padding: 1.25
+  m_canvasRenderer: {fileID: 2014667595}
+  m_TextComponent: {fileID: 1243775648}
+  m_materialReferenceIndex: 1
+--- !u!222 &2014667595
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014667592}
   m_CullTransparentMesh: 0
 --- !u!1 &2018628770
 GameObject:
