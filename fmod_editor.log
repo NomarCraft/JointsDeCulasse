@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 00000255502B9B48 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 00000222F7B33078 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -15,56 +15,11 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SoundI::release                          :  (000002553DC7A4E8)
-[LOG] SoundI::release                          :     Collision2 (0000025539D06CE8)
-[LOG] SoundI::release                          :  (000002553DC7B908)
-[LOG] SoundI::release                          :     Collision3 (0000025539D07B88)
-[LOG] SoundI::release                          :  (000002555057F218)
-[LOG] SoundI::release                          :     Collision1 (00000255365D6DF8)
-[LOG] SoundI::release                          :  (000002553DC7AD88)
-[LOG] SoundI::release                          :     Steam1 (0000025539D069A8)
-[LOG] SoundI::release                          :  (000002553DC7BD58)
-[LOG] SoundI::release                          :     RepairedOK_2 (0000025539D05FE8)
-[LOG] SoundI::release                          :  (000002553DC7AC18)
-[LOG] SoundI::release                          :     Steam3 (0000025539D06E88)
-[LOG] SoundI::release                          : CAR_1_GRAVE_LONG (000002553E142FC8)
-[LOG] SoundI::release                          :     CAR_1_GRAVE_LONG (00000255365D72D8)
-[LOG] SoundI::release                          :     CAR_1_GRAVE_LONG (000002553E143EF8)
-[LOG] SoundI::release                          : wind_general_soft_low_loop_04 (000002553E144AC8)
-[LOG] SoundI::release                          :     wind_general_soft_low_loop_04 (0000025515E47EE8)
-[LOG] SoundI::release                          :     wind_general_soft_low_loop_04 (000002553E143688)
-[LOG] SoundI::release                          :  (000002553DC7C8D8)
-[LOG] SoundI::release                          :     Steam2 (0000025539D079E8)
-[LOG] SoundI::release                          :  (000002553DC7CD28)
-[LOG] SoundI::release                          :     Klaxon2 (00000255365D7C98)
-[LOG] SoundI::release                          :  (000002553DC7A098)
-[LOG] SoundI::release                          :     Hammer4 (0000025539D06808)
-[LOG] SoundI::release                          :  (000002553DC7AAA8)
-[LOG] SoundI::release                          :     Hammer1 (0000025515E483C8)
-[LOG] SoundI::release                          :  (000002553DC7C038)
-[LOG] SoundI::release                          :     Hammer2 (0000025539D07368)
-[LOG] SoundI::release                          :  (000002553DC7BBE8)
-[LOG] SoundI::release                          :     Hammer3 (0000025539D07D28)
-[LOG] SoundI::release                          :  (000002553DC7C488)
-[LOG] SoundI::release                          :     3-2-1_massive (0000025515E48228)
-[LOG] SoundI::release                          :  (000002553DC7D5C8)
-[LOG] SoundI::release                          :     Explosion2 (0000025539D07848)
-[LOG] SoundI::release                          :  (000002553DC7A208)
-[LOG] SoundI::release                          :     Explosion3 (0000025539D07028)
-[LOG] SoundI::release                          :  (000002553DC7D008)
-[LOG] SoundI::release                          :     Explosion4 (00000255365D6298)
-[LOG] SoundI::release                          :  (000002553DC7C768)
-[LOG] SoundI::release                          :     Explosion1 (0000025539D07508)
-[LOG] SoundI::release                          :  (000002553DC7B628)
-[LOG] SoundI::release                          :     Landing_car_1 (0000025539D06B48)
-[LOG] SoundI::release                          :  (000002553DC7CA48)
-[LOG] SoundI::release                          :     Boost1_end (00000255365D6438)
-[LOG] SoundI::release                          :  (000002553DC7BA78)
-[LOG] SoundI::release                          :     Respawn (0000025539D076A8)
-[LOG] SoundI::release                          :  (000002553DC7BEC8)
-[LOG] SoundI::release                          :     rldd2 (0000025539D064C8)
-[LOG] SoundI::release                          :  (000002553DC7B798)
-[LOG] SoundI::release                          :     GO_massive (0000025539D071C8)
+[LOG] SoundI::release                          : Menus_1 (0000022319A49F68)
+[LOG] SoundI::release                          :     Menus_1 (00000223275CA828)
+[LOG] SoundI::release                          :     Menus_1 (0000022319A4A988)
+[LOG] SoundI::release                          :  (000002228287CDA8)
+[LOG] SoundI::release                          :     2 (00000223275CBBA8)
 [LOG] Thread::callback                         : FMOD Studio update thread finished.
 [LOG] Thread::callback                         : FMOD Studio bank load thread finished.
 [LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
@@ -82,3 +37,12 @@
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
+[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
+[LOG] LiveUpdate::release                      : 
+[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
+[LOG] Thread::callback                         : FMOD stream thread finished.
+[LOG] Thread::callback                         : FMOD mixer thread finished.
+[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
+[LOG] Thread::callback                         : FMOD file thread finished.
+[LOG] SystemI::close                           : Closed.
