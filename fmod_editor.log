@@ -7,7 +7,7 @@
 [LOG] OutputWASAPI::init                       : Output buffer size: 4096 samples, latency: 0.00ms, period: 10.00ms, DSP buffer: 1024 * 4
 [LOG] Thread::initThread                       : Init FMOD stream thread. Priority: 2, Stack Size: 65536, Semaphore: No, Sleep Time: 10, Looping: Yes.
 [LOG] Thread::initThread                       : Init FMOD mixer thread. Priority: 3, Stack Size: 49152, Semaphore: No, Sleep Time: 0, Looping: Yes.
-[LOG] AsyncManager::init                       : manager 00000222F7B33078 isAsync 0 updatePeriod 0.02
+[LOG] AsyncManager::init                       : manager 0000022322CDED88 isAsync 0 updatePeriod 0.02
 [LOG] AsyncManager::init                       : done
 [LOG] PlaybackSystem::init                     : 
 [LOG] Thread::initThread                       : Init FMOD Studio sample load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
@@ -15,21 +15,53 @@
 [LOG] Thread::initThread                       : Init FMOD Studio bank load thread. Priority: 0, Stack Size: 65536, Semaphore: No, Sleep Time: 1, Looping: No.
 [LOG] Manager::init                            : done.
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
-[LOG] SoundI::release                          : Menus_1 (0000022319A49F68)
-[LOG] SoundI::release                          :     Menus_1 (00000223275CA828)
-[LOG] SoundI::release                          :     Menus_1 (0000022319A4A988)
-[LOG] SoundI::release                          :  (000002228287CDA8)
-[LOG] SoundI::release                          :     2 (00000223275CBBA8)
-[LOG] Thread::callback                         : FMOD Studio update thread finished.
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Profile::disconnectAll                   : Profiler disconnecting all clients
-[LOG] SystemI::close                           : Closed.
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] Thread::initThread                       : Init FMOD nonblocking thread (0). Priority: 1, Stack Size: 81920, Semaphore: Yes, Sleep Time: 0, Looping: Yes.
+[LOG] SystemI::createSound                     : setdata soundi = 0000022326F7B238 : node = 000002231ACAAC80
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022326F7B238
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 59573664
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002231ACAAD98
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='paul-mccartney-new-lyrics', format=2, channels=2, frequency=48000, lengthbytes=2010048, lengthpcm=7364013, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] Thread::initThread                       :     Init FMOD file thread. Priority: 1, Stack Size: 16384, Semaphore: No, Sleep Time: 10, Looping: Yes.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022326F7B238
+[LOG] SoundI::getSubSound                      : sound 0000022326F7B238.  Subsound index 0 / 1
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022326F7A818
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022326F7A818
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022326F79A98 : node = 000002231ACAB310
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022326F79A98
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 59573664
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002231ACAB428
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='paul-mccartney-new-lyrics', format=2, channels=2, frequency=48000, lengthbytes=2010048, lengthpcm=7364013, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022326F79A98
+[LOG] SoundI::getSubSound                      : sound 0000022326F79A98.  Subsound index 0 / 1
+[LOG] SoundI::release                          : paul-mccartney-new-lyrics (0000022326F7B238)
+[LOG] SoundI::release                          :     paul-mccartney-new-lyrics (0000022322F8E4F8)
+[LOG] SoundI::release                          :     paul-mccartney-new-lyrics (0000022326F7A818)
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022326F79C48
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022326F79C48
+[LOG] SoundI::release                          : paul-mccartney-new-lyrics (0000022326F79A98)
+[LOG] SoundI::release                          :     paul-mccartney-new-lyrics (0000022322F8EEB8)
+[LOG] SoundI::release                          :     paul-mccartney-new-lyrics (0000022326F79C48)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
@@ -37,12 +69,142 @@
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
 [LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
-[LOG] Thread::callback                         : FMOD Studio bank load thread finished.
-[LOG] Thread::callback                         : FMOD Studio sample load thread finished.
-[LOG] LiveUpdate::release                      : 
-[LOG] LiveUpdate::reset                        : Reset connection (reason Disconnected)
-[LOG] Thread::callback                         : FMOD stream thread finished.
-[LOG] Thread::callback                         : FMOD mixer thread finished.
-[LOG] Thread::callback                         : FMOD nonblocking thread (0) finished.
-[LOG] Thread::callback                         : FMOD file thread finished.
-[LOG] SystemI::close                           : Closed.
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000002231AF9E808 : node = 000002231F9B5180
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002231AF9E808
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 58945248
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002231F9B5298
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Fringe_Trimmed_Boots', format=2, channels=2, frequency=48000, lengthbytes=1381984, lengthpcm=5202337, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002231AF9E808
+[LOG] SoundI::getSubSound                      : sound 000002231AF9E808.  Subsound index 0 / 1
+[LOG] SoundI::release                          : Fringe_Trimmed_Boots (000002231AF9E808)
+[LOG] SoundI::release                          :     Fringe_Trimmed_Boots (0000022322D08A78)
+[LOG] SoundI::release                          :     Fringe_Trimmed_Boots (000002231AF9EB68)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000002231AF9E808 : node = 000002231F9B4850
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002231AF9E808
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 58945248
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002231F9B4968
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Race_3', format=2, channels=2, frequency=48000, lengthbytes=6709984, lengthpcm=23439986, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002231AF9E808
+[LOG] SoundI::getSubSound                      : sound 000002231AF9E808.  Subsound index 0 / 1
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000002231AF9EB68 : node = 000002231F9B5030
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002231AF9EB68
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 58945248
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002231F9B5148
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Race_2', format=2, channels=2, frequency=48000, lengthbytes=6707680, lengthpcm=23439986, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002231AF9EB68
+[LOG] SoundI::getSubSound                      : sound 000002231AF9EB68.  Subsound index 0 / 1
+[LOG] SoundI::release                          : Race_3 (000002231AF9E808)
+[LOG] SoundI::release                          :     Race_3 (0000022322D0AFD8)
+[LOG] SoundI::release                          :     Race_3 (000002231AF9E9B8)
+[LOG] SoundI::release                          : Race_2 (000002231AF9EB68)
+[LOG] SoundI::release                          :     Race_2 (0000022322D0D398)
+[LOG] SoundI::release                          :     Race_2 (000002231AF9ED18)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000002231AF9E9B8 : node = 000002231F9B4C40
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002231AF9E9B8
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 58945248
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002231F9B4D58
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Fringe_Trimmed_Boots', format=2, channels=2, frequency=48000, lengthbytes=1381984, lengthpcm=5202337, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002231AF9E9B8
+[LOG] SoundI::getSubSound                      : sound 000002231AF9E9B8.  Subsound index 0 / 1
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002231AF9EB68
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002231AF9EB68
+[LOG] SoundI::release                          : Fringe_Trimmed_Boots (000002231AF9E9B8)
+[LOG] SoundI::release                          :     Fringe_Trimmed_Boots (0000022322D0AFD8)
+[LOG] SoundI::release                          :     Fringe_Trimmed_Boots (000002231AF9EB68)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 000002231AF9E808 : node = 000002231F9B4C40
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 000002231AF9E808
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 58945248
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 000002231F9B4D58
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='Fringe_Trimmed_Boots', format=2, channels=2, frequency=48000, lengthbytes=1381984, lengthpcm=5202337, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 000002231AF9E808
+[LOG] SoundI::getSubSound                      : sound 000002231AF9E808.  Subsound index 0 / 1
+[LOG] SoundI::release                          : Fringe_Trimmed_Boots (000002231AF9E808)
+[LOG] SoundI::release                          :     Fringe_Trimmed_Boots (0000022322D0D398)
+[LOG] SoundI::release                          :     Fringe_Trimmed_Boots (000002231AF9E9B8)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] Manager::readBank                        : fileversion = 103, compatVersion = 99 (oldest = 44, newest = 103)
+[LOG] PlaybackSystem::acquireMasterBus         : Setting master channel group format to 6
+[LOG] SystemI::createSound                     : filename = D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank : mode 02010082
+[LOG] SystemI::createSound                     : FMOD_NONBLOCKING specified.  Putting into queue to be opened asynchronously!
+[LOG] SystemI::createSound                     : setdata soundi = 0000022326DBDFB8 : node = 00000223770B2A80
+[LOG] SystemI::createSound                     : add node to async list : head = 0000022322F8FEA8.  list count = 0
+[LOG] AsyncThread::threadFunc                  : Starting Asynchronous operation on sound 0000022326DBDFB8
+[LOG] SystemI::createSoundInternal             :     Create name='D:\Cours Aries 1\PFA\le git\JointsDeCulasse\Build_FMOD\Desktop\Master Bank.bank', mode=0x02010082
+[LOG] SystemI::createSoundInternal             :     exinfo->cbsize             = 232
+[LOG] SystemI::createSoundInternal             :     exinfo->length             = 59393664
+[LOG] SystemI::createSoundInternal             :     exinfo->fileoffset         = 48576
+[LOG] SystemI::createSoundInternal             :     exinfo->numsubsounds       = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlist      = 00000223770B2B98
+[LOG] SystemI::createSoundInternal             :     exinfo->inclusionlistnum   = 1
+[LOG] SystemI::createSoundInternal             :     exinfo->suggestedsoundtype = 5
+[LOG] SystemI::createSoundInternal             :     exinfo->initialseekpostype = 1
+[LOG] SystemI::createSoundInternal             :     Stream 0/1: name='London_Bayou', format=2, channels=2, frequency=48000, lengthbytes=1830240, lengthpcm=6159046, pcmblocksize=0, loopstart=0, loopend=0, mode=0x00000000, channelmask=0x00000000, channelorder=0, peakvolume=0.999969.
+[LOG] AsyncThread::threadFunc                  : Finished Asynchronous operation on sound 0000022326DBDFB8
+[LOG] SoundI::getSubSound                      : sound 0000022326DBDFB8.  Subsound index 0 / 1
+[LOG] SoundI::release                          : London_Bayou (0000022326DBDFB8)
+[LOG] SoundI::release                          :     London_Bayou (0000022322D0B178)
+[LOG] SoundI::release                          :     London_Bayou (0000022326F79C48)
